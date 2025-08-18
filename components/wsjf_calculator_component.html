@@ -1,0 +1,625 @@
+<!-- WSJF Calculator Component - components/interactive/wsjf-calculator.html -->
+<div class="wsjf-calculator" data-component="wsjf-calculator">
+    <div class="calculator-header">
+        <h3 class="calculator-title">{{title}}</h3>
+        <p class="calculator-subtitle">{{subtitle}}</p>
+    </div>
+
+    <div class="calculator-body">
+        <!-- Input Section -->
+        <div class="calculator-inputs">
+            <div class="input-section">
+                <h4>📊 Parámetros de Evaluación</h4>
+                
+                <div class="input-group">
+                    <label for="businessValue" class="input-label">
+                        💰 Business Value (1-21)
+                        <span class="input-help">Valor que aporta al negocio o cliente</span>
+                    </label>
+                    <div class="slider-container">
+                        <input type="range" id="businessValue" min="1" max="21" value="8" class="slider" data-fibonacci="true">
+                        <div class="slider-display">
+                            <span class="slider-value" id="businessValueDisplay">8</span>
+                            <div class="fibonacci-markers" data-for="businessValue"></div>
+                        </div>
+                    </div>
+                    <div class="input-examples" id="businessValueExamples">
+                        <small>Ejemplos: Feature crítica (13-21), Mejora UX (5-8), Bug fix (1-3)</small>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="urgency" class="input-label">
+                        ⏰ Urgencia (1-21)
+                        <span class="input-help">Qué tan pronto necesitamos esto</span>
+                    </label>
+                    <div class="slider-container">
+                        <input type="range" id="urgency" min="1" max="21" value="5" class="slider" data-fibonacci="true">
+                        <div class="slider-display">
+                            <span class="slider-value" id="urgencyDisplay">5</span>
+                            <div class="fibonacci-markers" data-for="urgency"></div>
+                        </div>
+                    </div>
+                    <div class="input-examples" id="urgencyExamples">
+                        <small>Ejemplos: Crítico/blocking (13-21), Importante (5-8), Puede esperar (1-3)</small>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="riskReduction" class="input-label">
+                        🛡️ Reducción de Riesgo (1-21)
+                        <span class="input-help">Mitigación de riesgos técnicos/negocio</span>
+                    </label>
+                    <div class="slider-container">
+                        <input type="range" id="riskReduction" min="1" max="21" value="3" class="slider" data-fibonacci="true">
+                        <div class="slider-display">
+                            <span class="slider-value" id="riskReductionDisplay">3</span>
+                            <div class="fibonacci-markers" data-for="riskReduction"></div>
+                        </div>
+                    </div>
+                    <div class="input-examples" id="riskReductionExamples">
+                        <small>Ejemplos: Security fix (13-21), Performance (5-8), Refactoring (1-3)</small>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="effort" class="input-label">
+                        🎯 Esfuerzo en SP (1-21)
+                        <span class="input-help">Story Points estimados para completar</span>
+                    </label>
+                    <div class="slider-container">
+                        <input type="range" id="effort" min="1" max="21" value="8" class="slider" data-fibonacci="true">
+                        <div class="slider-display">
+                            <span class="slider-value" id="effortDisplay">8</span>
+                            <div class="fibonacci-markers" data-for="effort"></div>
+                        </div>
+                    </div>
+                    <div class="input-examples" id="effortExamples">
+                        <small>Ejemplos: Task simple (1-3), Feature media (5-8), Epic (13-21)</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div class="calculator-results">
+            <div class="result-main">
+                <h4>🧮 Resultado WSJF</h4>
+                
+                <div class="wsjf-score">
+                    <div class="score-value" id="wsjfResult">2.0</div>
+                    <div class="score-label">Score WSJF</div>
+                </div>
+
+                <div class="priority-indicator" id="priorityIndicator">
+                    <div class="priority-badge" id="priorityBadge">Prioridad Media</div>
+                    <div class="priority-description" id="priorityDescription">
+                        Considerar para próximos sprints
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-formula">
+                <h5>📐 Fórmula</h5>
+                <div class="formula-display">
+                    <div class="formula-equation">
+                        WSJF = (<span id="formulaBV">8</span> + <span id="formulaU">5</span> + <span id="formulaRR">3</span>) / <span id="formulaE">8</span>
+                    </div>
+                    <div class="formula-calculation">
+                        WSJF = <span id="formulaSum">16</span> / <span id="formulaEffort">8</span> = <span id="formulaResult">2.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-breakdown">
+                <h5>📊 Desglose</h5>
+                <div class="breakdown-chart">
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Business Value</span>
+                        <div class="breakdown-bar">
+                            <div class="breakdown-fill" id="breakdownBV" style="width: 38%"></div>
+                        </div>
+                        <span class="breakdown-value" id="breakdownBVValue">8</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Urgencia</span>
+                        <div class="breakdown-bar">
+                            <div class="breakdown-fill" id="breakdownUrgency" style="width: 24%"></div>
+                        </div>
+                        <span class="breakdown-value" id="breakdownUrgencyValue">5</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Reducción Riesgo</span>
+                        <div class="breakdown-bar">
+                            <div class="breakdown-fill" id="breakdownRisk" style="width: 14%"></div>
+                        </div>
+                        <span class="breakdown-value" id="breakdownRiskValue">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="calculator-actions">
+                <button class="action-button secondary" id="resetButton">
+                    🔄 Reset
+                </button>
+                <button class="action-button primary" id="saveButton">
+                    💾 Guardar Cálculo
+                </button>
+                <button class="action-button secondary" id="shareButton">
+                    📤 Compartir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- History section -->
+    <div class="calculator-history" id="calculatorHistory" style="display: none;">
+        <h4>📋 Historial de Cálculos</h4>
+        <div class="history-list" id="historyList">
+            <!-- Los cálculos guardados aparecerán aquí -->
+        </div>
+        <button class="action-button secondary" id="clearHistoryButton">
+            🗑️ Limpiar Historial
+        </button>
+    </div>
+
+    <!-- Loading/Error states -->
+    <div class="calculator-loading" id="calculatorLoading" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Calculando...</p>
+    </div>
+
+    <div class="calculator-error" id="calculatorError" style="display: none;">
+        <div class="error-icon">⚠️</div>
+        <h4>Error en el cálculo</h4>
+        <p class="error-message"></p>
+        <button class="action-button primary" id="retryButton">Reintentar</button>
+    </div>
+</div>
+
+<style>
+/* WSJF Calculator Styles */
+.wsjf-calculator {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.calculator-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.calculator-title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.calculator-subtitle {
+    color: var(--gray);
+    margin: 0;
+}
+
+.calculator-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.calculator-inputs h4,
+.calculator-results h4 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.input-group {
+    margin-bottom: 2rem;
+}
+
+.input-label {
+    display: block;
+    font-weight: 600;
+    color: var(--light);
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+.input-help {
+    display: block;
+    font-weight: 400;
+    color: var(--gray);
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.slider-container {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(30, 41, 59, 0.5);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.6);
+}
+
+.slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.slider-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.slider-value {
+    font-weight: bold;
+    color: var(--primary);
+    font-size: 1.2rem;
+    min-width: 30px;
+}
+
+.fibonacci-markers {
+    display: flex;
+    gap: 0.2rem;
+    font-size: 0.7rem;
+    color: var(--gray);
+}
+
+.input-examples {
+    color: var(--gray);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* Results Section */
+.result-main {
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.wsjf-score {
+    margin-bottom: 1.5rem;
+}
+
+.score-value {
+    font-size: 4rem;
+    font-weight: 900;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+}
+
+.score-label {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.priority-indicator {
+    margin-top: 1.5rem;
+}
+
+.priority-badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.priority-badge.very-high {
+    background: rgba(239, 68, 68, 0.2);
+    color: #EF4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.priority-badge.high {
+    background: rgba(245, 158, 11, 0.2);
+    color: #F59E0B;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.priority-badge.medium {
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--primary);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.priority-badge.low {
+    background: rgba(107, 114, 128, 0.2);
+    color: #6B7280;
+    border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+.priority-description {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.result-formula {
+    background: rgba(30, 41, 59, 0.3);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.result-formula h5 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.formula-display {
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.formula-equation {
+    color: var(--light);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.formula-calculation {
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.result-breakdown {
+    background: rgba(30, 41, 59, 0.3);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.result-breakdown h5 {
+    color: var(--secondary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.breakdown-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.breakdown-label {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.breakdown-bar {
+    height: 8px;
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.breakdown-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.breakdown-value {
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 0.9rem;
+    min-width: 30px;
+    text-align: right;
+}
+
+/* Action Buttons */
+.calculator-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    min-width: 120px;
+}
+
+.action-button.primary {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.action-button.secondary {
+    background: rgba(30, 41, 59, 0.5);
+    color: var(--light);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+}
+
+/* History Section */
+.calculator-history {
+    background: rgba(30, 41, 59, 0.3);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.calculator-history h4 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+.history-item {
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.history-item:hover {
+    background: rgba(99, 102, 241, 0.2);
+    transform: translateX(5px);
+}
+
+/* Loading and Error States */
+.calculator-loading,
+.calculator-error {
+    text-align: center;
+    padding: 2rem;
+    color: var(--gray);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(99, 102, 241, 0.1);
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+.error-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.error-message {
+    color: #EF4444;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .calculator-body {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .wsjf-calculator {
+        padding: 1.5rem;
+    }
+
+    .calculator-title {
+        font-size: 1.5rem;
+    }
+
+    .score-value {
+        font-size: 3rem;
+    }
+
+    .breakdown-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .calculator-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .action-button {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+/* Animation keyframes */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .loading-spinner,
+    .action-button,
+    .history-item {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .slider {
+        border: 2px solid var(--light);
+    }
+    
+    .priority-badge {
+        border-width: 2px;
+    }
+}
+</style>

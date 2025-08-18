@@ -1,0 +1,873 @@
+<!-- Loader Component - components/loader.html -->
+<div class="loader-component" id="loader" data-component="loader">
+    <div class="loader-backdrop"></div>
+    
+    <div class="loader-content">
+        <!-- Main loading animation -->
+        <div class="loader-main">
+            <div class="loader-spinner">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="scrum-logo">
+                    <span class="logo-text">SCRUM</span>
+                    <span class="logo-accent">Pro</span>
+                </div>
+            </div>
+            
+            <div class="loader-text">
+                <h2 class="loader-title">{{title}}</h2>
+                <p class="loader-subtitle" id="loadingStatus">{{status}}</p>
+            </div>
+        </div>
+
+        <!-- Progress indicators -->
+        <div class="loader-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text">
+                <span id="progressText">Inicializando...</span>
+                <span id="progressPercentage">0%</span>
+            </div>
+        </div>
+
+        <!-- Loading steps -->
+        <div class="loading-steps" id="loadingSteps">
+            <div class="step" data-step="1">
+                <div class="step-icon">⚙️</div>
+                <div class="step-text">Configurando sistema</div>
+                <div class="step-status"></div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-icon">🧩</div>
+                <div class="step-text">Cargando componentes</div>
+                <div class="step-status"></div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-icon">📄</div>
+                <div class="step-text">Preparando contenido</div>
+                <div class="step-status"></div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-icon">🎯</div>
+                <div class="step-text">Finalizando...</div>
+                <div class="step-status"></div>
+            </div>
+        </div>
+
+        <!-- Tips while loading -->
+        <div class="loader-tips" id="loaderTips">
+            <div class="tip active">
+                <span class="tip-icon">💡</span>
+                <span class="tip-text">SCRUM utiliza la escala Fibonacci para estimación porque refleja la incertidumbre natural</span>
+            </div>
+            <div class="tip">
+                <span class="tip-icon">📊</span>
+                <span class="tip-text">Un equipo ágil típico mejora su velocity en un 23% después de 3 sprints</span>
+            </div>
+            <div class="tip">
+                <span class="tip-icon">⚡</span>
+                <span class="tip-text">Planning Poker ayuda a reducir el sesgo de anclaje en las estimaciones</span>
+            </div>
+            <div class="tip">
+                <span class="tip-icon">🎯</span>
+                <span class="tip-text">La Definition of Done debe ser clara y compartida por todo el equipo</span>
+            </div>
+            <div class="tip">
+                <span class="tip-icon">🔄</span>
+                <span class="tip-text">Las retrospectivas son el corazón de la mejora continua en SCRUM</span>
+            </div>
+        </div>
+
+        <!-- Error state -->
+        <div class="loader-error" id="loaderError" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <h3 class="error-title">Error al cargar</h3>
+            <p class="error-message" id="errorMessage">No se pudo cargar la aplicación</p>
+            <div class="error-actions">
+                <button class="retry-button" id="retryButton">🔄 Reintentar</button>
+                <button class="reload-button" id="reloadButton">⟳ Recargar página</button>
+            </div>
+        </div>
+
+        <!-- Manual skip option -->
+        <div class="loader-skip" id="loaderSkip" style="display: none;">
+            <button class="skip-button" id="skipButton">
+                Saltar animación →
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Loader Component Styles */
+.loader-component {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loader-component.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+    opacity: 0.98;
+}
+
+.loader-backdrop::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+    animation: backgroundShift 20s ease infinite;
+}
+
+.loader-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    animation: loaderContentIn 1s ease;
+}
+
+.loader-main {
+    margin-bottom: 3rem;
+}
+
+.loader-spinner {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 2rem;
+}
+
+.spinner-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+.spinner-ring:nth-child(1) {
+    border-top-color: var(--primary);
+    animation-duration: 2s;
+}
+
+.spinner-ring:nth-child(2) {
+    border-right-color: var(--secondary);
+    animation-duration: 3s;
+    animation-direction: reverse;
+}
+
+.spinner-ring:nth-child(3) {
+    border-bottom-color: var(--accent);
+    animation-duration: 4s;
+}
+
+.scrum-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--primary);
+    display: block;
+    line-height: 1;
+}
+
+.logo-accent {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+}
+
+.loader-title {
+    font-size: 2rem;
+    font-weight: 900;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    animation: titlePulse 2s ease infinite;
+}
+
+.loader-subtitle {
+    color: var(--gray);
+    font-size: 1rem;
+    margin: 0;
+    animation: subtitleFade 3s ease infinite;
+}
+
+.loader-progress {
+    margin-bottom: 2.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.loading-steps {
+    margin-bottom: 2rem;
+    text-align: left;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background: rgba(30, 41, 59, 0.3);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+}
+
+.step.active {
+    opacity: 1;
+    background: rgba(99, 102, 241, 0.1);
+    border-left: 3px solid var(--primary);
+}
+
+.step.completed {
+    opacity: 0.8;
+    background: rgba(16, 185, 129, 0.1);
+    border-left: 3px solid var(--accent);
+}
+
+.step-icon {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    min-width: 30px;
+}
+
+.step-text {
+    flex: 1;
+    color: var(--light);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.step-status {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(100, 116, 139, 0.3);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.step.active .step-status {
+    background: var(--primary);
+    animation: pulse 1s ease infinite;
+}
+
+.step.completed .step-status {
+    background: var(--accent);
+}
+
+.step.completed .step-status::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.loader-tips {
+    position: relative;
+    height: 60px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.tip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    background: rgba(30, 41, 59, 0.4);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.tip.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tip-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.tip-text {
+    color: var(--gray);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.loader-error {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 15px;
+    animation: errorShake 0.5s ease;
+}
+
+.error-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.error-title {
+    color: #EF4444;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.error-message {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.retry-button,
+.reload-button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.retry-button {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.reload-button {
+    background: rgba(30, 41, 59, 0.5);
+    color: var(--light);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.retry-button:hover,
+.reload-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.loader-skip {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    opacity: 0;
+    animation: skipFadeIn 0.5s ease 3s forwards;
+}
+
+.skip-button {
+    background: rgba(30, 41, 59, 0.8);
+    color: var(--gray);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.skip-button:hover {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--light);
+    border-color: rgba(99, 102, 241, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .loader-content {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .loader-spinner {
+        width: 100px;
+        height: 100px;
+    }
+
+    .loader-title {
+        font-size: 1.5rem;
+    }
+
+    .loader-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .loading-steps {
+        max-width: 100%;
+    }
+
+    .step {
+        padding: 0.6rem;
+    }
+
+    .tip-text {
+        font-size: 0.8rem;
+    }
+
+    .loader-skip {
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .error-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .retry-button,
+    .reload-button {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes backgroundShift {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+}
+
+@keyframes loaderContentIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes titlePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes subtitleFade {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+}
+
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+@keyframes skipFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .loader-component,
+    .spinner-ring,
+    .progress-fill,
+    .step,
+    .tip {
+        animation: none;
+        transition: none;
+    }
+    
+    .loader-title,
+    .loader-subtitle {
+        animation: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .progress-bar {
+        border: 1px solid var(--light);
+    }
+    
+    .step {
+        border: 1px solid rgba(99, 102, 241, 0.5);
+    }
+    
+    .tip {
+        border-width: 2px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .loader-component {
+        display: none !important;
+    }
+}
+</style>
+
+<script>
+/**
+ * Loader Component JavaScript
+ * Handles loading states, progress, and animations
+ */
+class LoaderComponent {
+    constructor() {
+        this.container = null;
+        this.progress = 0;
+        this.currentStep = 0;
+        this.currentTip = 0;
+        this.isVisible = true;
+        this.tipInterval = null;
+        this.stepTimeout = null;
+        
+        this.steps = [
+            'Configurando sistema',
+            'Cargando componentes', 
+            'Preparando contenido',
+            'Finalizando...'
+        ];
+        
+        this.init();
+    }
+    
+    init() {
+        this.container = document.getElementById('loader');
+        if (!this.container) return;
+        
+        this.setupEventListeners();
+        this.startTipRotation();
+        this.startLoadingSequence();
+    }
+    
+    setupEventListeners() {
+        const skipButton = document.getElementById('skipButton');
+        const retryButton = document.getElementById('retryButton');
+        const reloadButton = document.getElementById('reloadButton');
+        
+        if (skipButton) {
+            skipButton.addEventListener('click', () => this.hide());
+        }
+        
+        if (retryButton) {
+            retryButton.addEventListener('click', () => this.retry());
+        }
+        
+        if (reloadButton) {
+            reloadButton.addEventListener('click', () => location.reload());
+        }
+    }
+    
+    startTipRotation() {
+        const tips = document.querySelectorAll('.tip');
+        
+        this.tipInterval = setInterval(() => {
+            tips[this.currentTip].classList.remove('active');
+            this.currentTip = (this.currentTip + 1) % tips.length;
+            tips[this.currentTip].classList.add('active');
+        }, 4000);
+    }
+    
+    startLoadingSequence() {
+        this.setProgress(10, 'Inicializando sistema...');
+        
+        // Simulate loading steps
+        const sequence = [
+            { delay: 800, progress: 25, text: 'Cargando componentes principales...', step: 1 },
+            { delay: 1200, progress: 50, text: 'Configurando navegación...', step: 2 },
+            { delay: 1000, progress: 75, text: 'Preparando contenido...', step: 3 },
+            { delay: 800, progress: 90, text: 'Casi listo...', step: 4 },
+            { delay: 500, progress: 100, text: 'Completado!', step: 4 }
+        ];
+        
+        let totalDelay = 0;
+        sequence.forEach(({ delay, progress, text, step }) => {
+            totalDelay += delay;
+            setTimeout(() => {
+                this.setProgress(progress, text);
+                this.setActiveStep(step - 1);
+            }, totalDelay);
+        });
+        
+        // Auto-hide after completion
+        setTimeout(() => {
+            this.hide();
+        }, totalDelay + 800);
+    }
+    
+    setProgress(percentage, text) {
+        this.progress = percentage;
+        
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const progressPercentage = document.getElementById('progressPercentage');
+        const loadingStatus = document.getElementById('loadingStatus');
+        
+        if (progressFill) {
+            progressFill.style.width = `${percentage}%`;
+        }
+        
+        if (progressText) {
+            progressText.textContent = text;
+        }
+        
+        if (progressPercentage) {
+            progressPercentage.textContent = `${Math.round(percentage)}%`;
+        }
+        
+        if (loadingStatus) {
+            loadingStatus.textContent = text;
+        }
+    }
+    
+    setActiveStep(stepIndex) {
+        const steps = document.querySelectorAll('.step');
+        
+        steps.forEach((step, index) => {
+            step.classList.remove('active', 'completed');
+            
+            if (index < stepIndex) {
+                step.classList.add('completed');
+            } else if (index === stepIndex) {
+                step.classList.add('active');
+            }
+        });
+        
+        this.currentStep = stepIndex;
+    }
+    
+    showError(message = 'Error al cargar la aplicación') {
+        const errorContainer = document.getElementById('loaderError');
+        const errorMessage = document.getElementById('errorMessage');
+        const mainContent = this.container.querySelector('.loader-main');
+        const progressContainer = this.container.querySelector('.loader-progress');
+        const stepsContainer = document.getElementById('loadingSteps');
+        const tipsContainer = document.getElementById('loaderTips');
+        
+        if (errorMessage) {
+            errorMessage.textContent = message;
+        }
+        
+        if (errorContainer) {
+            errorContainer.style.display = 'block';
+        }
+        
+        // Hide other content
+        [mainContent, progressContainer, stepsContainer, tipsContainer].forEach(el => {
+            if (el) el.style.display = 'none';
+        });
+        
+        this.stopTipRotation();
+    }
+    
+    retry() {
+        // Reset and restart loading
+        const errorContainer = document.getElementById('loaderError');
+        const mainContent = this.container.querySelector('.loader-main');
+        const progressContainer = this.container.querySelector('.loader-progress');
+        const stepsContainer = document.getElementById('loadingSteps');
+        const tipsContainer = document.getElementById('loaderTips');
+        
+        if (errorContainer) {
+            errorContainer.style.display = 'none';
+        }
+        
+        // Show other content
+        [mainContent, progressContainer, stepsContainer, tipsContainer].forEach(el => {
+            if (el) el.style.display = 'block';
+        });
+        
+        // Reset state
+        this.progress = 0;
+        this.currentStep = 0;
+        this.setProgress(0, 'Reintentando...');
+        this.setActiveStep(0);
+        
+        // Restart sequences
+        this.startTipRotation();
+        setTimeout(() => this.startLoadingSequence(), 500);
+    }
+    
+    hide() {
+        this.isVisible = false;
+        this.stopTipRotation();
+        
+        if (this.container) {
+            this.container.classList.add('hidden');
+            
+            // Remove from DOM after animation
+            setTimeout(() => {
+                if (this.container.parentNode) {
+                    this.container.parentNode.removeChild(this.container);
+                }
+            }, 800);
+        }
+        
+        // Dispatch event
+        document.dispatchEvent(new CustomEvent('loaderHidden'));
+    }
+    
+    show() {
+        this.isVisible = true;
+        
+        if (this.container) {
+            this.container.classList.remove('hidden');
+            this.startTipRotation();
+        }
+    }
+    
+    stopTipRotation() {
+        if (this.tipInterval) {
+            clearInterval(this.tipInterval);
+            this.tipInterval = null;
+        }
+    }
+    
+    updateStatus(message) {
+        const loadingStatus = document.getElementById('loadingStatus');
+        if (loadingStatus) {
+            loadingStatus.textContent = message;
+        }
+    }
+    
+    isLoaderVisible() {
+        return this.isVisible;
+    }
+    
+    destroy() {
+        this.stopTipRotation();
+        
+        if (this.stepTimeout) {
+            clearTimeout(this.stepTimeout);
+        }
+        
+        if (this.container && this.container.parentNode) {
+            this.container.parentNode.removeChild(this.container);
+        }
+    }
+}
+
+// Auto-initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    window.loaderComponent = new LoaderComponent();
+});
+
+// Export for module usage
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = LoaderComponent;
+}
+</script>
