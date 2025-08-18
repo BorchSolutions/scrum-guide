@@ -1,0 +1,780 @@
+/**
+ * Examples.js - Gestión de ejemplos interactivos para SCRUM Pro Guide
+ * Funcionalidades: Tabs, Sprint Board, Timeline, Code Examples, Interactive Demos
+ */
+
+class ExamplesManager {
+    constructor() {
+        this.activeTab = null;
+        this.sprintBoard = null;
+        this.draggedElement = null;
+        this.codeBlocks = [];
+        this.timelines = [];
+        
+        this.init();
+    }
+
+    /**
+     * Inicializa el gestor de ejemplos
+     */
+    init() {
+        this.setupTabs();
+        this.setupSprintBoard();
+        this.setupCodeBlocks();
+        this.setupTimelines();
+        this.setupInteractiveElements();
+        console.log('🎯 Examples Manager initialized successfully!');
+    }
+
+    /**
+     * Configura la funcionalidad de tabs
+     */
+    setupTabs() {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        if (tabButtons.length === 0) return;
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const tabName = button.getAttribute('data-tab');
+                this.switchTab(tabName, button);
+            });
+        });
+
+        // Keyboard navigation para tabs
+        tabButtons.forEach((button, index) => {
+            button.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    const direction = e.key === 'ArrowRight' ? 1 : -1;
+                    const nextIndex = (index + direction + tabButtons.length) % tabButtons.length;
+                    tabButtons[nextIndex].focus();
+                    tabButtons[nextIndex].click();
+                }
+            });
+        });
+    }
+
+    /**
+     * Cambia a un tab específico
+     * @param {string} tabName - Nombre del tab
+     * @param {HTMLElement} clickedButton - Botón clickeado
+     */
+    switchTab(tabName, clickedButton) {
+        if (!tabName) return;
+
+        // Remover clase active de todos los botones y contenidos
+        document.querySelectorAll('.tab-button').forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+        });
+        
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+            content.setAttribute('aria-hidden', 'true');
+        });
+
+        // Agregar clase active al botón y contenido correspondiente
+        clickedButton.classList.add('active');
+        clickedButton.setAttribute('aria-selected', 'true');
+        
+        const targetContent = document.getElementById(tabName);
+        if (targetContent) {
+            targetContent.classList.add('active');
+            targetContent.setAttribute('aria-hidden', 'false');
+            
+            // Trigger animations específicas del tab
+            this.animateTabContent(targetContent);
+        }
+
+        this.activeTab = tabName;
+        this.onTabChange(tabName);
+    }
+
+    /**
+     * Anima el contenido cuando se cambia de tab
+     * @param {HTMLElement} content - Contenido del tab
+     */
+    animateTabContent(content) {
+        // Reset y trigger de animaciones
+        content.style.animation = 'none';
+        content.offsetHeight; // Trigger reflow
+        content.style.animation = 'fadeIn 0.5s ease';
+
+        // Animar elementos hijos con delay
+        const children = content.querySelectorAll('.timeline-item, .code-block, .demo-item');
+        children.forEach((child, index) => {
+            child.style.opacity = '0';
+            child.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                child.style.transition = 'all 0.4s ease';
+                child.style.opacity = '1';
+                child.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }
+
+    /**
+     * Callback cuando cambia el tab activo
+     * @param {string} tabName - Nombre del nuevo tab
+     */
+    onTabChange(tabName) {
+        // Efectos específicos por tab
+        switch (tabName) {
+            case 'code':
+                this.highlightCodeBlocks();
+                break;
+            case 'metrics':
+                this.animateMetricsCharts();
+                break;
+            case 'sprint1':
+            case 'sprint2':
+                this.animateSprintContent();
+                break;
+        }
+
+        // Disparar evento personalizado
+        document.dispatchEvent(new CustomEvent('tabChanged', {
+            detail: { tabName, timestamp: Date.now() }
+        }));
+    }
+
+    /**
+     * Configura el Sprint Board interactivo
+     */
+    setupSprintBoard() {
+        const sprintBoard = document.querySelector('.sprint-board');
+        if (!sprintBoard) return;
+
+        this.sprintBoard = {
+            element: sprintBoard,
+            columns: sprintBoard.querySelectorAll('.board-column'),
+            tasks: sprintBoard.querySelectorAll('.task-card')
+        };
+
+        this.setupDragAndDrop();
+        this.setupTaskInteractions();
+    }
+
+    /**
+     * Configura drag and drop para el sprint board
+     */
+    setupDragAndDrop() {
+        if (!this.sprintBoard) return;
+
+        // Hacer tasks arrastrables
+        this.sprintBoard.tasks.forEach(task => {
+            task.draggable = true;
+            task.addEventListener('dragstart', this.handleDragStart.bind(this));
+            task.addEventListener('dragend', this.handleDragEnd.bind(this));
+        });
+
+        // Configurar drop zones
+        this.sprintBoard.columns.forEach(column => {
+            column.addEventListener('dragover', this.handleDragOver.bind(this));
+            column.addEventListener('drop', this.handleDrop.bind(this));
+            column.addEventListener('dragenter', this.handleDragEnter.bind(this));
+            column.addEventListener('dragleave', this.handleDragLeave.bind(this));
+        });
+    }
+
+    /**
+     * Maneja el inicio del drag
+     * @param {DragEvent} e - Evento de drag
+     */
+    handleDragStart(e) {
+        this.draggedElement = e.target;
+        e.target.style.opacity = '0.5';
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', e.target.outerHTML);
+    }
+
+    /**
+     * Maneja el fin del drag
+     * @param {DragEvent} e - Evento de drag
+     */
+    handleDragEnd(e) {
+        e.target.style.opacity = '';
+        this.draggedElement = null;
+        
+        // Remover highlight de columnas
+        this.sprintBoard.columns.forEach(col => {
+            col.classList.remove('drag-over');
+        });
+    }
+
+    /**
+     * Maneja drag over
+     * @param {DragEvent} e - Evento de drag
+     */
+    handleDragOver(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+    }
+
+    /**
+     * Maneja drag enter
+     * @param {DragEvent} e - Evento de drag
+     */
+    handleDragEnter(e) {
+        e.target.closest('.board-column')?.classList.add('drag-over');
+    }
+
+    /**
+     * Maneja drag leave
+     * @param {DragEvent} e - Evento de drag
+     */
+    handleDragLeave(e) {
+        if (!e.target.closest('.board-column')?.contains(e.relatedTarget)) {
+            e.target.closest('.board-column')?.classList.remove('drag-over');
+        }
+    }
+
+    /**
+     * Maneja el drop
+     * @param {DragEvent} e - Evento de drop
+     */
+    handleDrop(e) {
+        e.preventDefault();
+        const column = e.target.closest('.board-column');
+        
+        if (column && this.draggedElement) {
+            // Mover la tarea a la nueva columna
+            column.appendChild(this.draggedElement);
+            
+            // Animar la nueva posición
+            this.draggedElement.style.animation = 'slideInDown 0.3s ease';
+            
+            // Log del cambio
+            const taskTitle = this.draggedElement.querySelector('.task-title')?.textContent;
+            const columnTitle = column.querySelector('.column-header')?.textContent;
+            console.log(`📋 Moved "${taskTitle}" to "${columnTitle}"`);
+            
+            // Disparar evento de cambio
+            this.onTaskMoved(this.draggedElement, column);
+        }
+        
+        column?.classList.remove('drag-over');
+    }
+
+    /**
+     * Callback cuando se mueve una tarea
+     * @param {HTMLElement} task - Tarea movida
+     * @param {HTMLElement} newColumn - Nueva columna
+     */
+    onTaskMoved(task, newColumn) {
+        // Actualizar estado de la tarea si es necesario
+        const taskData = this.getTaskData(task);
+        const columnData = this.getColumnData(newColumn);
+        
+        document.dispatchEvent(new CustomEvent('taskMoved', {
+            detail: { task: taskData, column: columnData }
+        }));
+    }
+
+    /**
+     * Configura interacciones adicionales con tasks
+     */
+    setupTaskInteractions() {
+        if (!this.sprintBoard) return;
+
+        this.sprintBoard.tasks.forEach(task => {
+            // Click para mostrar detalles
+            task.addEventListener('click', (e) => {
+                if (!e.target.closest('.task-actions')) {
+                    this.showTaskDetails(task);
+                }
+            });
+
+            // Hover effects
+            task.addEventListener('mouseenter', () => {
+                task.style.transform = 'scale(1.02)';
+            });
+
+            task.addEventListener('mouseleave', () => {
+                task.style.transform = '';
+            });
+        });
+    }
+
+    /**
+     * Muestra detalles de una tarea
+     * @param {HTMLElement} task - Elemento de tarea
+     */
+    showTaskDetails(task) {
+        const taskData = this.getTaskData(task);
+        console.log('📝 Task details:', taskData);
+        
+        // Aquí podrías mostrar un modal o panel con detalles
+        // Por ahora solo agregamos un efecto visual
+        task.classList.add('selected');
+        setTimeout(() => {
+            task.classList.remove('selected');
+        }, 2000);
+    }
+
+    /**
+     * Obtiene datos de una tarea
+     * @param {HTMLElement} task - Elemento de tarea
+     * @returns {Object} Datos de la tarea
+     */
+    getTaskData(task) {
+        return {
+            title: task.querySelector('.task-title')?.textContent || '',
+            storyPoints: task.querySelector('.story-points')?.textContent || '',
+            priority: task.querySelector('.priority')?.textContent || '',
+            element: task
+        };
+    }
+
+    /**
+     * Obtiene datos de una columna
+     * @param {HTMLElement} column - Elemento de columna
+     * @returns {Object} Datos de la columna
+     */
+    getColumnData(column) {
+        return {
+            title: column.querySelector('.column-header')?.textContent || '',
+            taskCount: column.querySelectorAll('.task-card').length,
+            element: column
+        };
+    }
+
+    /**
+     * Configura bloques de código
+     */
+    setupCodeBlocks() {
+        this.codeBlocks = Array.from(document.querySelectorAll('.code-block'));
+        
+        this.codeBlocks.forEach((block, index) => {
+            this.enhanceCodeBlock(block, index);
+        });
+    }
+
+    /**
+     * Mejora un bloque de código
+     * @param {HTMLElement} block - Bloque de código
+     * @param {number} index - Índice del bloque
+     */
+    enhanceCodeBlock(block, index) {
+        // Agregar botón de copia
+        const copyButton = document.createElement('button');
+        copyButton.className = 'code-copy-btn';
+        copyButton.innerHTML = '📋 Copiar';
+        copyButton.style.cssText = `
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+
+        // Hacer el bloque relativo para el botón absoluto
+        block.style.position = 'relative';
+        block.appendChild(copyButton);
+
+        // Mostrar/ocultar botón en hover
+        block.addEventListener('mouseenter', () => {
+            copyButton.style.opacity = '1';
+        });
+
+        block.addEventListener('mouseleave', () => {
+            copyButton.style.opacity = '0';
+        });
+
+        // Funcionalidad de copia
+        copyButton.addEventListener('click', () => {
+            this.copyCodeToClipboard(block, copyButton);
+        });
+
+        // Agregar números de línea
+        this.addLineNumbers(block);
+    }
+
+    /**
+     * Copia código al clipboard
+     * @param {HTMLElement} block - Bloque de código
+     * @param {HTMLElement} button - Botón de copia
+     */
+    copyCodeToClipboard(block, button) {
+        const code = block.querySelector('pre code, pre')?.textContent || '';
+        
+        navigator.clipboard.writeText(code).then(() => {
+            button.innerHTML = '✅ Copiado';
+            button.style.background = 'var(--accent)';
+            
+            setTimeout(() => {
+                button.innerHTML = '📋 Copiar';
+                button.style.background = 'var(--primary)';
+            }, 2000);
+        }).catch(() => {
+            button.innerHTML = '❌ Error';
+            setTimeout(() => {
+                button.innerHTML = '📋 Copiar';
+            }, 2000);
+        });
+    }
+
+    /**
+     * Agrega números de línea a un bloque de código
+     * @param {HTMLElement} block - Bloque de código
+     */
+    addLineNumbers(block) {
+        const pre = block.querySelector('pre');
+        if (!pre) return;
+
+        const code = pre.textContent || '';
+        const lines = code.split('\n');
+        
+        if (lines.length > 3) { // Solo agregar números si hay más de 3 líneas
+            const lineNumbers = document.createElement('div');
+            lineNumbers.className = 'line-numbers';
+            lineNumbers.style.cssText = `
+                position: absolute;
+                left: 0;
+                top: 0;
+                padding: 1.5rem 0;
+                margin-right: 1rem;
+                color: var(--gray);
+                font-family: 'Courier New', monospace;
+                font-size: 0.8rem;
+                line-height: 1.6;
+                user-select: none;
+                border-right: 1px solid rgba(100, 116, 139, 0.2);
+                padding-right: 1rem;
+                background: rgba(15, 23, 42, 0.5);
+            `;
+
+            for (let i = 1; i <= lines.length; i++) {
+                lineNumbers.innerHTML += `${i}<br>`;
+            }
+
+            block.style.paddingLeft = '4rem';
+            block.appendChild(lineNumbers);
+        }
+    }
+
+    /**
+     * Resalta bloques de código cuando son visibles
+     */
+    highlightCodeBlocks() {
+        this.codeBlocks.forEach((block, index) => {
+            setTimeout(() => {
+                block.style.animation = 'slideInLeft 0.5s ease forwards';
+            }, index * 100);
+        });
+    }
+
+    /**
+     * Configura timelines interactivos
+     */
+    setupTimelines() {
+        this.timelines = Array.from(document.querySelectorAll('.timeline'));
+        
+        this.timelines.forEach(timeline => {
+            this.enhanceTimeline(timeline);
+        });
+    }
+
+    /**
+     * Mejora un timeline
+     * @param {HTMLElement} timeline - Elemento timeline
+     */
+    enhanceTimeline(timeline) {
+        const items = timeline.querySelectorAll('.timeline-item');
+        
+        items.forEach((item, index) => {
+            // Agregar click handler
+            item.addEventListener('click', () => {
+                this.highlightTimelineItem(item);
+            });
+
+            // Animar entrada secuencial
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.animation = 'slideInUp 0.6s ease forwards';
+                        }, index * 200);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(item);
+        });
+    }
+
+    /**
+     * Resalta un item del timeline
+     * @param {HTMLElement} item - Item del timeline
+     */
+    highlightTimelineItem(item) {
+        // Remover highlight previo
+        document.querySelectorAll('.timeline-item').forEach(i => {
+            i.classList.remove('highlighted');
+        });
+
+        // Agregar highlight
+        item.classList.add('highlighted');
+        
+        // Remover después de 3 segundos
+        setTimeout(() => {
+            item.classList.remove('highlighted');
+        }, 3000);
+    }
+
+    /**
+     * Configura elementos interactivos adicionales
+     */
+    setupInteractiveElements() {
+        // Configurar cards hover effects
+        this.setupCardEffects();
+        
+        // Configurar metric cards
+        this.setupMetricCards();
+        
+        // Configurar demo buttons
+        this.setupDemoButtons();
+    }
+
+    /**
+     * Configura efectos de hover para cards
+     */
+    setupCardEffects() {
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    }
+
+    /**
+     * Configura metric cards interactivos
+     */
+    setupMetricCards() {
+        const metricCards = document.querySelectorAll('.metric-card');
+        
+        metricCards.forEach(card => {
+            card.addEventListener('click', () => {
+                this.showMetricDetails(card);
+            });
+        });
+    }
+
+    /**
+     * Muestra detalles de una métrica
+     * @param {HTMLElement} card - Card de métrica
+     */
+    showMetricDetails(card) {
+        const value = card.querySelector('.metric-value')?.textContent;
+        const label = card.querySelector('.metric-label')?.textContent;
+        
+        console.log(`📊 Metric: ${label} = ${value}`);
+        
+        // Efecto visual
+        card.style.animation = 'pulse 0.5s ease';
+        setTimeout(() => {
+            card.style.animation = '';
+        }, 500);
+    }
+
+    /**
+     * Configura botones de demo
+     */
+    setupDemoButtons() {
+        const demoButtons = document.querySelectorAll('.demo-button');
+        
+        demoButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.handleDemoButtonClick(button);
+            });
+        });
+    }
+
+    /**
+     * Maneja clicks en botones de demo
+     * @param {HTMLElement} button - Botón clickeado
+     */
+    handleDemoButtonClick(button) {
+        // Efecto de ripple
+        const ripple = document.createElement('span');
+        ripple.style.cssText = `
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        `;
+        
+        button.style.position = 'relative';
+        button.style.overflow = 'hidden';
+        button.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    }
+
+    /**
+     * Anima contenido de sprint
+     */
+    animateSprintContent() {
+        const sprintElements = document.querySelectorAll('.timeline-item, .task-card, .hierarchy-item');
+        
+        sprintElements.forEach((element, index) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateX(-30px)';
+            
+            setTimeout(() => {
+                element.style.transition = 'all 0.5s ease';
+                element.style.opacity = '1';
+                element.style.transform = 'translateX(0)';
+            }, index * 100);
+        });
+    }
+
+    /**
+     * Anima gráficos de métricas
+     */
+    animateMetricsCharts() {
+        const charts = document.querySelectorAll('#burndownChart, #velocityChart');
+        charts.forEach(chart => {
+            chart.style.opacity = '0';
+            chart.style.transform = 'scale(0.9)';
+            
+            setTimeout(() => {
+                chart.style.transition = 'all 0.8s ease';
+                chart.style.opacity = '1';
+                chart.style.transform = 'scale(1)';
+            }, 200);
+        });
+    }
+
+    /**
+     * Obtiene estadísticas de ejemplos
+     * @returns {Object} Estadísticas
+     */
+    getExampleStats() {
+        return {
+            totalTabs: document.querySelectorAll('.tab-button').length,
+            activeTab: this.activeTab,
+            totalTasks: this.sprintBoard?.tasks.length || 0,
+            totalCodeBlocks: this.codeBlocks.length,
+            totalTimelines: this.timelines.length
+        };
+    }
+
+    /**
+     * Destruye el gestor y limpia event listeners
+     */
+    destroy() {
+        this.codeBlocks = [];
+        this.timelines = [];
+        this.sprintBoard = null;
+        console.log('🎯 Examples Manager destroyed');
+    }
+}
+
+// CSS adicional para efectos
+const additionalStyles = `
+    .drag-over {
+        background: rgba(99, 102, 241, 0.1) !important;
+        border: 2px dashed var(--primary) !important;
+    }
+    
+    .task-card.selected {
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.5) !important;
+        transform: scale(1.05) !important;
+    }
+    
+    .timeline-item.highlighted {
+        background: rgba(99, 102, 241, 0.1) !important;
+        border-left: 3px solid var(--primary) !important;
+    }
+    
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes slideInDown {
+        from {
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideInUp {
+        from {
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+`;
+
+// Inyectar estilos adicionales
+const styleSheet = document.createElement('style');
+styleSheet.textContent = additionalStyles;
+document.head.appendChild(styleSheet);
+
+// Inicialización automática
+document.addEventListener('DOMContentLoaded', () => {
+    window.examplesManager = new ExamplesManager();
+});
+
+// Event listeners para eventos personalizados
+document.addEventListener('tabChanged', (event) => {
+    console.log(`🔄 Tab changed to: ${event.detail.tabName}`);
+});
+
+document.addEventListener('taskMoved', (event) => {
+    console.log(`📋 Task moved:`, event.detail);
+});
+
+// Exportar para uso en módulos
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { ExamplesManager };
+}
+
+if (typeof window !== 'undefined') {
+    window.ExamplesManager = ExamplesManager;
+}

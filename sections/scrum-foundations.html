@@ -1,0 +1,1008 @@
+<!-- SCRUM Foundations Section - Enhanced Implementation -->
+<section id="intro" class="section">
+    <div class="container">
+        <div class="section-header reveal">
+            <h2 class="section-title">SCRUM Foundations</h2>
+            <p class="section-subtitle">Fundamentos del framework ágil más utilizado en el mundo</p>
+        </div>
+
+        <!-- SCRUM Definition & Philosophy -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">¿Qué es SCRUM?</h3>
+                <p style="color: var(--gray);">Framework liviano que ayuda a personas, equipos y organizaciones a generar valor a través de soluciones adaptativas para problemas complejos</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">📖 Definición Oficial</h4>
+                    <p style="color: var(--gray); line-height: 1.8; font-style: italic;">
+                        "Scrum es un <strong>marco de trabajo liviano</strong> que ayuda a las personas, equipos y organizaciones a <strong>generar valor</strong> a través de soluciones adaptativas para <strong>problemas complejos</strong>."
+                    </p>
+                    <p style="color: var(--gray); margin-top: 1rem; font-size: 0.9rem;">
+                        — Scrum Guide 2020, Ken Schwaber & Jeff Sutherland
+                    </p>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">🎯 Propósito Fundamental</h4>
+                    <ul style="color: var(--gray); list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">🔍 <strong>Empirismo:</strong> Tomar decisiones basadas en observación</li>
+                        <li style="margin-bottom: 0.8rem;">🧠 <strong>Lean thinking:</strong> Reducir desperdicio, enfoque en esencial</li>
+                        <li style="margin-bottom: 0.8rem;">⚡ <strong>Adaptabilidad:</strong> Responder rápido a cambios</li>
+                        <li>🎯 <strong>Valor continuo:</strong> Entrega incremental funcional</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pilares de SCRUM -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Los 3 Pilares del Empirismo</h3>
+                <p style="color: var(--gray);">Fundamentos sobre los que se construye todo el framework SCRUM</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px; text-align: center; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%); animation: pulse 3s ease infinite;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🔍</div>
+                        <h4 style="color: var(--primary); margin-bottom: 1rem;">Transparencia</h4>
+                        <p style="color: var(--gray);">El proceso emergente y el trabajo deben ser visibles para quienes realizan el trabajo y quienes reciben el trabajo.</p>
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
+                            <strong style="color: var(--primary);">Ejemplos prácticos:</strong>
+                            <ul style="list-style: none; padding: 0; margin-top: 0.5rem; font-size: 0.9rem;">
+                                <li>• Sprint Backlog visible para todos</li>
+                                <li>• Definition of Done compartida</li>
+                                <li>• Impedimentos comunicados abiertamente</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(236, 72, 153, 0.1); border-radius: 15px; text-align: center; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%); animation: pulse 3s ease infinite;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">👁️</div>
+                        <h4 style="color: var(--secondary); margin-bottom: 1rem;">Inspección</h4>
+                        <p style="color: var(--gray);">Los artefactos de Scrum y el progreso hacia objetivos acordados deben ser inspeccionados frecuentemente.</p>
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
+                            <strong style="color: var(--secondary);">Momentos clave:</strong>
+                            <ul style="list-style: none; padding: 0; margin-top: 0.5rem; font-size: 0.9rem;">
+                                <li>• Daily Scrum (progreso diario)</li>
+                                <li>• Sprint Review (incremento)</li>
+                                <li>• Sprint Retrospective (proceso)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(16, 185, 129, 0.1); border-radius: 15px; text-align: center; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%); animation: pulse 3s ease infinite;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🔄</div>
+                        <h4 style="color: var(--accent); margin-bottom: 1rem;">Adaptación</h4>
+                        <p style="color: var(--gray);">Si cualquier aspecto de un proceso se desvía fuera de límites aceptables, el proceso o el material debe ajustarse.</p>
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
+                            <strong style="color: var(--accent);">Acciones típicas:</strong>
+                            <ul style="list-style: none; padding: 0; margin-top: 0.5rem; font-size: 0.9rem;">
+                                <li>• Refinamiento del Product Backlog</li>
+                                <li>• Cambios en Sprint Planning</li>
+                                <li>• Mejoras de Retrospective</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Beneficios Comprobados con Métricas Interactivas -->
+        <div class="metrics-dashboard reveal">
+            <h3 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;">Beneficios Comprobados de SCRUM</h3>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">Datos reales de más de 50,000 proyectos analizados por Standish Group y PMI</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card" data-metric="productivity">
+                    <div class="metric-value">87%</div>
+                    <div class="metric-label">Mayor Productividad</div>
+                    <span class="metric-change metric-up">↑ 15% vs Waterfall</span>
+                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 0.5rem;">vs metodologías tradicionales</div>
+                </div>
+                <div class="metric-card" data-metric="speed">
+                    <div class="metric-value">3x</div>
+                    <div class="metric-label">Velocidad de Entrega</div>
+                    <span class="metric-change metric-up">↑ Más rápido</span>
+                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 0.5rem;">time-to-market</div>
+                </div>
+                <div class="metric-card" data-metric="satisfaction">
+                    <div class="metric-value">92%</div>
+                    <div class="metric-label">Satisfacción Cliente</div>
+                    <span class="metric-change metric-up">↑ 8% este año</span>
+                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 0.5rem;">feedback positivo</div>
+                </div>
+                <div class="metric-card" data-metric="quality">
+                    <div class="metric-value">45%</div>
+                    <div class="metric-label">Menos Defectos</div>
+                    <span class="metric-change metric-up">↓ En producción</span>
+                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 0.5rem;">bugs reportados</div>
+                </div>
+                <div class="metric-card" data-metric="roi">
+                    <div class="metric-value">340%</div>
+                    <div class="metric-label">ROI Promedio</div>
+                    <span class="metric-change metric-up">↑ Retorno inversión</span>
+                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 0.5rem;">en 18 meses</div>
+                </div>
+                <div class="metric-card" data-metric="engagement">
+                    <div class="metric-value">78%</div>
+                    <div class="metric-label">Employee Engagement</div>
+                    <span class="metric-change metric-up">↑ Equipos motivados</span>
+                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 0.5rem;">vs equipos tradicionales</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Roles del Equipo - Versión Expandida -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Roles en SCRUM</h3>
+                <p style="color: var(--gray);">Tres roles interdependientes que forman el Scrum Team</p>
+            </div>
+
+            <div class="example-tabs">
+                <button class="tab-button active" data-tab="product-owner">Product Owner</button>
+                <button class="tab-button" data-tab="scrum-master">Scrum Master</button>
+                <button class="tab-button" data-tab="developers">Developers</button>
+                <button class="tab-button" data-tab="team-dynamics">Team Dynamics</button>
+            </div>
+
+            <div class="tab-content active" id="product-owner">
+                <div class="grid grid-2">
+                    <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <div style="font-size: 3rem; margin-right: 1rem;">👑</div>
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Product Owner</h4>
+                                <p style="color: var(--gray); margin: 0;">Accountable del valor del producto</p>
+                            </div>
+                        </div>
+                        
+                        <h5 style="color: var(--primary); margin-bottom: 1rem;">🎯 Responsabilidades Clave</h5>
+                        <ul style="color: var(--gray); list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.8rem;">🎪 <strong>Visión del producto:</strong> Define y comunica la visión</li>
+                            <li style="margin-bottom: 0.8rem;">📋 <strong>Product Backlog:</strong> Gestiona y prioriza items</li>
+                            <li style="margin-bottom: 0.8rem;">💰 <strong>Valor de negocio:</strong> Maximiza ROI del producto</li>
+                            <li style="margin-bottom: 0.8rem;">🗣️ <strong>Stakeholder voice:</strong> Representa necesidades del cliente</li>
+                            <li>✅ <strong>Acceptance criteria:</strong> Define criterios de aceptación</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h5 style="color: var(--accent); margin-bottom: 1rem;">📊 Un día típico del PO</h5>
+                        <div class="timeline" style="padding: 0;">
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem; padding: 0.8rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
+                                <span style="color: var(--primary); font-weight: bold; margin-right: 1rem;">9:00</span>
+                                <span style="color: var(--gray);">Review métricas del producto y feedback usuarios</span>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem; padding: 0.8rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
+                                <span style="color: var(--primary); font-weight: bold; margin-right: 1rem;">10:00</span>
+                                <span style="color: var(--gray);">Daily Scrum - escuchar progreso del equipo</span>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem; padding: 0.8rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
+                                <span style="color: var(--primary); font-weight: bold; margin-right: 1rem;">11:00</span>
+                                <span style="color: var(--gray);">Refinar Product Backlog con stakeholders</span>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem; padding: 0.8rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
+                                <span style="color: var(--primary); font-weight: bold; margin-right: 1rem;">14:00</span>
+                                <span style="color: var(--gray);">Sesión de Discovery con usuarios</span>
+                            </div>
+                            <div style="display: flex; align-items: center; padding: 0.8rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
+                                <span style="color: var(--primary); font-weight: bold; margin-right: 1rem;">16:00</span>
+                                <span style="color: var(--gray);">Escribir y actualizar User Stories</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--warning); margin-bottom: 0.5rem;">⚠️ Errores comunes del PO</h6>
+                            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                                <li>• Actuar como "feature factory" sin visión</li>
+                                <li>• No estar disponible para el equipo</li>
+                                <li>• Cambiar prioridades constantemente</li>
+                                <li>• No validar assumptions con usuarios</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="scrum-master">
+                <div class="grid grid-2">
+                    <div style="padding: 2rem; background: rgba(236, 72, 153, 0.1); border-radius: 15px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <div style="font-size: 3rem; margin-right: 1rem;">🚀</div>
+                            <div>
+                                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Scrum Master</h4>
+                                <p style="color: var(--gray); margin: 0;">Facilitador y coach del equipo</p>
+                            </div>
+                        </div>
+                        
+                        <h5 style="color: var(--secondary); margin-bottom: 1rem;">🎭 Múltiples Hats</h5>
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
+                                <h6 style="color: var(--accent); margin-bottom: 0.5rem;">🏃‍♂️ Facilitador</h6>
+                                <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Facilita eventos, mejora dinámicas de equipo</p>
+                            </div>
+                            <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
+                                <h6 style="color: var(--accent); margin-bottom: 0.5rem;">🎓 Coach</h6>
+                                <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Desarrolla competencias ágiles del equipo</p>
+                            </div>
+                            <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
+                                <h6 style="color: var(--accent); margin-bottom: 0.5rem;">🛡️ Servant Leader</h6>
+                                <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Sirve al equipo, elimina impedimentos</p>
+                            </div>
+                            <div style="padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
+                                <h6 style="color: var(--accent); margin-bottom: 0.5rem;">🔄 Change Agent</h6>
+                                <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Impulsa adopción ágil en la organización</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h5 style="color: var(--accent); margin-bottom: 1rem;">🛠️ Herramientas del SM</h5>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h6 style="color: var(--secondary); margin-bottom: 1rem;">Técnicas de Facilitación</h6>
+                            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                                <li style="margin-bottom: 0.5rem;">🎯 <strong>Fist to Five:</strong> Votación rápida de consenso</li>
+                                <li style="margin-bottom: 0.5rem;">⏰ <strong>Timeboxing:</strong> Gestión eficaz del tiempo</li>
+                                <li style="margin-bottom: 0.5rem;">🔄 <strong>Round Robin:</strong> Participación equitativa</li>
+                                <li style="margin-bottom: 0.5rem;">🎭 <strong>Silent Brainstorming:</strong> Ideas sin sesgos</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h6 style="color: var(--secondary); margin-bottom: 1rem;">Métricas que Monitorea</h6>
+                            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                                <li style="margin-bottom: 0.5rem;">📊 <strong>Velocity:</strong> Estabilidad del equipo</li>
+                                <li style="margin-bottom: 0.5rem;">🔥 <strong>Burndown:</strong> Progreso del sprint</li>
+                                <li style="margin-bottom: 0.5rem;">😊 <strong>Team happiness:</strong> Moral y engagement</li>
+                                <li style="margin-bottom: 0.5rem;">⚡ <strong>Lead time:</strong> Eficiencia de entrega</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">💡 Tip del SM Experto</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem; font-style: italic;">
+                                "Un buen Scrum Master se vuelve progresivamente innecesario conforme el equipo madura en auto-organización"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="developers">
+                <div class="grid grid-2">
+                    <div style="padding: 2rem; background: rgba(16, 185, 129, 0.1); border-radius: 15px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <div style="font-size: 3rem; margin-right: 1rem;">👥</div>
+                            <div>
+                                <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Developers</h4>
+                                <p style="color: var(--gray); margin: 0;">3-9 profesionales que crean el incremento</p>
+                            </div>
+                        </div>
+                        
+                        <h5 style="color: var(--accent); margin-bottom: 1rem;">🌟 Características del Team</h5>
+                        <ul style="color: var(--gray); list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.8rem;">🔀 <strong>Cross-functional:</strong> Todas las skills necesarias</li>
+                            <li style="margin-bottom: 0.8rem;">🎯 <strong>Auto-organizados:</strong> Deciden cómo trabajar</li>
+                            <li style="margin-bottom: 0.8rem;">🤝 <strong>Colaborativos:</strong> Ownership compartido</li>
+                            <li style="margin-bottom: 0.8rem;">📚 <strong>T-shaped:</strong> Especialización + generalización</li>
+                            <li>🔄 <strong>Mejora continua:</strong> Aprenden y se adaptan</li>
+                        </ul>
+                        
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
+                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">🎯 Sprint Goal Ownership</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">
+                                Los Developers son collectively accountable por crear un incremento utilizable que cumpla el Sprint Goal cada Sprint.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h5 style="color: var(--accent); margin-bottom: 1rem;">🛠️ Skills Matrix Típica</h5>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h6 style="color: var(--secondary); margin-bottom: 1rem;">Para equipos .NET + Angular</h6>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div style="padding: 0.8rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
+                                    <strong style="color: var(--primary);">Backend</strong>
+                                    <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0 0; font-size: 0.8rem; color: var(--gray);">
+                                        <li>• C# / .NET Core</li>
+                                        <li>• Entity Framework</li>
+                                        <li>• API REST</li>
+                                        <li>• SQL Server</li>
+                                    </ul>
+                                </div>
+                                <div style="padding: 0.8rem; background: rgba(236, 72, 153, 0.1); border-radius: 8px;">
+                                    <strong style="color: var(--secondary);">Frontend</strong>
+                                    <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0 0; font-size: 0.8rem; color: var(--gray);">
+                                        <li>• Angular / TypeScript</li>
+                                        <li>• RxJS</li>
+                                        <li>• HTML/CSS</li>
+                                        <li>• Testing (Jasmine/Karma)</li>
+                                    </ul>
+                                </div>
+                                <div style="padding: 0.8rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                                    <strong style="color: var(--accent);">DevOps</strong>
+                                    <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0 0; font-size: 0.8rem; color: var(--gray);">
+                                        <li>• Azure DevOps</li>
+                                        <li>• Docker</li>
+                                        <li>• CI/CD</li>
+                                        <li>• Monitoring</li>
+                                    </ul>
+                                </div>
+                                <div style="padding: 0.8rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                                    <strong style="color: var(--warning);">QA</strong>
+                                    <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0 0; font-size: 0.8rem; color: var(--gray);">
+                                        <li>• Unit Testing</li>
+                                        <li>• Integration Tests</li>
+                                        <li>• E2E Testing</li>
+                                        <li>• Performance Testing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">🔄 Pair Programming Benefits</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">
+                                Knowledge sharing instantáneo, menos bugs, mejor diseño, y team building natural.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="team-dynamics">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">🎭 Dinámicas de Equipo Efectivas</h4>
+                
+                <div class="grid grid-2">
+                    <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h5 style="color: var(--primary); margin-bottom: 1rem;">🤝 Collaboration Patterns</h5>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">Daily Interactions</h6>
+                            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                                <li style="margin-bottom: 0.5rem;">🔄 <strong>Swarming:</strong> Todo el equipo en una User Story crítica</li>
+                                <li style="margin-bottom: 0.5rem;">👥 <strong>Pair/Mob programming:</strong> Knowledge sharing continuo</li>
+                                <li style="margin-bottom: 0.5rem;">🎯 <strong>Feature teams:</strong> Ownership de extremo a extremo</li>
+                                <li>📞 <strong>Informal syncs:</strong> Comunicación continua fuera del Daily</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">Decision Making</h6>
+                            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                                <li style="margin-bottom: 0.5rem;">🗳️ <strong>Consensus:</strong> Decisiones por acuerdo mutuo</li>
+                                <li style="margin-bottom: 0.5rem;">⏰ <strong>Timeboxed discussions:</strong> Evitar analysis paralysis</li>
+                                <li style="margin-bottom: 0.5rem;">🎯 <strong>Delegate to expert:</strong> En decisiones técnicas</li>
+                                <li>🔄 <strong>Experiment & adapt:</strong> Probar y medir resultados</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h5 style="color: var(--secondary); margin-bottom: 1rem;">📊 Team Health Indicators</h5>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="color: var(--gray);">Psychological Safety</span>
+                                <span style="color: var(--accent); font-weight: bold;">92%</span>
+                            </div>
+                            <div style="width: 100%; height: 8px; background: rgba(30, 41, 59, 0.3); border-radius: 4px;">
+                                <div style="width: 92%; height: 100%; background: var(--gradient-accent); border-radius: 4px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="color: var(--gray);">Team Autonomy</span>
+                                <span style="color: var(--primary); font-weight: bold;">87%</span>
+                            </div>
+                            <div style="width: 100%; height: 8px; background: rgba(30, 41, 59, 0.3); border-radius: 4px;">
+                                <div style="width: 87%; height: 100%; background: var(--gradient-primary); border-radius: 4px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="color: var(--gray);">Learning Culture</span>
+                                <span style="color: var(--warning); font-weight: bold;">78%</span>
+                            </div>
+                            <div style="width: 100%; height: 8px; background: rgba(30, 41, 59, 0.3); border-radius: 4px;">
+                                <div style="width: 78%; height: 100%; background: linear-gradient(135deg, #F59E0B, #EAB308); border-radius: 4px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="color: var(--gray);">Cross-functionality</span>
+                                <span style="color: var(--secondary); font-weight: bold;">83%</span>
+                            </div>
+                            <div style="width: 100%; height: 8px; background: rgba(30, 41, 59, 0.3); border-radius: 4px;">
+                                <div style="width: 83%; height: 100%; background: var(--gradient-secondary); border-radius: 4px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px; font-size: 0.9rem;">
+                            <strong style="color: var(--accent);">💡 Tip:</strong>
+                            <span style="color: var(--gray);">Mide estos indicadores mensualmente en retrospectives para detectar issues temprano.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Eventos SCRUM Interactivos -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Eventos SCRUM</h3>
+                <p style="color: var(--gray);">Timeboxed events para inspección y adaptación</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-icon">📅</div>
+                    <h3 class="card-title">Sprint Planning</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--primary); margin-bottom: 0.5rem;">🎯 Objetivo</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Definir el trabajo a realizar en el Sprint</p>
+                        </div>
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--primary); margin-bottom: 0.5rem;">⏱️ Timebox</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Máximo 8 horas para Sprint de 4 semanas</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--primary); margin-bottom: 0.5rem;">📋 Artifacts</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Sprint Goal + Sprint Backlog</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3 class="card-title">Daily Scrum</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--secondary); margin-bottom: 0.5rem;">🎯 Objetivo</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Sincronizar actividades y planificar próximas 24h</p>
+                        </div>
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--secondary); margin-bottom: 0.5rem;">⏱️ Timebox</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">15 minutos exactos, mismo horario/lugar</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--secondary); margin-bottom: 0.5rem;">💬 Formato</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">¿Qué hice? ¿Qué haré? ¿Impedimentos?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🎉</div>
+                    <h3 class="card-title">Sprint Review</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">🎯 Objetivo</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Inspeccionar incremento y adaptar Product Backlog</p>
+                        </div>
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">⏱️ Timebox</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Máximo 4 horas para Sprint de 4 semanas</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">👥 Asistentes</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Scrum Team + Stakeholders clave</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔍</div>
+                    <h3 class="card-title">Sprint Retrospective</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--warning); margin-bottom: 0.5rem;">🎯 Objetivo</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Inspeccionar proceso e identificar mejoras</p>
+                        </div>
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--warning); margin-bottom: 0.5rem;">⏱️ Timebox</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Máximo 3 horas para Sprint de 4 semanas</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+                            <h6 style="color: var(--warning); margin-bottom: 0.5rem;">📈 Output</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Plan de mejoras para próximo Sprint</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Sprint Board -->
+        <div class="sprint-board reveal">
+            <h3 style="text-align: center; margin-bottom: 1rem; font-size: 2rem;">Sprint Board Interactivo</h3>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 2rem;">Arrastra las tarjetas entre columnas para simular el flujo de trabajo</p>
+            <div class="board-columns">
+                <div class="board-column" data-column="backlog">
+                    <div class="column-header">📋 Sprint Backlog</div>
+                    <div class="task-card" draggable="true" data-story-points="8">
+                        <div class="task-title">Implementar Login OAuth</div>
+                        <div class="task-description">Integración con Azure AD para autenticación</div>
+                        <div class="task-meta">
+                            <span class="story-points">8 SP</span>
+                            <span class="priority priority-high">Alta</span>
+                        </div>
+                    </div>
+                    <div class="task-card" draggable="true" data-story-points="5">
+                        <div class="task-title">API de Productos</div>
+                        <div class="task-description">CRUD completo con Entity Framework</div>
+                        <div class="task-meta">
+                            <span class="story-points">5 SP</span>
+                            <span class="priority priority-medium">Media</span>
+                        </div>
+                    </div>
+                    <div class="task-card" draggable="true" data-story-points="3">
+                        <div class="task-title">Validaciones Frontend</div>
+                        <div class="task-description">Reactive forms con validadores custom</div>
+                        <div class="task-meta">
+                            <span class="story-points">3 SP</span>
+                            <span class="priority priority-low">Baja</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="board-column" data-column="progress">
+                    <div class="column-header">🚧 En Progreso</div>
+                    <div class="task-card" draggable="true" data-story-points="3">
+                        <div class="task-title">Componente Angular Cart</div>
+                        <div class="task-description">Carrito de compras con persistencia</div>
+                        <div class="task-meta">
+                            <span class="story-points">3 SP</span>
+                            <span class="priority priority-high">Alta</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="board-column" data-column="review">
+                    <div class="column-header">🔍 Code Review</div>
+                    <div class="task-card" draggable="true" data-story-points="2">
+                        <div class="task-title">Unit Tests Productos</div>
+                        <div class="task-description">Testing con xUnit y Moq</div>
+                        <div class="task-meta">
+                            <span class="story-points">2 SP</span>
+                            <span class="priority priority-medium">Media</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="board-column" data-column="done">
+                    <div class="column-header">✅ Done</div>
+                    <div class="task-card" data-story-points="3">
+                        <div class="task-title">Setup .NET Core API</div>
+                        <div class="task-description">Proyecto base con Clean Architecture</div>
+                        <div class="task-meta">
+                            <span class="story-points">3 SP</span>
+                            <span class="priority priority-high">Alta</span>
+                        </div>
+                    </div>
+                    <div class="task-card" data-story-points="5">
+                        <div class="task-title">Configurar CI/CD</div>
+                        <div class="task-description">Pipeline Azure DevOps completo</div>
+                        <div class="task-meta">
+                            <span class="story-points">5 SP</span>
+                            <span class="priority priority-high">Alta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sprint Progress Summary -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem; text-align: center;">📊 Sprint Progress</h4>
+                <div class="grid grid-4">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--accent);" id="total-sp">29</div>
+                        <div style="color: var(--gray); font-size: 0.9rem;">Total SP</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--primary);" id="completed-sp">8</div>
+                        <div style="color: var(--gray); font-size: 0.9rem;">Completed SP</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--warning);" id="progress-percentage">28%</div>
+                        <div style="color: var(--gray); font-size: 0.9rem;">Progress</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--secondary);" id="days-remaining">7</div>
+                        <div style="color: var(--gray); font-size: 0.9rem;">Days Left</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Valores de SCRUM -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Los 5 Valores de SCRUM</h3>
+                <p style="color: var(--gray);">Valores fundamentales que guían el comportamiento del equipo Scrum</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px; text-align: center; transition: all 0.3s ease;" 
+                     onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(99, 102, 241, 0.3)'"
+                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💪</div>
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Compromiso</h4>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">El equipo se compromete a lograr los objetivos del Sprint y a apoyarse mutuamente.</p>
+                    <div style="padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px; font-size: 0.9rem;">
+                        <strong style="color: var(--primary);">En la práctica:</strong>
+                        <span style="color: var(--gray);">Commitment al Sprint Goal, no a scope fijo</span>
+                    </div>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px; text-align: center; transition: all 0.3s ease;"
+                     onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(236, 72, 153, 0.3)'"
+                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">Enfoque</h4>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">Concentrarse en el trabajo del Sprint y en los objetivos del equipo Scrum.</p>
+                    <div style="padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px; font-size: 0.9rem;">
+                        <strong style="color: var(--secondary);">En la práctica:</strong>
+                        <span style="color: var(--gray);">WIP limits, Definition of Done clara</span>
+                    </div>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px; text-align: center; transition: all 0.3s ease;"
+                     onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(16, 185, 129, 0.3)'"
+                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                    <h4 style="color: var(--accent); margin-bottom: 1rem;">Transparencia</h4>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">El trabajo y los desafíos del equipo son visibles para todos los que hacen el trabajo.</p>
+                    <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px; font-size: 0.9rem;">
+                        <strong style="color: var(--accent);">En la práctica:</strong>
+                        <span style="color: var(--gray);">Sprint Board público, métricas visibles</span>
+                    </div>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px; text-align: center; transition: all 0.3s ease;"
+                     onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(245, 158, 11, 0.3)'"
+                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🤝</div>
+                    <h4 style="color: var(--warning); margin-bottom: 1rem;">Respeto</h4>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">Los miembros del equipo se respetan entre sí para ser personas capaces e independientes.</p>
+                    <div style="padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px; font-size: 0.9rem;">
+                        <strong style="color: var(--warning);">En la práctica:</strong>
+                        <span style="color: var(--gray);">Escucha activa, diversidad de opiniones</span>
+                    </div>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px; text-align: center; transition: all 0.3s ease; grid-column: span 2;"
+                     onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(99, 102, 241, 0.3)'"
+                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💙</div>
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Coraje</h4>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">Los miembros del equipo tienen el coraje de hacer lo correcto y trabajar en problemas difíciles.</p>
+                    <div style="padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px; font-size: 0.9rem;">
+                        <strong style="color: var(--primary);">En la práctica:</strong>
+                        <span style="color: var(--gray);">Expresar impedimentos, desafiar status quo, refactoring cuando es necesario</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCRUM vs Other Frameworks -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">SCRUM vs Otras Metodologías</h3>
+                <p style="color: var(--gray);">Comparativa para entender cuándo usar SCRUM</p>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; background: rgba(30, 41, 59, 0.5); border-radius: 10px;">
+                    <thead>
+                        <tr style="background: rgba(99, 102, 241, 0.2);">
+                            <th style="padding: 1rem; text-align: left; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.3);">Aspecto</th>
+                            <th style="padding: 1rem; text-align: center; color: var(--primary); border-bottom: 1px solid rgba(99, 102, 241, 0.3);">SCRUM</th>
+                            <th style="padding: 1rem; text-align: center; color: var(--secondary); border-bottom: 1px solid rgba(99, 102, 241, 0.3);">Kanban</th>
+                            <th style="padding: 1rem; text-align: center; color: var(--warning); border-bottom: 1px solid rgba(99, 102, 241, 0.3);">Waterfall</th>
+                            <th style="padding: 1rem; text-align: center; color: var(--accent); border-bottom: 1px solid rgba(99, 102, 241, 0.3);">SAFe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 0.8rem; color: var(--gray); border-bottom: 1px solid rgba(99, 102, 241, 0.1);"><strong>Iteraciones</strong></td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Sprints fijos (1-4 semanas)</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Flujo continuo</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Fases secuenciales</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Program Increments (10-12 sem)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.8rem; color: var(--gray); border-bottom: 1px solid rgba(99, 102, 241, 0.1);"><strong>Roles</strong></td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">PO, SM, Developers</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Flexibles</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Project Manager, especialistas</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">RTE, PM, Architects</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.8rem; color: var(--gray); border-bottom: 1px solid rgba(99, 102, 241, 0.1);"><strong>Planificación</strong></td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Sprint Planning</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Just-in-time</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Planificación detallada upfront</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">PI Planning</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.8rem; color: var(--gray); border-bottom: 1px solid rgba(99, 102, 241, 0.1);"><strong>Mejor para</strong></td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Productos complejos</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Trabajo operativo</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Requisitos estables</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--light); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">Empresas grandes</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.8rem; color: var(--gray);"><strong>Complejidad setup</strong></td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--accent);">⭐⭐⭐☆☆</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--accent);">⭐⭐☆☆☆</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--warning);">⭐⭐⭐⭐☆</td>
+                            <td style="padding: 0.8rem; text-align: center; color: #EF4444;">⭐⭐⭐⭐⭐</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Enhanced Sprint Board Drag & Drop
+document.addEventListener('DOMContentLoaded', function() {
+    setupSprintBoard();
+    setupMetricHovers();
+});
+
+function setupSprintBoard() {
+    const taskCards = document.querySelectorAll('.task-card[draggable="true"]');
+    const columns = document.querySelectorAll('.board-column');
+
+    taskCards.forEach(card => {
+        card.addEventListener('dragstart', handleDragStart);
+        card.addEventListener('dragend', handleDragEnd);
+    });
+
+    columns.forEach(column => {
+        column.addEventListener('dragover', handleDragOver);
+        column.addEventListener('drop', handleDrop);
+        column.addEventListener('dragenter', handleDragEnter);
+        column.addEventListener('dragleave', handleDragLeave);
+    });
+}
+
+function handleDragStart(e) {
+    e.dataTransfer.setData('text/plain', e.target.outerHTML);
+    e.dataTransfer.setData('source-column', e.target.closest('.board-column').dataset.column);
+    e.target.style.opacity = '0.5';
+    e.target.classList.add('dragging');
+}
+
+function handleDragEnd(e) {
+    e.target.style.opacity = '1';
+    e.target.classList.remove('dragging');
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+}
+
+function handleDragEnter(e) {
+    if (e.target.classList.contains('board-column')) {
+        e.target.style.background = 'rgba(99, 102, 241, 0.1)';
+        e.target.style.transform = 'scale(1.02)';
+    }
+}
+
+function handleDragLeave(e) {
+    if (e.target.classList.contains('board-column')) {
+        e.target.style.background = '';
+        e.target.style.transform = '';
+    }
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    const column = e.target.closest('.board-column');
+    const cardHTML = e.dataTransfer.getData('text/plain');
+    const sourceColumn = e.dataTransfer.getData('source-column');
+    const targetColumn = column.dataset.column;
+    
+    if (sourceColumn !== targetColumn) {
+        // Remove dragging card from source
+        const draggingCard = document.querySelector('.task-card.dragging');
+        if (draggingCard) {
+            draggingCard.remove();
+        }
+        
+        // Add card to target column
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = cardHTML;
+        const newCard = tempDiv.firstChild;
+        newCard.classList.remove('dragging');
+        newCard.style.opacity = '1';
+        
+        // Re-attach event listeners
+        newCard.addEventListener('dragstart', handleDragStart);
+        newCard.addEventListener('dragend', handleDragEnd);
+        
+        column.appendChild(newCard);
+        
+        // Update progress
+        updateSprintProgress();
+        
+        // Show feedback
+        showMoveNotification(newCard.querySelector('.task-title').textContent, targetColumn);
+    }
+    
+    // Reset column styling
+    column.style.background = '';
+    column.style.transform = '';
+}
+
+function updateSprintProgress() {
+    const doneCards = document.querySelectorAll('[data-column="done"] .task-card');
+    let completedSP = 0;
+    
+    doneCards.forEach(card => {
+        const sp = parseInt(card.dataset.storyPoints) || 0;
+        completedSP += sp;
+    });
+    
+    const totalSP = 29; // Could be calculated dynamically
+    const percentage = Math.round((completedSP / totalSP) * 100);
+    
+    document.getElementById('completed-sp').textContent = completedSP;
+    document.getElementById('progress-percentage').textContent = percentage + '%';
+    
+    // Update progress color based on percentage
+    const progressElement = document.getElementById('progress-percentage');
+    if (percentage >= 75) {
+        progressElement.style.color = 'var(--accent)';
+    } else if (percentage >= 50) {
+        progressElement.style.color = 'var(--warning)';
+    } else {
+        progressElement.style.color = 'var(--secondary)';
+    }
+}
+
+function showMoveNotification(taskTitle, targetColumn) {
+    const columnNames = {
+        'backlog': 'Sprint Backlog',
+        'progress': 'En Progreso',
+        'review': 'Code Review',
+        'done': 'Done'
+    };
+    
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--gradient-primary);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        z-index: 10000;
+        animation: slideInRight 0.3s ease;
+        max-width: 300px;
+    `;
+    notification.innerHTML = `
+        <strong>✅ Tarea movida</strong><br>
+        <span style="font-size: 0.9rem;">"${taskTitle}" → ${columnNames[targetColumn]}</span>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+function setupMetricHovers() {
+    const metricCards = document.querySelectorAll('.metric-card[data-metric]');
+    
+    metricCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            const metric = card.dataset.metric;
+            showMetricDetails(card, metric);
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            hideMetricDetails(card);
+        });
+    });
+}
+
+function showMetricDetails(card, metric) {
+    const details = {
+        productivity: "Medido por Story Points entregados por sprint vs metodologías tradicionales",
+        speed: "Time-to-market reducido debido a entregas incrementales frecuentes",
+        satisfaction: "Net Promoter Score de clientes que usan productos desarrollados con SCRUM",
+        quality: "Reducción de bugs en producción gracias a Definition of Done y testing continuo",
+        roi: "Retorno de inversión promedio después de 18 meses de implementación",
+        engagement: "Employee satisfaction score comparado con equipos no-ágiles"
+    };
+    
+    if (!card.querySelector('.metric-tooltip')) {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'metric-tooltip';
+        tooltip.style.cssText = `
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--darker);
+            color: var(--light);
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+        tooltip.textContent = details[metric] || "Métrica de rendimiento del equipo";
+        
+        card.style.position = 'relative';
+        card.appendChild(tooltip);
+        
+        setTimeout(() => tooltip.style.opacity = '1', 10);
+    }
+}
+
+function hideMetricDetails(card) {
+    const tooltip = card.querySelector('.metric-tooltip');
+    if (tooltip) {
+        tooltip.style.opacity = '0';
+        setTimeout(() => tooltip.remove(), 300);
+    }
+}
+
+// Add CSS animations for smooth interactions
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInRight {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOutRight {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+    .task-card {
+        transition: all 0.3s ease;
+    }
+    .task-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+    }
+    .task-card.dragging {
+        transform: rotate(5deg);
+    }
+    .task-description {
+        font-size: 0.8rem;
+        color: var(--gray);
+        margin: 0.5rem 0;
+        line-height: 1.4;
+    }
+`;
+document.head.appendChild(style);
+
+console.log('🎯 SCRUM Foundations loaded with enhanced interactivity!');
+</script>

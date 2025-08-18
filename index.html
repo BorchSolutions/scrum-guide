@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCRUM Mastery - Guía Completa para Equipos Ágiles</title>
+    
+    <!-- External CSS Files -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Favicon and Meta -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <meta name="description" content="Guía completa de SCRUM con enfoque en estimación Fibonacci para equipos .NET y Angular">
+    <meta name="keywords" content="SCRUM, Agile, Fibonacci, Story Points, .NET, Angular, Estimación">
+    <meta name="author" content="SCRUM Pro Guide">
+    
+    <!-- Progressive Web App -->
+    <meta name="theme-color" content="#6366F1">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="SCRUM Pro Guide - Estimación Fibonacci">
+    <meta property="og:description" content="Guía completa de SCRUM con enfoque en estimación Fibonacci">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tu-usuario.github.io/scrum-guide/">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/js/content-loader.js" as="script">
+    <link rel="preload" href="sections/scrum-foundations.html" as="fetch" crossorigin>
+    <link rel="preload" href="sections/estimacion-agil.html" as="fetch" crossorigin>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p style="margin-top: 1rem; color: var(--gray);">Cargando experiencia Scrum...</p>
+            <div style="margin-top: 1rem; color: var(--primary); font-size: 0.9rem;" id="loading-status">
+                Inicializando contenido modular...
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Component Container -->
+    <div id="navigation-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">SCRUM</h1>
+            <p class="hero-subtitle">Framework ágil para equipos de alto rendimiento</p>
+            <a href="#intro" class="hero-cta">
+                Comenzar el viaje
+                <span>→</span>
+            </a>
+            <div style="margin-top: 2rem; font-size: 0.9rem; color: var(--gray);">
+                🚀 Contenido modular | 📊 Estimación Fibonacci | 💻 .NET + Angular
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                <path d="M15 20L9 14L10.4 12.6L15 17.2L19.6 12.6L21 14L15 20Z" fill="white" opacity="0.5"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main id="main-content" class="main-content">
+        <!-- Dynamic content will be loaded here -->
+        <div class="content-placeholder" style="text-align: center; padding: 4rem 2rem; color: var(--gray);">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">📄</div>
+            <h3>Cargando contenido...</h3>
+            <p>El contenido se está cargando dinámicamente</p>
+        </div>
+    </main>
+
+    <!-- Footer Component Container -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript Modules -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/content-loader.js"></script>
+
+    <!-- Component Loader -->
+    <script>
+        // Component loader for navigation and footer
+        class ComponentLoader {
+            constructor() {
+                this.loadComponents();
+            }
+
+            async loadComponents() {
+                await Promise.all([
+                    this.loadNavigation(),
+                    this.loadFooter()
+                ]);
+            }
+
+            async loadNavigation() {
+                try {
+                    const response = await fetch('components/navigation.html');
+                    const html = await response.text();
+                    document.getElementById('navigation-container').innerHTML = html;
+                } catch (error) {
+                    console.warn('Failed to load navigation component:', error);
+                    // Fallback navigation
+                    this.createFallbackNavigation();
+                }
+            }
+
+            async loadFooter() {
+                try {
+                    const response = await fetch('components/footer.html');
+                    const html = await response.text();
+                    document.getElementById('footer-container').innerHTML = html;
+                } catch (error) {
+                    console.warn('Failed to load footer component:', error);
+                    this.createFallbackFooter();
+                }
+            }
+
+            createFallbackNavigation() {
+                const nav = document.createElement('nav');
+                nav.className = 'nav';
+                nav.id = 'navbar';
+                nav.innerHTML = `
+                    <div class="nav-container">
+                        <div class="logo">SCRUM Pro</div>
+                        <ul class="nav-menu">
+                            <li><a href="#intro" class="nav-link">SCRUM Foundations</a></li>
+                            <li><a href="#estimacion" class="nav-link">Estimación Ágil</a></li>
+                            <li><a href="#metricas" class="nav-link">Medición & Métricas</a></li>
+                            <li><a href="#aplicacion" class="nav-link">Aplicación Práctica</a></li>
+                            <li><a href="#herramientas" class="nav-link">Recursos</a></li>
+                        </ul>
+                    </div>
+                `;
+                document.getElementById('navigation-container').appendChild(nav);
+            }
+
+            createFallbackFooter() {
+                const footer = document.createElement('footer');
+                footer.innerHTML = `
+                    <div class="footer-content">
+                        <div class="footer-bottom">
+                            <p>© 2024 SCRUM Pro - Guía completa para equipos ágiles</p>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('footer-container').appendChild(footer);
+            }
+        }
+
+        // Update loading status
+        function updateLoadingStatus(message) {
+            const statusElement = document.getElementById('loading-status');
+            if (statusElement) {
+                statusElement.textContent = message;
+            }
+        }
+
+        // Initialize everything when DOM is ready
+        document.addEventListener('DOMContentLoaded', async () => {
+            updateLoadingStatus('Cargando componentes...');
+            
+            // Load components first
+            const componentLoader = new ComponentLoader();
+            
+            // Wait a bit for components to load
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            updateLoadingStatus('Inicializando content loader...');
+            
+            // Content loader will be initialized by its own script
+            // We just need to wait for it
+            const waitForContentLoader = () => {
+                if (window.contentLoader) {
+                    updateLoadingStatus('Contenido listo!');
+                    console.log('🚀 SCRUM Pro Guide fully loaded with modular content!');
+                } else {
+                    setTimeout(waitForContentLoader, 100);
+                }
+            };
+            
+            waitForContentLoader();
+        });
+
+        // Service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            if (window.performanceMonitor) {
+                const metrics = window.performanceMonitor.getMetrics();
+                console.log('📊 Performance metrics:', metrics);
+            }
+        });
+
+        // Error handling for missing content
+        window.addEventListener('error', (event) => {
+            if (event.target.tagName === 'SCRIPT' || event.target.tagName === 'LINK') {
+                console.warn('Failed to load resource:', event.target.src || event.target.href);
+                // Could show a user-friendly error message here
+            }
+        });
+    </script>
+
+    <!-- Analytics placeholder -->
+    <script>
+        // Analytics integration would go here
+        // Example: Google Analytics, Mixpanel, etc.
+        function trackPageView(section) {
+            if (typeof gtag !== 'undefined') {
+                gtag('config', 'GA_MEASUREMENT_ID', {
+                    page_title: `SCRUM Guide - ${section}`,
+                    page_location: window.location.href
+                });
+            }
+        }
+        
+        // Track content loading events
+        document.addEventListener('contentLoaded', (event) => {
+            trackPageView(event.detail.section);
+        });
+    </script>
+</body>
+</html>

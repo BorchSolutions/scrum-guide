@@ -1,0 +1,430 @@
+<!-- Estimación Ágil Section -->
+<section id="estimacion" class="section">
+    <div class="container">
+        <div class="section-header reveal">
+            <h2 class="section-title">Estimación Ágil</h2>
+            <p class="section-subtitle">Dominando el arte de la estimación con Fibonacci</p>
+        </div>
+
+        <!-- Fundamentación Fibonacci -->
+        <div class="grid grid-2 reveal">
+            <div class="card">
+                <div class="card-icon">🧮</div>
+                <h3 class="card-title">¿Por qué Fibonacci?</h3>
+                <div style="margin-top: 1.5rem;">
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Secuencia Natural</h4>
+                        <p class="card-text">1, 2, 3, 5, 8, 13, 21, 34...<br>
+                        Cada número = suma de los dos anteriores</p>
+                    </div>
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px;">
+                        <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Proporción Áurea</h4>
+                        <p class="card-text">Relación entre números consecutivos ≈ <strong>1.618</strong><br>
+                        Refleja incertidumbre creciente</p>
+                    </div>
+                    <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Evita Falsa Precisión</h4>
+                        <p class="card-text">No hay diferencia real entre 6 y 7 horas<br>
+                        Fibonacci fuerza decisiones claras</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🧠</div>
+                <h3 class="card-title">Ventajas Psicológicas</h3>
+                <div style="margin-top: 1.5rem;">
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+                        <h4 style="color: var(--warning); margin-bottom: 0.5rem;">Facilita Consenso</h4>
+                        <p class="card-text">Menos opciones = discusiones más enfocadas<br>
+                        Convergencia rápida hacia acuerdos</p>
+                    </div>
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Refleja Incertidumbre</h4>
+                        <p class="card-text">Tareas simples → estimación precisa (1,2,3)<br>
+                        Tareas complejas → mayor incertidumbre (13,21)</p>
+                    </div>
+                    <div style="padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px;">
+                        <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Mejores Decisiones</h4>
+                        <p class="card-text">47% menos tiempo estimando<br>
+                        23% mayor accuracy vs escalas lineales</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Points con ejemplos -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Referencia de Story Points</h3>
+                <p style="color: var(--gray);">Ejemplos prácticos para .NET Core y Angular (máximo 21 SP)</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">1-3 Story Points</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">1 SP - Trivial</h4>
+                            <p class="card-text">• Cambiar un texto en la UI<br>
+                            • Actualizar una constante<br>
+                            • Corregir un typo<br>
+                            • Cambiar color de botón</p>
+                        </div>
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">2 SP - Muy Simple</h4>
+                            <p class="card-text">• Validación required a campo<br>
+                            • Pipe simple en Angular<br>
+                            • Endpoint GET básico .NET<br>
+                            • Ocultar/mostrar elemento</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">3 SP - Simple</h4>
+                            <p class="card-text">• Formulario con 3-4 campos<br>
+                            • Paginación en tabla<br>
+                            • Agregar logging<br>
+                            • Componente loading spinner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">5-8 Story Points</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--warning); margin-bottom: 0.5rem;">5 SP - Mediano</h4>
+                            <p class="card-text">• CRUD completo entidad simple<br>
+                            • Autenticación JWT Angular<br>
+                            • Reporte con filtros básicos<br>
+                            • Validaciones complejas</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">8 SP - Complejo</h4>
+                            <p class="card-text">• Upload archivos con preview<br>
+                            • Dashboard con gráficos<br>
+                            • Integración API externa<br>
+                            • Notificaciones tiempo real</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-icon">🔥</div>
+                    <h3 class="card-title">13 Story Points</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Tareas Muy Complejas</h4>
+                            <p class="card-text">• Migrar módulo Angular 15 → 17<br>
+                            • Sistema permisos granular<br>
+                            • Wizard multi-paso complejo<br>
+                            • Refactorizar BD arquitectura</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">21 Story Points</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px;">
+                            <h4 style="color: #EF4444; margin-bottom: 0.5rem;">Épicas (Máximo Permitido)</h4>
+                            <p class="card-text">• Implementar i18n completa<br>
+                            • Sistema reportes dinámicos<br>
+                            • Migrar a Identity Server<br>
+                            • PWA con offline capabilities</p>
+                        </div>
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.2); border-radius: 10px; border-left: 3px solid #EF4444;">
+                            <p style="color: #EF4444; font-weight: 600; margin: 0;">
+                                ⚠️ Regla: Si una tarea requiere >21 SP, debe dividirse obligatoriamente
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Técnicas de Estimación Fibonacci -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Técnicas de Estimación Fibonacci</h3>
+                <p style="color: var(--gray);">Métodos probados para dominar la estimación con escala Fibonacci</p>
+            </div>
+
+            <div class="example-tabs">
+                <button class="tab-button active" data-tab="planning-poker">Planning Poker</button>
+                <button class="tab-button" data-tab="triangulacion">Triangulación</button>
+                <button class="tab-button" data-tab="anchoring">Anchoring</button>
+                <button class="tab-button" data-tab="splitting">Task Splitting</button>
+                <button class="tab-button" data-tab="calibracion">Calibración</button>
+            </div>
+
+            <div class="tab-content active" id="planning-poker">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Planning Poker con Fibonacci</h4>
+                
+                <div class="grid grid-2">
+                    <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h5 style="color: var(--primary); margin-bottom: 1rem;">🎯 Proceso Optimizado</h5>
+                        <ol style="color: var(--gray); padding-left: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;"><strong>Presentación:</strong> Product Owner lee la User Story (2 min)</li>
+                            <li style="margin-bottom: 0.8rem;"><strong>Clarificación:</strong> Preguntas técnicas únicamente (3 min)</li>
+                            <li style="margin-bottom: 0.8rem;"><strong>Reflexión silenciosa:</strong> Cada miembro piensa individualmente (1 min)</li>
+                            <li style="margin-bottom: 0.8rem;"><strong>Votación simultánea:</strong> Todos revelan cartas al mismo tiempo</li>
+                            <li style="margin-bottom: 0.8rem;"><strong>Discusión enfocada:</strong> Solo si hay diferencias >2 valores Fibonacci</li>
+                            <li style="margin-bottom: 0.8rem;"><strong>Re-votación:</strong> Máximo 2 rondas adicionales</li>
+                        </ol>
+                    </div>
+                    
+                    <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h5 style="color: var(--secondary); margin-bottom: 1rem;">⚡ Reglas de Convergencia</h5>
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h6 style="color: #10B981; margin-bottom: 0.5rem;">✅ Consenso Inmediato</h6>
+                            <p style="color: var(--gray); margin: 0;">Todos votan el mismo número → Estimación final</p>
+                        </div>
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+                            <h6 style="color: #F59E0B; margin-bottom: 0.5rem;">⚠️ Diferencia Pequeña</h6>
+                            <p style="color: var(--gray); margin: 0;">Ejemplo: 5, 5, 8, 5 → Tomar el mayor (8 SP)</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px;">
+                            <h6 style="color: #EF4444; margin-bottom: 0.5rem;">🔄 Diferencia Grande</h6>
+                            <p style="color: var(--gray); margin: 0;">Ejemplo: 3, 8, 13, 5 → Discusión obligatoria</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px;">
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">🎲 Cartas Recomendadas para Fibonacci</h5>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div style="background: var(--gradient-primary); color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;" class="poker-card-interactive">1</div>
+                        <div style="background: var(--gradient-primary); color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;" class="poker-card-interactive">2</div>
+                        <div style="background: var(--gradient-primary); color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;" class="poker-card-interactive">3</div>
+                        <div style="background: var(--gradient-primary); color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;" class="poker-card-interactive">5</div>
+                        <div style="background: var(--gradient-primary); color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;" class="poker-card-interactive">8</div>
+                        <div style="background: var(--gradient-primary); color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;" class="poker-card-interactive">13</div>
+                        <div style="background: var(--gradient-primary); color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;" class="poker-card-interactive">21</div>
+                        <div style="background: var(--gradient-secondary); color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: bold; font-size: 1rem; cursor: pointer; transition: all 0.3s ease;" class="poker-card-interactive">?</div>
+                        <div style="background: var(--gradient-accent); color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: bold; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease;" class="poker-card-interactive">☕</div>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--gray); text-align: center;">
+                        <strong>?</strong> = Necesito más información | <strong>☕</strong> = Pausa (task muy compleja)
+                    </p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="triangulacion">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Técnica de Triangulación</h4>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px; margin-bottom: 2rem;">
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">🔺 Concepto</h5>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">
+                        Comparar la nueva tarea con <strong>3 tareas de referencia conocidas</strong> para determinar su posición en la escala Fibonacci.
+                    </p>
+                    <div style="background: rgba(99, 102, 241, 0.1); padding: 1.5rem; border-radius: 10px;">
+                        <h6 style="color: var(--primary); margin-bottom: 0.5rem;">Fórmula Mental:</h6>
+                        <p style="color: var(--gray); margin: 0;">
+                            "¿La nueva tarea es más compleja que X, similar a Y, o menos compleja que Z?"
+                        </p>
+                    </div>
+                </div>
+
+                <h5 style="color: var(--secondary); margin-bottom: 1rem;">Ejemplo Práctico: Estimando "Sistema de Notificaciones Push"</h5>
+                
+                <div class="grid grid-3">
+                    <div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 15px;">
+                        <h6 style="color: #10B981; margin-bottom: 1rem;">📌 Referencia 1</h6>
+                        <p style="font-weight: bold; margin-bottom: 0.5rem;">"Validaciones complejas de formulario"</p>
+                        <p style="color: var(--gray); margin-bottom: 1rem;">Estimación conocida: <strong>5 SP</strong></p>
+                        <p style="color: var(--gray);">✅ Notificaciones es MÁS complejo que esto</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem; background: rgba(245, 158, 11, 0.1); border-radius: 15px;">
+                        <h6 style="color: #F59E0B; margin-bottom: 1rem;">📌 Referencia 2</h6>
+                        <p style="font-weight: bold; margin-bottom: 0.5rem;">"Dashboard con múltiples gráficos"</p>
+                        <p style="color: var(--gray); margin-bottom: 1rem;">Estimación conocida: <strong>8 SP</strong></p>
+                        <p style="color: var(--gray);">🤔 Notificaciones es SIMILAR a esto</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem; background: rgba(236, 72, 153, 0.1); border-radius: 15px;">
+                        <h6 style="color: var(--secondary); margin-bottom: 1rem;">📌 Referencia 3</h6>
+                        <p style="font-weight: bold; margin-bottom: 0.5rem;">"Sistema de permisos granular"</p>
+                        <p style="color: var(--gray); margin-bottom: 1rem;">Estimación conocida: <strong>13 SP</strong></p>
+                        <p style="color: var(--gray);">✅ Notificaciones es MENOS complejo que esto</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px; text-align: center;">
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">🎯 Conclusión</h5>
+                    <p style="color: var(--gray); font-size: 1.1rem;">
+                        Más complejo que 5 SP + Similar a 8 SP + Menos complejo que 13 SP = <strong style="color: var(--primary); font-size: 1.3rem;">8 Story Points</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="anchoring">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Método de Anchoring</h4>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px; margin-bottom: 2rem;">
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">⚓ Establecer Anclas de Referencia</h5>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">
+                        Definir 2-3 tareas perfectamente conocidas por todo el equipo como "anclas" para cada valor Fibonacci clave.
+                    </p>
+                </div>
+
+                <div class="grid grid-2">
+                    <div style="padding: 2rem; background: rgba(16, 185, 129, 0.1); border-radius: 15px;">
+                        <h5 style="color: #10B981; margin-bottom: 1rem;">🎯 Anclas Recomendadas (.NET + Angular)</h5>
+                        
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
+                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">Ancla 3 SP</h6>
+                            <p style="color: var(--gray); margin: 0;">"Crear formulario simple con validaciones básicas"</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
+                            <h6 style="color: var(--warning); margin-bottom: 0.5rem;">Ancla 8 SP</h6>
+                            <p style="color: var(--gray); margin: 0;">"Implementar CRUD completo con API y frontend"</p>
+                        </div>
+                        
+                        <div style="padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
+                            <h6 style="color: var(--secondary); margin-bottom: 0.5rem;">Ancla 13 SP</h6>
+                            <p style="color: var(--gray); margin: 0;">"Integración completa con API externa + manejo errores"</p>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px;">
+                        <h5 style="color: var(--primary); margin-bottom: 1rem;">💭 Preguntas de Anclaje</h5>
+                        
+                        <ul style="list-style: none; padding: 0; color: var(--gray);">
+                            <li style="margin-bottom: 1rem; padding: 0.8rem; background: rgba(30, 41, 59, 0.3); border-radius: 8px;">
+                                "¿Es más complejo que nuestro ancla de 3 SP?"
+                            </li>
+                            <li style="margin-bottom: 1rem; padding: 0.8rem; background: rgba(30, 41, 59, 0.3); border-radius: 8px;">
+                                "¿Se parece a nuestro ancla de 8 SP?"
+                            </li>
+                            <li style="margin-bottom: 1rem; padding: 0.8rem; background: rgba(30, 41, 59, 0.3); border-radius: 8px;">
+                                "¿Es tan complejo como nuestro ancla de 13 SP?"
+                            </li>
+                            <li style="padding: 0.8rem; background: rgba(30, 41, 59, 0.3); border-radius: 8px;">
+                                "¿Qué tan lejos está del ancla más cercana?"
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="splitting">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Task Splitting - Dividir Tareas Grandes</h4>
+                
+                <div style="padding: 2rem; background: rgba(239, 68, 68, 0.1); border-radius: 15px; margin-bottom: 2rem;">
+                    <h5 style="color: #EF4444; margin-bottom: 1rem;">🚨 Regla de Oro</h5>
+                    <p style="color: var(--gray); font-size: 1.1rem;">
+                        <strong>Si una tarea excede 21 SP o no encaja en la escala Fibonacci, DEBE dividirse obligatoriamente</strong>
+                    </p>
+                </div>
+
+                <h5 style="color: var(--primary); margin-bottom: 1rem;">🔪 Técnicas de División</h5>
+
+                <div class="grid grid-2">
+                    <div style="padding: 1.5rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h6 style="color: var(--accent); margin-bottom: 1rem;">📋 Por Funcionalidad</h6>
+                        <p style="color: var(--gray); margin-bottom: 1rem;"><strong>Ejemplo:</strong> "Sistema de reportes completo" (34 SP)</p>
+                        <ul style="color: var(--gray); list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">• "Reportes básicos con filtros" (13 SP)</li>
+                            <li style="margin-bottom: 0.5rem;">• "Exportar a PDF/Excel" (8 SP)</li>
+                            <li style="margin-bottom: 0.5rem;">• "Reportes programados" (13 SP)</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="padding: 1.5rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h6 style="color: var(--secondary); margin-bottom: 1rem;">🎯 Por Criterios de Aceptación</h6>
+                        <p style="color: var(--gray); margin-bottom: 1rem;"><strong>Ejemplo:</strong> "Checkout completo" (25 SP)</p>
+                        <ul style="color: var(--gray); list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">• "Resumen de compra" (5 SP)</li>
+                            <li style="margin-bottom: 0.5rem;">• "Integración pagos" (13 SP)</li>
+                            <li style="margin-bottom: 0.5rem;">• "Confirmación y email" (8 SP)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="calibracion">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Calibración del Equipo</h4>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px; margin-bottom: 2rem;">
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">🎯 Objetivo de la Calibración</h5>
+                    <p style="color: var(--gray);">
+                        Asegurar que todos los miembros del equipo tengan la <strong>misma percepción</strong> de lo que significa cada valor en la escala Fibonacci.
+                    </p>
+                </div>
+
+                <div style="padding: 2rem; background: rgba(245, 158, 11, 0.1); border-radius: 15px;">
+                    <h6 style="color: var(--warning); margin-bottom: 1rem;">Ejercicio: "Estimar tareas de la casa"</h6>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">Usar analogías cotidianas para calibrar la escala:</p>
+                    
+                    <div class="grid grid-2">
+                        <div>
+                            <ul style="color: var(--gray); list-style: none; padding: 0;">
+                                <li style="margin-bottom: 0.8rem;"><strong>1 SP:</strong> Hacer café (5 min)</li>
+                                <li style="margin-bottom: 0.8rem;"><strong>2 SP:</strong> Lavar los platos (15 min)</li>
+                                <li style="margin-bottom: 0.8rem;"><strong>3 SP:</strong> Preparar desayuno (30 min)</li>
+                                <li style="margin-bottom: 0.8rem;"><strong>5 SP:</strong> Limpieza completa cocina (1.5 horas)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul style="color: var(--gray); list-style: none; padding: 0;">
+                                <li style="margin-bottom: 0.8rem;"><strong>8 SP:</strong> Limpieza general de la casa (4 horas)</li>
+                                <li style="margin-bottom: 0.8rem;"><strong>13 SP:</strong> Reorganizar toda la cocina (1 día)</li>
+                                <li style="margin-bottom: 0.8rem;"><strong>21 SP:</strong> Renovar completamente baño (1 semana)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <p style="color: var(--gray); margin-top: 1.5rem; font-style: italic;">
+                        💡 Después del ejercicio, trasladar estos conceptos de "esfuerzo relativo" a las tareas de desarrollo.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Consejos y Mejores Prácticas -->
+        <div class="grid grid-3 reveal">
+            <div class="card">
+                <div class="card-icon">💡</div>
+                <h3 class="card-title">Mejores Prácticas</h3>
+                <p class="card-text">
+                    • <strong>Consistencia:</strong> Usar siempre las mismas anclas<br>
+                    • <strong>Timeboxing:</strong> Máximo 5 min por estimación<br>
+                    • <strong>Principio conservador:</strong> En duda, elegir el mayor<br>
+                    • <strong>Documentar:</strong> Reasoning de estimaciones complejas<br>
+                    • <strong>Revisar:</strong> Accuracy cada 3-4 sprints
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⚠️</div>
+                <h3 class="card-title">Errores Comunes</h3>
+                <p class="card-text">
+                    • <strong>Falsa precisión:</strong> "Esta tarea es 6.5 SP"<br>
+                    • <strong>Anchoring bias:</strong> Influencia de primera estimación<br>
+                    • <strong>Planning perfecto:</strong> Buscar certeza absoluta<br>
+                    • <strong>Comparar equipos:</strong> Velocity entre diferentes teams<br>
+                    • <strong>Pressure timing:</strong> Convertir SP a horas
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3 class="card-title">Señales de Éxito</h3>
+                <p class="card-text">
+                    • <strong>Consenso rápido:</strong> <90% tareas en 1ra votación<br>
+                    • <strong>Accuracy alta:</strong> >85% estimaciones ±1 Fibonacci<br>
+                    • <strong>Velocity estable:</strong> ±15% entre sprints<br>
+                    • <strong>Confianza equipo:</strong> Sin miedo a estimar<br>
+                    • <strong>Retrospectivas:</strong> Pocas quejas sobre estimación
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

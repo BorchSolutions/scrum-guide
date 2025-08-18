@@ -1,0 +1,401 @@
+<!-- Aplicación Práctica Section -->
+<section id="aplicacion" class="section">
+    <div class="container">
+        <div class="section-header reveal">
+            <h2 class="section-title">Aplicación Práctica</h2>
+            <p class="section-subtitle">De la teoría a la implementación real en proyectos</p>
+        </div>
+
+        <!-- Work Items Hierarchy -->
+        <div class="reveal">
+            <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.8rem;">Jerarquía de Work Items</h3>
+            <div class="hierarchy">
+                <div class="hierarchy-item">
+                    <div class="hierarchy-icon">
+                        🏔️
+                        <div class="hierarchy-line"></div>
+                    </div>
+                    <div class="hierarchy-content">
+                        <h3 class="hierarchy-title">Epic</h3>
+                        <p class="hierarchy-description">
+                            Gran iniciativa estratégica que puede durar varios meses. Representa un objetivo de negocio significativo que se descompone en features más pequeñas.
+                        </p>
+                        <div class="hierarchy-example">
+                            <strong>Ejemplo:</strong> "Plataforma de E-commerce Completa"<br>
+                            <strong>Duración:</strong> 3-6 meses<br>
+                            <strong>Valor de Negocio:</strong> Muy Alto (100+ puntos)<br>
+                            <strong>Incluye:</strong> Catálogo, Carrito, Pagos, Envíos, Admin Panel
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-item">
+                    <div class="hierarchy-icon">
+                        ⭐
+                        <div class="hierarchy-line"></div>
+                    </div>
+                    <div class="hierarchy-content">
+                        <h3 class="hierarchy-title">Feature</h3>
+                        <p class="hierarchy-description">
+                            Funcionalidad específica que aporta valor directo al usuario. Puede completarse en uno o varios sprints.
+                        </p>
+                        <div class="hierarchy-example">
+                            <strong>Ejemplo:</strong> "Sistema de Carrito de Compras"<br>
+                            <strong>Duración:</strong> 2-3 sprints<br>
+                            <strong>Story Points:</strong> 21-34 puntos<br>
+                            <strong>Componentes:</strong> Añadir items, actualizar cantidad, calcular total
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-item">
+                    <div class="hierarchy-icon">
+                        📝
+                        <div class="hierarchy-line"></div>
+                    </div>
+                    <div class="hierarchy-content">
+                        <h3 class="hierarchy-title">User Story</h3>
+                        <p class="hierarchy-description">
+                            Descripción de funcionalidad desde la perspectiva del usuario, siguiendo el formato: "Como [usuario], quiero [acción] para [beneficio]"
+                        </p>
+                        <div class="hierarchy-example">
+                            <strong>Ejemplo:</strong> "Como cliente, quiero añadir productos al carrito para comprarlos después"<br>
+                            <strong>Story Points:</strong> 8 puntos<br>
+                            <strong>Criterios de Aceptación:</strong><br>
+                            • Botón "Añadir al carrito" visible<br>
+                            • Confirmación visual al añadir<br>
+                            • Contador actualizado en navbar
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-item">
+                    <div class="hierarchy-icon">✅</div>
+                    <div class="hierarchy-content">
+                        <h3 class="hierarchy-title">Task</h3>
+                        <p class="hierarchy-description">
+                            Trabajo técnico específico necesario para completar una User Story. Debe ser completable en menos de un día.
+                        </p>
+                        <div class="hierarchy-example">
+                            <strong>Ejemplos de Tasks:</strong><br>
+                            • "Crear modelo CartItem en .NET Core" (2 horas)<br>
+                            • "Implementar servicio AddToCart en Angular" (4 horas)<br>
+                            • "Escribir unit tests para CartService" (3 horas)<br>
+                            • "Configurar Redis para cache de carrito" (2 horas)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Story Template -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Template de User Story</h3>
+                <p style="color: var(--gray);">Formato estándar para escribir User Stories efectivas</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">📝 Estructura Básica</h5>
+                    
+                    <div style="background: rgba(99, 102, 241, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                        <h6 style="color: var(--primary); margin-bottom: 1rem;">Formato:</h6>
+                        <p style="color: var(--light); font-family: monospace; line-height: 1.8;">
+                            <strong>Como</strong> [tipo de usuario],<br>
+                            <strong>Quiero</strong> [acción/funcionalidad],<br>
+                            <strong>Para</strong> [beneficio/valor]
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 10px;">
+                        <h6 style="color: var(--accent); margin-bottom: 1rem;">Ejemplo:</h6>
+                        <p style="color: var(--light); line-height: 1.8;">
+                            <strong>Como</strong> cliente del e-commerce,<br>
+                            <strong>Quiero</strong> filtrar productos por precio,<br>
+                            <strong>Para</strong> encontrar opciones dentro de mi presupuesto
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h5 style="color: var(--secondary); margin-bottom: 1rem;">✅ Criterios de Aceptación</h5>
+                    
+                    <div style="background: rgba(236, 72, 153, 0.1); padding: 1.5rem; border-radius: 10px;">
+                        <h6 style="color: var(--secondary); margin-bottom: 1rem;">Para el ejemplo anterior:</h6>
+                        <ul style="color: var(--light); list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.8rem;">✅ El filtro muestra rangos de precio predefinidos</li>
+                            <li style="margin-bottom: 0.8rem;">✅ Se puede establecer un rango personalizado</li>
+                            <li style="margin-bottom: 0.8rem;">✅ Los resultados se actualizan automáticamente</li>
+                            <li style="margin-bottom: 0.8rem;">✅ Se mantiene el filtro al navegar entre páginas</li>
+                            <li style="margin-bottom: 0.8rem;">✅ Se puede combinar con otros filtros</li>
+                            <li>✅ Funciona en móvil y desktop</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Proyecto Ejemplo -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Proyecto Ejemplo: E-commerce con .NET y Angular</h3>
+                <p style="color: var(--gray);">Stack: .NET Core 8 API + Angular 17 + SQL Server + Redis</p>
+            </div>
+
+            <div class="example-tabs">
+                <button class="tab-button active" data-tab="sprint1">Sprint 1</button>
+                <button class="tab-button" data-tab="sprint2">Sprint 2</button>
+                <button class="tab-button" data-tab="code">Código Ejemplo</button>
+                <button class="tab-button" data-tab="metricas-proyecto">Métricas</button>
+            </div>
+
+            <div class="tab-content active" id="sprint1">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Sprint 1: Fundación del Proyecto</h4>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Sprint Planning (4 horas)</div>
+                            <div class="timeline-title">Objetivo: Setup inicial y CRUD de productos</div>
+                            <p>• Configurar arquitectura Clean Architecture<br>
+                            • Implementar autenticación JWT<br>
+                            • CRUD completo de productos<br>
+                            • CI/CD pipeline en Azure DevOps</p>
+                            <p style="margin-top: 1rem;"><strong>Commitment:</strong> 42 Story Points</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Semana 1</div>
+                            <div class="timeline-title">Backend Foundation</div>
+                            <p>• Entity Framework Core setup<br>
+                            • Repository Pattern implementation<br>
+                            • JWT Authentication<br>
+                            • Unit Tests con xUnit</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Semana 2</div>
+                            <div class="timeline-title">Frontend & Integration</div>
+                            <p>• Angular project structure<br>
+                            • Reactive Forms para productos<br>
+                            • Guards y Interceptors<br>
+                            • Integration testing</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Sprint Review & Retro</div>
+                            <div class="timeline-title">Resultados</div>
+                            <p>✅ 38/42 Story Points completados<br>
+                            📈 Velocity establecida: 38 SP<br>
+                            🎯 4 items movidos al siguiente sprint<br>
+                            💡 Mejora identificada: Mejor estimación de tasks de DevOps</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="sprint2">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Sprint 2: Carrito y Checkout</h4>
+                <div style="background: rgba(30, 41, 59, 0.5); border-radius: 15px; padding: 2rem;">
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">Sprint Goal</h5>
+                    <p>Implementar el flujo completo de compra desde añadir al carrito hasta el checkout.</p>
+                    
+                    <h5 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">User Stories Seleccionadas</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <strong>US-101:</strong> Como cliente, quiero añadir productos al carrito (8 SP)
+                        </li>
+                        <li style="margin-bottom: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <strong>US-102:</strong> Como cliente, quiero modificar cantidades en el carrito (5 SP)
+                        </li>
+                        <li style="margin-bottom: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <strong>US-103:</strong> Como cliente, quiero proceder al checkout (13 SP)
+                        </li>
+                        <li style="margin-bottom: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <strong>US-104:</strong> Como cliente, quiero recibir confirmación por email (8 SP)
+                        </li>
+                    </ul>
+
+                    <h5 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Tasks Técnicas</h5>
+                    <p>• Implementar Redis para cache de carrito<br>
+                    • Crear servicio de Email con SendGrid<br>
+                    • Implementar patrón Mediator con MediatR<br>
+                    • Añadir Stripe payment integration<br>
+                    • E2E tests con Cypress</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="code">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Ejemplos de Código</h4>
+                
+                <h5 style="color: var(--primary); margin-bottom: 1rem;">.NET Core - Product Controller</h5>
+                <div class="code-block">
+                    <pre><code><span class="keyword">using</span> Microsoft.AspNetCore.Mvc;
+<span class="keyword">using</span> MediatR;
+
+[ApiController]
+[Route(<span class="string">"api/[controller]"</span>)]
+<span class="keyword">public class</span> <span class="function">ProductsController</span> : ControllerBase
+{
+    <span class="keyword">private readonly</span> IMediator _mediator;
+    
+    <span class="keyword">public</span> <span class="function">ProductsController</span>(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+    
+    [HttpPost]
+    <span class="keyword">public async</span> Task&lt;ActionResult&lt;ProductDto&gt;&gt; <span class="function">CreateProduct</span>(
+        CreateProductCommand command)
+    {
+        <span class="comment">// Story Points: 5</span>
+        <span class="comment">// Business Value: Alto - Funcionalidad core</span>
+        <span class="keyword">var</span> result = <span class="keyword">await</span> _mediator.Send(command);
+        <span class="keyword">return</span> CreatedAtAction(nameof(GetProduct), 
+            <span class="keyword">new</span> { id = result.Id }, result);
+    }
+    
+    [HttpGet(<span class="string">"{id}"</span>)]
+    <span class="keyword">public async</span> Task&lt;ActionResult&lt;ProductDto&gt;&gt; <span class="function">GetProduct</span>(<span class="keyword">int</span> id)
+    {
+        <span class="keyword">var</span> query = <span class="keyword">new</span> GetProductQuery { Id = id };
+        <span class="keyword">var</span> result = <span class="keyword">await</span> _mediator.Send(query);
+        <span class="keyword">return</span> result != <span class="keyword">null</span> ? Ok(result) : NotFound();
+    }
+}</code></pre>
+                </div>
+
+                <h5 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Angular - Product Service</h5>
+                <div class="code-block">
+                    <pre><code><span class="keyword">import</span> { Injectable } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
+<span class="keyword">import</span> { HttpClient } <span class="keyword">from</span> <span class="string">'@angular/common/http'</span>;
+<span class="keyword">import</span> { Observable } <span class="keyword">from</span> <span class="string">'rxjs'</span>;
+
+@Injectable({
+  providedIn: <span class="string">'root'</span>
+})
+<span class="keyword">export class</span> <span class="function">ProductService</span> {
+  <span class="keyword">private</span> apiUrl = <span class="string">'https://api.example.com/api/products'</span>;
+  
+  <span class="function">constructor</span>(<span class="keyword">private</span> http: HttpClient) {}
+  
+  <span class="comment">// User Story: Listar productos - 3 SP</span>
+  <span class="function">getProducts</span>(): Observable&lt;Product[]&gt; {
+    <span class="keyword">return this</span>.http.get&lt;Product[]&gt;(<span class="keyword">this</span>.apiUrl);
+  }
+  
+  <span class="comment">// User Story: Crear producto - 5 SP</span>
+  <span class="function">createProduct</span>(product: Product): Observable&lt;Product&gt; {
+    <span class="keyword">return this</span>.http.post&lt;Product&gt;(<span class="keyword">this</span>.apiUrl, product);
+  }
+  
+  <span class="comment">// Task: Implementar cache con RxJS - 2 horas</span>
+  <span class="keyword">private</span> cache$ = <span class="keyword">new</span> BehaviorSubject&lt;Product[]&gt;([]);
+}</code></pre>
+                </div>
+
+                <h5 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Estimación por Líneas de Código</h5>
+                <div style="background: rgba(99, 102, 241, 0.1); padding: 1.5rem; border-radius: 10px;">
+                    <p style="color: var(--gray);">
+                        <strong>Controller básico (5 SP):</strong> ~50-80 líneas<br>
+                        <strong>Service con cache (8 SP):</strong> ~120-200 líneas<br>
+                        <strong>Componente complejo (13 SP):</strong> ~300-500 líneas<br><br>
+                        <em>Nota: LOC es indicativo, la complejidad real define los Story Points</em>
+                    </p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="metricas-proyecto">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Métricas del Proyecto</h4>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">156</div>
+                        <div class="metric-label">Total Story Points</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">4</div>
+                        <div class="metric-label">Sprints Completados</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">39</div>
+                        <div class="metric-label">Velocity Promedio</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">94%</div>
+                        <div class="metric-label">Código Cubierto</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">Fórmulas de Cálculo</h5>
+                    <p><strong>ROI del Sprint:</strong> (Valor Entregado - Costo) / Costo × 100</p>
+                    <p><strong>Eficiencia:</strong> Story Points Completados / Story Points Comprometidos</p>
+                    <p><strong>Lead Time:</strong> Tiempo desde que se crea hasta que se completa</p>
+                    <p><strong>Cycle Time:</strong> Tiempo desde que se empieza hasta que se completa</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Casos Especiales -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Casos Especiales en Estimación</h3>
+                <p style="color: var(--gray);">Situaciones comunes que requieren atención especial</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-icon">🔍</div>
+                    <h3 class="card-title">Spikes de Investigación</h3>
+                    <p class="card-text">
+                        <strong>Definición:</strong> Investigación técnica con outcome incierto<br><br>
+                        <strong>Timeboxing:</strong> Máximo 1-2 días por spike<br><br>
+                        <strong>Estimación:</strong> No usar SP, usar tiempo fijo<br><br>
+                        <strong>Ejemplo:</strong> "Investigar viabilidad de Web3 integration" → 1 día spike
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🐛</div>
+                    <h3 class="card-title">Bugs vs Features</h3>
+                    <p class="card-text">
+                        <strong>Bugs críticos:</strong> Prioridad inmediata, fuera de SP<br><br>
+                        <strong>Bugs menores:</strong> 1-2 SP típicamente<br><br>
+                        <strong>Refactoring:</strong> Estimar como feature normal<br><br>
+                        <strong>Deuda técnica:</strong> Incluir en velocity del sprint
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🎓</div>
+                    <h3 class="card-title">Learning & Training</h3>
+                    <p class="card-text">
+                        <strong>Nueva tecnología:</strong> +50% de tiempo estimado<br><br>
+                        <strong>Junior developers:</strong> +100% para tareas complejas<br><br>
+                        <strong>Knowledge transfer:</strong> Incluir tiempo de mentoring<br><br>
+                        <strong>Documentación:</strong> +20% para tasks nuevas
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3 class="card-title">Dependencias Externas</h3>
+                    <p class="card-text">
+                        <strong>APIs externas:</strong> +100% de buffer por incertidumbre<br><br>
+                        <strong>Aprobaciones legales:</strong> Fuera de estimación, tracking separado<br><br>
+                        <strong>Infraestructura:</strong> Coordinar con DevOps antes de planificar<br><br>
+                        <strong>Third-party libs:</strong> Spike de evaluación primero
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,39 @@
+<!-- Footer Component -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="#intro" class="footer-link">SCRUM Foundations</a>
+            <a href="#estimacion" class="footer-link">Estimación Ágil</a>
+            <a href="#metricas" class="footer-link">Medición & Métricas</a>
+            <a href="#aplicacion" class="footer-link">Aplicación Práctica</a>
+            <a href="#herramientas" class="footer-link">Recursos</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 SCRUM Pro - Guía completa para equipos ágiles</p>
+            <p style="margin-top: 0.5rem; opacity: 0.6;">Optimizado para equipos .NET Core y Angular</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--gray);">
+                🚀 Contenido modular cargado dinámicamente | 
+                📊 <span id="content-stats">Cargando estadísticas...</span>
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script>
+// Update content statistics
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.contentLoader) {
+        const updateStats = () => {
+            const progress = window.contentLoader.getLoadingProgress();
+            const statsElement = document.getElementById('content-stats');
+            if (statsElement) {
+                statsElement.textContent = `${progress.loaded}/${progress.total} secciones cargadas (${progress.percentage}%)`;
+            }
+        };
+        
+        // Update stats periodically
+        updateStats();
+        setInterval(updateStats, 2000);
+    }
+});
+</script>

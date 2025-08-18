@@ -1,0 +1,295 @@
+<!-- Medición y Métricas Section -->
+<section id="metricas" class="section">
+    <div class="container">
+        <div class="section-header reveal">
+            <h2 class="section-title">Medición & Métricas</h2>
+            <p class="section-subtitle">Cómo medimos el éxito y el progreso del equipo</p>
+        </div>
+
+        <div class="grid grid-3 reveal">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3 class="card-title">Story Points</h3>
+                <p class="card-text">
+                    <strong>Definición:</strong> Medida relativa del esfuerzo, complejidad y riesgo.<br><br>
+                    <strong>Escala Fibonacci:</strong> 1, 2, 3, 5, 8, 13, 21<br><br>
+                    <strong>Planning Poker:</strong> Técnica de estimación colaborativa donde cada miembro vota.<br><br>
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💰</div>
+                <h3 class="card-title">Business Value</h3>
+                <p class="card-text">
+                    <strong>Definición:</strong> Valor que aporta al negocio o cliente.<br><br>
+                    <strong>Escala:</strong> Fibonacci (1-34)<br><br>
+                    <strong>Cálculo WSJF:</strong> (Valor + Urgencia + Reducción de Riesgo) / Esfuerzo
+                    <br>
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h3 class="card-title">Velocity</h3>
+                <p class="card-text">
+                    <strong>Definición:</strong> Story Points completados por Sprint.<br><br>
+                    <strong>Cálculo:</strong> Promedio de últimos 3-5 sprints<br><br>
+                    <strong>Uso:</strong> Predicción de capacidad futura<br><br>
+                    <strong>Ejemplo:</strong> Velocity = 45 SP/Sprint → Podemos planificar ~45 SP para próximo sprint
+                </p>
+            </div>
+        </div>
+
+        <!-- WSJF Calculator -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Calculadora WSJF</h3>
+                <p style="color: var(--gray);">Weighted Shortest Job First - Priorización basada en valor y costo</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">📝 Ingresa los valores</h5>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--light); font-weight: 600;">Business Value (1-21)</label>
+                        <input type="range" id="businessValue" min="1" max="21" value="8" style="width: 100%; margin-bottom: 0.5rem;" oninput="calculateWSJF()">
+                        <span id="businessValueDisplay" style="color: var(--primary); font-weight: bold;">8</span>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--light); font-weight: 600;">Urgencia (1-21)</label>
+                        <input type="range" id="urgency" min="1" max="21" value="5" style="width: 100%; margin-bottom: 0.5rem;" oninput="calculateWSJF()">
+                        <span id="urgencyDisplay" style="color: var(--secondary); font-weight: bold;">5</span>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--light); font-weight: 600;">Reducción de Riesgo (1-21)</label>
+                        <input type="range" id="riskReduction" min="1" max="21" value="3" style="width: 100%; margin-bottom: 0.5rem;" oninput="calculateWSJF()">
+                        <span id="riskReductionDisplay" style="color: var(--accent); font-weight: bold;">3</span>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--light); font-weight: 600;">Esfuerzo en SP (1-21)</label>
+                        <input type="range" id="effort" min="1" max="21" value="8" style="width: 100%; margin-bottom: 0.5rem;" oninput="calculateWSJF()">
+                        <span id="effortDisplay" style="color: var(--warning); font-weight: bold;">8</span>
+                    </div>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px;">
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">🧮 Resultado WSJF</h5>
+                    
+                    <div style="text-align: center; padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 10px; margin-bottom: 1.5rem;">
+                        <div style="font-size: 3rem; font-weight: bold; color: var(--primary);" id="wsjfResult">2.0</div>
+                        <div style="color: var(--gray); margin-top: 0.5rem;">Score WSJF</div>
+                    </div>
+                    
+                    <div style="background: rgba(30, 41, 59, 0.3); padding: 1.5rem; border-radius: 10px;">
+                        <h6 style="color: var(--accent); margin-bottom: 1rem;">Fórmula:</h6>
+                        <p style="color: var(--gray); font-family: monospace; text-align: center;">
+                            WSJF = (<span id="formulaBV">8</span> + <span id="formulaU">5</span> + <span id="formulaRR">3</span>) / <span id="formulaE">8</span>
+                        </p>
+                        <p style="color: var(--gray); font-family: monospace; text-align: center; margin-top: 1rem;">
+                            WSJF = <span id="formulaSum">16</span> / <span id="formulaEffort">8</span> = <span id="formulaResult">2.0</span>
+                        </p>
+                    </div>
+                    
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                        <h6 style="color: var(--accent); margin-bottom: 0.5rem;">💡 Interpretación:</h6>
+                        <p style="color: var(--gray); margin: 0;" id="wsjfInterpretation">Prioridad media - Considerar para próximos sprints</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-2 reveal">
+            <div class="chart-container">
+                <h3 class="chart-title">Burndown Chart</h3>
+                <canvas id="burndownChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3 class="chart-title">Velocity Trend</h3>
+                <canvas id="velocityChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Métricas Avanzadas -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Métricas Avanzadas</h3>
+                <p style="color: var(--gray);">KPIs especializados para equipos de alto rendimiento</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">Lead Time</h3>
+                    <p class="card-text">
+                        <strong>Definición:</strong> Tiempo desde que se define la User Story hasta que se entrega en producción.<br><br>
+                        <strong>Fórmula:</strong> Fecha Entrega - Fecha Creación<br><br>
+                        <strong>Meta:</strong> < 2 sprints para stories de 8 SP<br><br>
+                        <strong>Ejemplo:</strong> Story creada el 1/Nov, entregada el 15/Nov = 14 días lead time
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3 class="card-title">Cycle Time</h3>
+                    <p class="card-text">
+                        <strong>Definición:</strong> Tiempo desde que se inicia el desarrollo hasta que se completa.<br><br>
+                        <strong>Fórmula:</strong> Fecha Done - Fecha "In Progress"<br><br>
+                        <strong>Meta:</strong> < 5 días para stories de 8 SP<br><br>
+                        <strong>Uso:</strong> Identificar cuellos de botella en el proceso
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Estimation Accuracy</h3>
+                    <p class="card-text">
+                        <strong>Definición:</strong> Precisión de las estimaciones vs tiempo real.<br><br>
+                        <strong>Cálculo:</strong> |Story Points Estimados - Tiempo Real| / Story Points Estimados<br><br>
+                        <strong>Meta:</strong> > 85% accuracy<br><br>
+                        <strong>Mejora:</strong> Recalibrar anclas cada 5 sprints
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔥</div>
+                    <h3 class="card-title">Defect Rate</h3>
+                    <p class="card-text">
+                        <strong>Definición:</strong> Bugs encontrados por Story Point entregado.<br><br>
+                        <strong>Fórmula:</strong> Total Bugs / Total Story Points<br><br>
+                        <strong>Meta:</strong> < 0.1 bugs/SP<br><br>
+                        <strong>Tracking:</strong> Por sprint y acumulativo trimestral
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="metrics-dashboard reveal">
+            <h3 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;">Dashboard del Sprint Actual</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">42</div>
+                    <div class="metric-label">Story Points Comprometidos</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">28</div>
+                    <div class="metric-label">Story Points Completados</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">5</div>
+                    <div class="metric-label">Días Restantes</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">85%</div>
+                    <div class="metric-label">Probabilidad de Éxito</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">2.3</div>
+                    <div class="metric-label">Bugs por Story</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">4.5★</div>
+                    <div class="metric-label">Satisfacción del Equipo</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Métricas de Predicción -->
+        <div class="example-container reveal">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Predicción y Forecasting</h3>
+                <p style="color: var(--gray);">Herramientas para planificación y predicción basada en datos históricos</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">📈 Predicción de Velocity</h4>
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--accent);">39.2</div>
+                        <div style="color: var(--gray);">SP promedio próximos 3 sprints</div>
+                    </div>
+                    <p style="color: var(--gray); font-size: 0.9rem;">
+                        Basado en promedio móvil de últimos 5 sprints con tendencia ajustada
+                    </p>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">🎯 Completion Date</h4>
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--warning);">15 Mar</div>
+                        <div style="color: var(--gray);">Fecha estimada proyecto</div>
+                    </div>
+                    <p style="color: var(--gray); font-size: 0.9rem;">
+                        156 SP restantes ÷ 39.2 SP/sprint = 4 sprints
+                    </p>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: var(--accent); margin-bottom: 1rem;">📊 Confidence Level</h4>
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--primary);">87%</div>
+                        <div style="color: var(--gray);">Probabilidad de cumplir fecha</div>
+                    </div>
+                    <p style="color: var(--gray); font-size: 0.9rem;">
+                        Basado en variabilidad histórica del equipo
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// WSJF Calculator
+function calculateWSJF() {
+    const businessValue = parseInt(document.getElementById('businessValue').value);
+    const urgency = parseInt(document.getElementById('urgency').value);
+    const riskReduction = parseInt(document.getElementById('riskReduction').value);
+    const effort = parseInt(document.getElementById('effort').value);
+    
+    // Update displays
+    document.getElementById('businessValueDisplay').textContent = businessValue;
+    document.getElementById('urgencyDisplay').textContent = urgency;
+    document.getElementById('riskReductionDisplay').textContent = riskReduction;
+    document.getElementById('effortDisplay').textContent = effort;
+    
+    // Calculate WSJF
+    const numerator = businessValue + urgency + riskReduction;
+    const wsjf = (numerator / effort);
+    
+    // Update formula displays
+    document.getElementById('formulaBV').textContent = businessValue;
+    document.getElementById('formulaU').textContent = urgency;
+    document.getElementById('formulaRR').textContent = riskReduction;
+    document.getElementById('formulaE').textContent = effort;
+    document.getElementById('formulaSum').textContent = numerator;
+    document.getElementById('formulaEffort').textContent = effort;
+    document.getElementById('formulaResult').textContent = wsjf.toFixed(1);
+    
+    // Update result
+    document.getElementById('wsjfResult').textContent = wsjf.toFixed(1);
+    
+    // Update interpretation
+    let interpretation = '';
+    if (wsjf >= 4) {
+        interpretation = '🔥 Prioridad MUY ALTA - Incluir en próximo sprint';
+    } else if (wsjf >= 2.5) {
+        interpretation = '⚡ Prioridad ALTA - Considerar para próximos 2 sprints';
+    } else if (wsjf >= 1.5) {
+        interpretation = '📋 Prioridad MEDIA - Backlog prioritario';
+    } else {
+        interpretation = '🔻 Prioridad BAJA - Reconsiderar necesidad';
+    }
+    
+    document.getElementById('wsjfInterpretation').textContent = interpretation;
+}
+
+// Initialize calculator
+document.addEventListener('DOMContentLoaded', function() {
+    calculateWSJF();
+});
+</script>
