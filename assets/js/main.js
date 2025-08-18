@@ -38,7 +38,6 @@ class AppController {
         if (this.isInitialized) return;
         
         try {
-            console.log('🚀 Initializing SCRUM Guide App v' + this.config.version);
             
             // 1. Setup global error handling
             this.setupErrorHandling();
@@ -65,7 +64,6 @@ class AppController {
             this.finalizeInitialization();
             
             this.isInitialized = true;
-            console.log('✅ App initialized successfully');
             
         } catch (error) {
             console.error('❌ Error initializing app:', error);
@@ -111,11 +109,7 @@ class AppController {
         };
         
         // Log capabilities
-        console.log('📱 Device capabilities:', {
-            isMobile: this.state.isMobile,
-            viewport: `${window.innerWidth}x${window.innerHeight}`,
-            features
-        });
+
         
         // Apply device-specific classes
         document.documentElement.classList.toggle('mobile', this.state.isMobile);
@@ -179,7 +173,6 @@ class AppController {
             
             this.updateLoadingStatus(loadingMessages[2]);
             
-            console.log('📦 Components loaded successfully');
             
         } catch (error) {
             console.error('Error loading components:', error);
@@ -203,7 +196,6 @@ class AppController {
             if (container) {
                 container.innerHTML = html;
                 this.components.set(name, { url, containerId, loaded: true });
-                console.log(`✅ Component '${name}' loaded`);
             } else {
                 console.warn(`Container '${containerId}' not found for component '${name}'`);
             }
@@ -222,26 +214,22 @@ class AppController {
             // Initialize ContentLoader
             if (window.ContentLoader) {
                 this.state.components.contentLoader = new window.ContentLoader();
-                console.log('📄 ContentLoader initialized');
             }
             
             // Initialize Navigation
             if (window.Navigation) {
                 this.state.components.navigation = new window.Navigation();
-                console.log('🧭 Navigation initialized');
             }
             
             // Initialize SectionManager
             if (window.SectionManager) {
                 this.state.components.sectionManager = new window.SectionManager();
-                console.log('📋 SectionManager initialized');
             }
             
             // Initialize TabManager for any existing tab containers
             this.initializeTabManagers();
             
         } catch (error) {
-            console.error('Error initializing systems:', error);
             throw error;
         }
     }
@@ -269,7 +257,6 @@ class AppController {
         });
         
         if (initialized > 0) {
-            console.log(`📑 Initialized ${initialized} TabManager instances`);
         }
     }
 
@@ -302,7 +289,6 @@ class AppController {
             this.handleSectionChange(event.detail.sectionId);
         });
         
-        console.log('👂 Event listeners configured');
     }
 
     /**
@@ -322,7 +308,6 @@ class AppController {
                 this.state.currentSection = initialSection;
             }
             
-            console.log(`📄 Initial content loaded: ${initialSection}`);
             
         } catch (error) {
             console.error('Error loading initial content:', error);
@@ -354,7 +339,6 @@ class AppController {
             timestamp: Date.now()
         });
         
-        console.log('🎉 App ready!');
     }
 
     /**
@@ -389,7 +373,6 @@ class AppController {
         if (statusElement) {
             statusElement.textContent = message;
         }
-        console.log('📊', message);
     }
 
     /**
@@ -439,9 +422,7 @@ class AppController {
      */
     handleVisibilityChange() {
         if (document.hidden) {
-            console.log('📱 App went to background');
         } else {
-            console.log('📱 App came to foreground');
         }
     }
 
@@ -451,7 +432,6 @@ class AppController {
     handleSectionChange(sectionId) {
         if (sectionId !== this.state.currentSection) {
             this.state.currentSection = sectionId;
-            console.log(`📄 Active section: ${sectionId}`);
         }
     }
 
@@ -464,7 +444,6 @@ class AppController {
             this.state.components.sectionManager.reinitialize();
         }
         
-        console.log('🔄 Viewport-dependent components reinitialized');
     }
 
     /**
@@ -499,7 +478,6 @@ class AppController {
      */
     trackError(errorInfo) {
         // Placeholder for error tracking
-        console.log('🔍 Error tracked:', errorInfo);
     }
 
     /**
@@ -530,7 +508,6 @@ class AppController {
         this.state = {};
         this.isInitialized = false;
         
-        console.log('🧹 App destroyed');
     }
 }
 

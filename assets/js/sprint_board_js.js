@@ -58,7 +58,6 @@ class SprintBoard {
         this.updateMetrics();
         this.updateUI();
         
-        console.log('📋 Sprint Board initialized with', this.tasks.length, 'tasks');
     }
 
     /**
@@ -399,7 +398,6 @@ class SprintBoard {
         // Analytics
         this.trackTaskMove(task, oldStatus, targetColumnId);
 
-        console.log(`📋 Task ${taskId} moved from ${oldStatus} to ${targetColumnId}`);
     }
 
     /**
@@ -542,7 +540,6 @@ class SprintBoard {
         // Analytics
         this.trackTaskCreation(task);
 
-        console.log('📋 Task created:', task.id);
         return task;
     }
 
@@ -568,7 +565,6 @@ class SprintBoard {
             this.config.onTaskEdit(task);
         }
 
-        console.log('📋 Task updated:', taskId);
         return task;
     }
 
@@ -714,7 +710,6 @@ class SprintBoard {
             this.config.onTaskDelete(task);
         }
 
-        console.log('📋 Task deleted:', taskId);
     }
 
     /**
@@ -1155,7 +1150,6 @@ class SprintBoard {
         this.observers = [];
         this.tasks = [];
 
-        console.log('📋 Sprint Board destroyed');
     }
 }
 

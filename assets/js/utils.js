@@ -523,7 +523,6 @@ window.Utils = {
             const start = performance.now();
             const result = func();
             const end = performance.now();
-            console.log(`${label} took ${(end - start).toFixed(2)}ms`);
             return result;
         },
 
@@ -580,7 +579,6 @@ window.$ = Utils.DOM.select;
 window.$$ = Utils.DOM.selectAll;
 
 // Log de inicialización
-console.log('🛠️ Utils library loaded successfully');
 
 // Exportar para módulos
 if (typeof module !== 'undefined' && module.exports) {

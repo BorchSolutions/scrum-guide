@@ -10,11 +10,9 @@ class ScrumTabManager {
     }
 
     init() {
-        console.log('🎯 Initializing SCRUM Tab Manager...');
         this.setupTabListeners();
         this.setupKeyboardNavigation();
         this.setupAccessibility();
-        console.log('✅ Tab Manager ready!');
     }
 
     setupTabListeners() {
@@ -28,7 +26,6 @@ class ScrumTabManager {
             });
         });
 
-        console.log(`📄 Setup listeners for ${tabButtons.length} tab buttons`);
     }
 
     switchTab(clickedButton) {
@@ -68,7 +65,6 @@ class ScrumTabManager {
         }
 
         this.activeTab = tabName;
-        console.log(`🔄 Switched to tab: ${tabName}`);
     }
 
     animateTabContent(content) {

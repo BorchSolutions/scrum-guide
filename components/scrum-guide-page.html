@@ -183,7 +183,6 @@
             const waitForContentLoader = () => {
                 if (window.contentLoader) {
                     updateLoadingStatus('Contenido listo!');
-                    console.log('🚀 SCRUM Pro Guide fully loaded with modular content!');
                 } else {
                     setTimeout(waitForContentLoader, 100);
                 }
@@ -197,10 +196,8 @@
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
                     .then(registration => {
-                        console.log('SW registered: ', registration);
                     })
                     .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
                     });
             });
         }
@@ -209,14 +206,12 @@
         window.addEventListener('load', () => {
             if (window.performanceMonitor) {
                 const metrics = window.performanceMonitor.getMetrics();
-                console.log('📊 Performance metrics:', metrics);
             }
         });
 
         // Error handling for missing content
         window.addEventListener('error', (event) => {
             if (event.target.tagName === 'SCRIPT' || event.target.tagName === 'LINK') {
-                console.warn('Failed to load resource:', event.target.src || event.target.href);
                 // Could show a user-friendly error message here
             }
         });

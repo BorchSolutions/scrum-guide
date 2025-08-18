@@ -23,7 +23,6 @@ class ExamplesManager {
         this.setupCodeBlocks();
         this.setupTimelines();
         this.setupInteractiveElements();
-        console.log('🎯 Examples Manager initialized successfully!');
     }
 
     /**
@@ -250,7 +249,6 @@ class ExamplesManager {
             // Log del cambio
             const taskTitle = this.draggedElement.querySelector('.task-title')?.textContent;
             const columnTitle = column.querySelector('.column-header')?.textContent;
-            console.log(`📋 Moved "${taskTitle}" to "${columnTitle}"`);
             
             // Disparar evento de cambio
             this.onTaskMoved(this.draggedElement, column);
@@ -305,7 +303,6 @@ class ExamplesManager {
      */
     showTaskDetails(task) {
         const taskData = this.getTaskData(task);
-        console.log('📝 Task details:', taskData);
         
         // Aquí podrías mostrar un modal o panel con detalles
         // Por ahora solo agregamos un efecto visual
@@ -585,7 +582,6 @@ class ExamplesManager {
         const value = card.querySelector('.metric-value')?.textContent;
         const label = card.querySelector('.metric-label')?.textContent;
         
-        console.log(`📊 Metric: ${label} = ${value}`);
         
         // Efecto visual
         card.style.animation = 'pulse 0.5s ease';
@@ -689,7 +685,6 @@ class ExamplesManager {
         this.codeBlocks = [];
         this.timelines = [];
         this.sprintBoard = null;
-        console.log('🎯 Examples Manager destroyed');
     }
 }
 
@@ -763,11 +758,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Event listeners para eventos personalizados
 document.addEventListener('tabChanged', (event) => {
-    console.log(`🔄 Tab changed to: ${event.detail.tabName}`);
 });
 
 document.addEventListener('taskMoved', (event) => {
-    console.log(`📋 Task moved:`, event.detail);
 });
 
 // Exportar para uso en módulos

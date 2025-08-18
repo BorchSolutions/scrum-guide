@@ -20,7 +20,6 @@ class ComponentManager {
     init() {
         this.setupGlobalErrorHandler();
         this.setupPerformanceMonitoring();
-        console.log('🧩 Component Manager initialized');
     }
 
     /**
@@ -103,7 +102,6 @@ class ComponentManager {
             this.setupComponentCleanup(name, containerElement);
 
             const loadTime = performance.now() - startTime;
-            console.log(`🎯 Component ${name} loaded in ${loadTime.toFixed(2)}ms`);
 
             // Trigger evento de carga
             this.triggerComponentEvent(name, 'loaded', { 
@@ -165,7 +163,6 @@ class ComponentManager {
             
             return new Promise((resolve, reject) => {
                 link.onload = () => {
-                    console.log(`📄 CSS loaded for component ${componentName}`);
                     resolve();
                 };
                 link.onerror = () => reject(new Error(`Failed to load CSS: ${cssPath}`));
@@ -365,7 +362,6 @@ class ComponentManager {
             this.loadedComponents.delete(name);
             this.removeComponentInstance(name);
 
-            console.log(`🗑️ Component ${name} unloaded`);
             this.triggerComponentEvent(name, 'unloaded');
 
         } catch (error) {
@@ -501,10 +497,8 @@ class ComponentManager {
                 const config = this.components.get(name);
                 if (config && config.htmlPath) {
                     await this.loadComponentHTML(config.htmlPath, name);
-                    console.log(`🚀 Preloaded component ${name}`);
                 }
             } catch (error) {
-                console.warn(`Failed to preload ${name}:`, error);
             }
         });
 
@@ -529,7 +523,6 @@ class ComponentManager {
         this.componentCache.clear();
         this.eventListeners.clear();
         
-        console.log('🧩 Component Manager destroyed');
     }
 }
 
@@ -566,7 +559,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cssPath: '/assets/css/components/board.css'
     });
 
-    console.log('🎯 Component Manager ready with default components');
 });
 
 // Hacer disponible globalmente

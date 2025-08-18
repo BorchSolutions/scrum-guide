@@ -27,7 +27,6 @@ class SectionManager {
         this.setupIntersectionObserver();
         
         this.isInitialized = true;
-        console.log('📋 Section Manager initialized successfully!');
     }
 
     /**
@@ -502,7 +501,6 @@ class SectionManager {
         this.observers.clear();
         this.animatedElements.clear();
         this.metricsAnimated.clear();
-        console.log('📋 Section Manager destroyed');
     }
 }
 

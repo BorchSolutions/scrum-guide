@@ -46,7 +46,6 @@ class TabManager {
         this.setupKeyboardNavigation();
         this.activateTab(this.activeIndex);
         
-        console.log(`📄 TabManager initialized with ${this.tabs.length} tabs`);
     }
 
     /**
@@ -137,7 +136,6 @@ class TabManager {
                 content: this.contents[index]
             });
 
-            console.log(`📄 Tab ${index} activated`);
 
         } catch (error) {
             console.error(`TabManager: Error activating tab ${index}:`, error);
@@ -204,7 +202,6 @@ class TabManager {
                 this.config.onTabLoad(index, tab, content);
             }
 
-            console.log(`📄 Tab ${index} content loaded`);
 
         } catch (error) {
             console.error(`TabManager: Error loading content for tab ${index}:`, error);
@@ -475,7 +472,6 @@ class TabManager {
         // Clear cache
         this.clearCache();
 
-        console.log('TabManager destroyed');
     }
 }
 
@@ -494,7 +490,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    console.log(`📄 Auto-initialized ${tabContainers.length} tab containers`);
 });
 
 // Export TabManager

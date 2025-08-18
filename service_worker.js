@@ -36,18 +36,15 @@ const CONTENT_SECTIONS = [
 
 // Install event - cache static assets
 self.addEventListener('install', (event) => {
-    console.log('SW: Installing service worker');
     
     event.waitUntil(
         Promise.all([
             // Cache static files
             caches.open(STATIC_CACHE).then(cache => {
-                console.log('SW: Caching static files');
                 return cache.addAll(STATIC_FILES);
             }),
             // Preload critical content sections
             caches.open(DYNAMIC_CACHE).then(cache => {
-                console.log('SW: Preloading critical content');
                 // Only cache the first two sections initially
                 return cache.addAll(CONTENT_SECTIONS.slice(0, 2));
             })
@@ -60,7 +57,6 @@ self.addEventListener('install', (event) => {
 
 // Activate event - cleanup old caches
 self.addEventListener('activate', (event) => {
-    console.log('SW: Activating service worker');
     
     event.waitUntil(
         caches.keys().then(cacheNames => {
@@ -68,7 +64,6 @@ self.addEventListener('activate', (event) => {
                 cacheNames.map(cacheName => {
                     // Delete old versions
                     if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
-                        console.log('SW: Deleting old cache:', cacheName);
                         return caches.delete(cacheName);
                     }
                 })
@@ -335,7 +330,6 @@ self.addEventListener('sync', (event) => {
 
 async function syncAnalytics() {
     // Sync any queued analytics data when back online
-    console.log('SW: Syncing analytics data');
 }
 
 // Push notifications (future feature)
@@ -379,4 +373,3 @@ self.addEventListener('notificationclick', (event) => {
     }
 });
 
-console.log('🔧 SCRUM Guide Service Worker loaded successfully!');

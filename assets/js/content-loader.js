@@ -47,7 +47,6 @@ class ContentLoader {
     async init() {
         this.createLoadingIndicator();
         this.setupNavigationHandlers();
-        console.log('📄 Content Loader initialized');
     }
 
     /**
@@ -189,7 +188,6 @@ class ContentLoader {
         // Trigger reveal animations
         this.triggerRevealAnimations(sectionWrapper);
         
-        console.log(`✅ Section ${sectionId} rendered successfully`);
     }
 
     /**
@@ -398,7 +396,6 @@ class ContentLoader {
      */
     clearCache() {
         this.cache.clear();
-        console.log('🗑️ Content cache cleared');
     }
 
     /**
@@ -439,5 +436,4 @@ window.showError = function(message) {
 // Initialize content loader when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     window.contentLoader = new ContentLoader();
-    console.log('📄 Content loader initialized');
 });

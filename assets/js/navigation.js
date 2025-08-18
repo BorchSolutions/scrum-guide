@@ -24,7 +24,6 @@ class Navigation {
         this.setupScrollEffects();
         this.setupMobileMenu();
         this.setupProgressIndicator();
-        console.log('🚀 Navigation system initialized successfully!');
     }
 
     /**

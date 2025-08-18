@@ -337,7 +337,6 @@ class AnimationManager {
                 e.preventDefault();
                 column.style.background = '';
                 // Here you could implement actual task moving logic
-                console.log('Task dropped in:', column.querySelector('.column-header').textContent);
             });
         });
 

@@ -44,7 +44,6 @@ class WSJFCalculator {
         this.setupFibonacciMarkers();
         this.calculateWSJF();
         
-        console.log('🧮 WSJF Calculator initialized');
     }
 
     /**
@@ -306,7 +305,6 @@ class WSJFCalculator {
             // Analytics
             this.trackCalculation(roundedWSJF);
             
-            console.log(`🧮 WSJF calculated: ${roundedWSJF}`, this.values);
             
         } catch (error) {
             console.error('WSJF Calculation error:', error);
@@ -803,7 +801,6 @@ class WSJFCalculator {
         this.eventListeners = [];
         this.history = [];
         
-        console.log('🧮 WSJF Calculator destroyed');
     }
 }
 
