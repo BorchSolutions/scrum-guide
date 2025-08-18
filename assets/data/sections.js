@@ -9,6 +9,7 @@ class SectionManager {
         this.observers = new Map();
         this.animatedElements = new Set();
         this.metricsAnimated = new Set();
+        this.isInitialized = false;
         
         this.init();
     }
@@ -17,10 +18,15 @@ class SectionManager {
      * Inicializa el gestor de secciones
      */
     init() {
+        if (this.isInitialized) return;
+        
         this.setupSections();
         this.setupRevealAnimations();
         this.setupMetricsAnimation();
         this.setupScrollEffects();
+        this.setupIntersectionObserver();
+        
+        this.isInitialized = true;
         console.log('📋 Section Manager initialized successfully!');
     }
 
@@ -33,7 +39,8 @@ class SectionManager {
             element: section,
             title: this.getSectionTitle(section),
             visible: false,
-            animated: false
+            animated: false,
+            progress: 0
         }));
     }
 
@@ -48,7 +55,7 @@ class SectionManager {
     }
 
     /**
-     * Configura las animaciones de reveal para elementos
+     * Configura las animaciones de reveal
      */
     setupRevealAnimations() {
         const revealElements = document.querySelectorAll('.reveal');
@@ -58,7 +65,7 @@ class SectionManager {
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !this.animatedElements.has(entry.target)) {
-                    this.animateRevealElement(entry.target);
+                    this.animateElement(entry.target);
                     this.animatedElements.add(entry.target);
                 }
             });
@@ -67,147 +74,181 @@ class SectionManager {
             rootMargin: '0px 0px -50px 0px'
         });
 
-        revealElements.forEach(el => {
-            revealObserver.observe(el);
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
         });
 
         this.observers.set('reveal', revealObserver);
     }
 
     /**
-     * Anima un elemento reveal
+     * Anima un elemento
      * @param {HTMLElement} element - Elemento a animar
      */
-    animateRevealElement(element) {
-        element.classList.add('active');
+    animateElement(element) {
+        const animationType = element.dataset.animation || 'fadeInUp';
+        const delay = parseInt(element.dataset.delay) || 0;
         
-        // Agregar delay secuencial para elementos hermanos
-        const siblings = Array.from(element.parentElement?.children || [])
-            .filter(el => el.classList.contains('reveal'));
-        
-        const index = siblings.indexOf(element);
-        if (index > 0) {
-            element.style.animationDelay = `${index * 0.1}s`;
-        }
+        setTimeout(() => {
+            element.classList.add('active');
+            element.style.animationName = animationType;
+        }, delay);
     }
 
     /**
-     * Configura la animación de métricas
+     * Configura animaciones de métricas
      */
     setupMetricsAnimation() {
-        const metricElements = document.querySelectorAll('.metric-value');
+        const metricElements = document.querySelectorAll('.metric-number, .counter');
         
         if (metricElements.length === 0) return;
 
-        const metricObserver = new IntersectionObserver((entries) => {
+        const metricsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !this.metricsAnimated.has(entry.target)) {
                     this.animateMetric(entry.target);
                     this.metricsAnimated.add(entry.target);
                 }
             });
-        }, { 
-            threshold: 0.5,
-            rootMargin: '0px 0px -100px 0px'
+        }, {
+            threshold: 0.5
         });
 
-        metricElements.forEach(el => {
-            metricObserver.observe(el);
+        metricElements.forEach(element => {
+            metricsObserver.observe(element);
         });
 
-        this.observers.set('metrics', metricObserver);
+        this.observers.set('metrics', metricsObserver);
     }
 
     /**
-     * Anima una métrica con efecto contador
+     * Anima una métrica con contador
      * @param {HTMLElement} element - Elemento de métrica
      */
     animateMetric(element) {
-        const text = element.textContent;
-        let endValue = 0;
-        let isPercentage = false;
-        let isDecimal = false;
-        let isStar = false;
-        let suffix = '';
+        const finalValue = element.textContent.trim();
+        const isPercentage = finalValue.includes('%');
+        const isMultiplier = finalValue.includes('x');
+        const numericValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
+        
+        if (isNaN(numericValue)) return;
 
-        // Detectar tipo de métrica
-        if (text.includes('%')) {
-            endValue = parseInt(text);
-            isPercentage = true;
-            suffix = '%';
-        } else if (text.includes('★')) {
-            endValue = parseFloat(text) * 10;
-            isStar = true;
-            suffix = '★';
-        } else if (text.includes('.')) {
-            endValue = parseFloat(text);
-            isDecimal = true;
-        } else if (text.includes('x')) {
-            endValue = parseInt(text);
-            suffix = 'x';
-        } else {
-            endValue = parseInt(text) || 0;
-        }
+        let currentValue = 0;
+        const increment = numericValue / 60; // 60 frames for smooth animation
+        const duration = 2000; // 2 seconds
+        const frameTime = duration / 60;
 
-        this.animateValue(element, 0, endValue, 1500, {
-            isPercentage,
-            isDecimal,
-            isStar,
-            suffix
+        element.textContent = isPercentage ? '0%' : isMultiplier ? '0x' : '0';
+
+        const animate = () => {
+            currentValue += increment;
+            
+            if (currentValue >= numericValue) {
+                element.textContent = finalValue;
+                return;
+            }
+
+            const displayValue = Math.floor(currentValue);
+            if (isPercentage) {
+                element.textContent = `${displayValue}%`;
+            } else if (isMultiplier) {
+                element.textContent = `${displayValue}x`;
+            } else {
+                element.textContent = displayValue.toString();
+            }
+
+            setTimeout(animate, frameTime);
+        };
+
+        animate();
+    }
+
+    /**
+     * Configura efectos de scroll
+     */
+    setupScrollEffects() {
+        let scrollTimer = null;
+
+        window.addEventListener('scroll', () => {
+            if (scrollTimer) {
+                clearTimeout(scrollTimer);
+            }
+
+            scrollTimer = setTimeout(() => {
+                this.handleScrollEffects();
+            }, 10);
         });
     }
 
     /**
-     * Anima un valor numérico
-     * @param {HTMLElement} element - Elemento a animar
-     * @param {number} start - Valor inicial
-     * @param {number} end - Valor final
-     * @param {number} duration - Duración en ms
-     * @param {Object} options - Opciones de formato
+     * Maneja efectos basados en scroll
      */
-    animateValue(element, start, end, duration, options = {}) {
-        const startTime = performance.now();
-        
-        const step = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Easing function (ease-out)
-            const easedProgress = 1 - Math.pow(1 - progress, 3);
-            const current = start + (end - start) * easedProgress;
-            
-            // Formatear valor según tipo
-            let displayValue;
-            if (options.isStar) {
-                displayValue = (current / 10).toFixed(1) + options.suffix;
-            } else if (options.isDecimal) {
-                displayValue = current.toFixed(1);
-            } else if (options.isPercentage || options.suffix) {
-                displayValue = Math.floor(current) + options.suffix;
-            } else {
-                displayValue = Math.floor(current);
-            }
-            
-            element.textContent = displayValue;
-            
-            if (progress < 1) {
-                requestAnimationFrame(step);
-            }
-        };
-        
-        requestAnimationFrame(step);
+    handleScrollEffects() {
+        this.updateSectionProgress();
+        this.updateParallaxElements();
+        this.updateScrollIndicators();
     }
 
     /**
-     * Configura efectos de scroll para secciones
+     * Actualiza el progreso de cada sección
      */
-    setupScrollEffects() {
+    updateSectionProgress() {
+        const scrollTop = window.pageYOffset;
+        const windowHeight = window.innerHeight;
+
+        this.sections.forEach(section => {
+            const rect = section.element.getBoundingClientRect();
+            const elementTop = rect.top + scrollTop;
+            const elementHeight = rect.height;
+            
+            // Calculate progress (0 to 1)
+            const progress = Math.max(0, Math.min(1, 
+                (scrollTop + windowHeight - elementTop) / (windowHeight + elementHeight)
+            ));
+            
+            section.progress = progress;
+            
+            // Update custom CSS property for advanced animations
+            section.element.style.setProperty('--scroll-progress', progress);
+        });
+    }
+
+    /**
+     * Actualiza elementos con efecto parallax
+     */
+    updateParallaxElements() {
+        const parallaxElements = document.querySelectorAll('.parallax');
+        const scrolled = window.pageYOffset;
+
+        parallaxElements.forEach(element => {
+            const speed = parseFloat(element.dataset.parallaxSpeed) || 0.5;
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+    }
+
+    /**
+     * Actualiza indicadores de scroll
+     */
+    updateScrollIndicators() {
+        const indicators = document.querySelectorAll('.scroll-indicator');
+        const scrollPercent = Math.min(100, 
+            (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+        );
+
+        indicators.forEach(indicator => {
+            indicator.style.setProperty('--scroll-percent', `${scrollPercent}%`);
+        });
+    }
+
+    /**
+     * Configura el Intersection Observer para secciones
+     */
+    setupIntersectionObserver() {
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const sectionData = this.sections.find(s => s.element === entry.target);
                 if (sectionData) {
-                    sectionData.visible = entry.isIntersecting;
-                    
                     if (entry.isIntersecting) {
                         this.onSectionEnter(sectionData);
                     } else {
@@ -232,6 +273,8 @@ class SectionManager {
      * @param {Object} sectionData - Datos de la sección
      */
     onSectionEnter(sectionData) {
+        sectionData.visible = true;
+        
         // Actualizar navegación activa
         this.updateActiveNavigation(sectionData.id);
         
@@ -247,6 +290,7 @@ class SectionManager {
      * @param {Object} sectionData - Datos de la sección
      */
     onSectionLeave(sectionData) {
+        sectionData.visible = false;
         this.dispatchSectionEvent('sectionLeave', sectionData);
     }
 
@@ -256,16 +300,17 @@ class SectionManager {
      */
     applySectionEffects(sectionData) {
         switch (sectionData.id) {
-            case 'intro':
+            case 'hero':
+            case 'scrum-foundations':
                 this.animateHeroElements();
                 break;
-            case 'framework':
-                this.animateFrameworkCards();
+            case 'estimacion-agil':
+                this.animateEstimationElements();
                 break;
-            case 'metricas':
-                this.animateCharts();
+            case 'medicion-metricas':
+                this.animateMetricsElements();
                 break;
-            case 'ejemplo':
+            case 'aplicacion-practica':
                 this.animateExampleElements();
                 break;
         }
@@ -277,33 +322,46 @@ class SectionManager {
     animateHeroElements() {
         const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-cta');
         heroElements.forEach((element, index) => {
-            setTimeout(() => {
-                element.style.animation = 'fadeInUp 0.8s ease forwards';
-            }, index * 200);
+            if (!element.classList.contains('animated')) {
+                setTimeout(() => {
+                    element.style.animation = 'fadeInUp 0.8s ease forwards';
+                    element.classList.add('animated');
+                }, index * 200);
+            }
         });
     }
 
     /**
-     * Anima tarjetas del framework
+     * Anima elementos de estimación
      */
-    animateFrameworkCards() {
-        const cards = document.querySelectorAll('#framework .card');
+    animateEstimationElements() {
+        const cards = document.querySelectorAll('#estimacion-agil .card, .fibonacci-card');
         cards.forEach((card, index) => {
-            setTimeout(() => {
-                card.style.animation = 'slideInUp 0.6s ease forwards';
-            }, index * 150);
+            if (!card.classList.contains('animated')) {
+                setTimeout(() => {
+                    card.style.animation = 'slideInUp 0.6s ease forwards';
+                    card.classList.add('animated');
+                }, index * 100);
+            }
         });
     }
 
     /**
-     * Anima gráficos y métricas
+     * Anima elementos de métricas
      */
-    animateCharts() {
-        // Animar canvas charts si existen
-        const charts = document.querySelectorAll('#burndownChart, #velocityChart');
-        charts.forEach(chart => {
-            if (chart && typeof this.animateChart === 'function') {
-                this.animateChart(chart);
+    animateMetricsElements() {
+        const charts = document.querySelectorAll('.chart-container');
+        charts.forEach((chart, index) => {
+            if (!chart.classList.contains('animated')) {
+                setTimeout(() => {
+                    chart.style.animation = 'zoomIn 0.8s ease forwards';
+                    chart.classList.add('animated');
+                    
+                    // Initialize chart if ChartManager is available
+                    if (window.ChartManager) {
+                        window.ChartManager.initializeChart(chart);
+                    }
+                }, index * 200);
             }
         });
     }
@@ -312,41 +370,46 @@ class SectionManager {
      * Anima elementos de ejemplo
      */
     animateExampleElements() {
-        const timelineItems = document.querySelectorAll('#ejemplo .timeline-item');
-        timelineItems.forEach((item, index) => {
-            setTimeout(() => {
-                item.style.animation = 'slideInLeft 0.7s ease forwards';
-            }, index * 200);
+        const examples = document.querySelectorAll('.example-container, .code-example');
+        examples.forEach((example, index) => {
+            if (!example.classList.contains('animated')) {
+                setTimeout(() => {
+                    example.style.animation = 'fadeInLeft 0.7s ease forwards';
+                    example.classList.add('animated');
+                }, index * 150);
+            }
         });
     }
 
     /**
      * Actualiza la navegación activa
-     * @param {string} activeSectionId - ID de la sección activa
+     * @param {string} sectionId - ID de la sección activa
      */
-    updateActiveNavigation(activeSectionId) {
-        // Remover clase active de todos los enlaces
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-        });
-
-        // Agregar clase active al enlace correspondiente
-        const activeLink = document.querySelector(`a[href="#${activeSectionId}"]`);
-        if (activeLink) {
-            activeLink.classList.add('active');
+    updateActiveNavigation(sectionId) {
+        // Update navigation if Navigation class is available
+        if (window.navigation && window.navigation.updateActiveNavigationById) {
+            window.navigation.updateActiveNavigationById(sectionId);
         }
+        
+        // Custom event for other components
+        document.dispatchEvent(new CustomEvent('sectionActive', {
+            detail: { sectionId }
+        }));
     }
 
     /**
      * Dispara evento personalizado de sección
-     * @param {string} eventType - Tipo de evento
+     * @param {string} eventName - Nombre del evento
      * @param {Object} sectionData - Datos de la sección
      */
-    dispatchSectionEvent(eventType, sectionData) {
-        const event = new CustomEvent(eventType, {
+    dispatchSectionEvent(eventName, sectionData) {
+        const event = new CustomEvent(eventName, {
             detail: {
                 section: sectionData,
-                timestamp: Date.now()
+                id: sectionData.id,
+                title: sectionData.title,
+                visible: sectionData.visible,
+                progress: sectionData.progress
             }
         });
         
@@ -354,19 +417,25 @@ class SectionManager {
     }
 
     /**
-     * Obtiene la sección actualmente visible
-     * @returns {Object|null} Datos de la sección activa
-     */
-    getCurrentSection() {
-        return this.sections.find(section => section.visible) || null;
-    }
-
-    /**
-     * Obtiene todas las secciones visibles
+     * Obtiene secciones visibles
      * @returns {Array} Array de secciones visibles
      */
     getVisibleSections() {
         return this.sections.filter(section => section.visible);
+    }
+
+    /**
+     * Obtiene la sección actual (más visible)
+     * @returns {Object|null} Sección actual
+     */
+    getCurrentSection() {
+        const visibleSections = this.getVisibleSections();
+        if (visibleSections.length === 0) return null;
+        
+        // Return the section with highest progress
+        return visibleSections.reduce((current, section) => 
+            section.progress > current.progress ? section : current
+        );
     }
 
     /**
@@ -393,10 +462,11 @@ class SectionManager {
     refreshSectionAnimations(sectionId) {
         const section = this.sections.find(s => s.id === sectionId);
         if (section) {
-            const elements = section.element.querySelectorAll('.reveal');
+            const elements = section.element.querySelectorAll('.reveal, .animated');
             elements.forEach(el => {
                 this.animatedElements.delete(el);
-                el.classList.remove('active');
+                el.classList.remove('active', 'animated');
+                el.style.animation = '';
             });
         }
     }
@@ -413,6 +483,15 @@ class SectionManager {
             animatedMetrics: this.metricsAnimated.size,
             currentSection: this.getCurrentSection()?.id || null
         };
+    }
+
+    /**
+     * Re-inicializa el gestor (útil para contenido dinámico)
+     */
+    reinitialize() {
+        this.destroy();
+        this.isInitialized = false;
+        this.init();
     }
 
     /**
@@ -445,7 +524,7 @@ const SectionUtils = {
         }
         
         const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
-        return visibleHeight / section.offsetHeight;
+        return visibleHeight / rect.height;
     },
 
     /**
@@ -455,64 +534,49 @@ const SectionUtils = {
      */
     isSectionFullyVisible(section) {
         const rect = section.getBoundingClientRect();
-        return rect.top >= 0 && rect.bottom <= window.innerHeight;
+        const windowHeight = window.innerHeight;
+        
+        return rect.top >= 0 && rect.bottom <= windowHeight;
     },
 
     /**
-     * Obtiene la siguiente sección
-     * @param {string} currentSectionId - ID de la sección actual
+     * Obtiene la sección más cercana al viewport
      * @returns {HTMLElement|null}
      */
-    getNextSection(currentSectionId) {
-        const sections = Array.from(document.querySelectorAll('section[id]'));
-        const currentIndex = sections.findIndex(s => s.id === currentSectionId);
-        return sections[currentIndex + 1] || null;
-    },
-
-    /**
-     * Obtiene la sección anterior
-     * @param {string} currentSectionId - ID de la sección actual
-     * @returns {HTMLElement|null}
-     */
-    getPreviousSection(currentSectionId) {
-        const sections = Array.from(document.querySelectorAll('section[id]'));
-        const currentIndex = sections.findIndex(s => s.id === currentSectionId);
-        return sections[currentIndex - 1] || null;
-    },
-
-    /**
-     * Calcula el tiempo estimado de lectura de una sección
-     * @param {HTMLElement} section - Elemento de sección
-     * @returns {number} Tiempo en minutos
-     */
-    estimateReadingTime(section) {
-        const text = section.textContent || '';
-        const wordsPerMinute = 200;
-        const wordCount = text.split(/\s+/).length;
-        return Math.ceil(wordCount / wordsPerMinute);
+    getClosestSection() {
+        const sections = document.querySelectorAll('section[id]');
+        let closestSection = null;
+        let closestDistance = Infinity;
+        
+        const viewportCenter = window.innerHeight / 2;
+        
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const sectionCenter = rect.top + rect.height / 2;
+            const distance = Math.abs(sectionCenter - viewportCenter);
+            
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestSection = section;
+            }
+        });
+        
+        return closestSection;
     }
 };
 
-// Eventos personalizados para secciones
-document.addEventListener('sectionEnter', (event) => {
-    console.log(`📍 Entered section: ${event.detail.section.id}`);
-});
-
-document.addEventListener('sectionLeave', (event) => {
-    console.log(`📤 Left section: ${event.detail.section.id}`);
-});
-
-// Inicialización automática
+// Inicialización automática cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     window.sectionManager = new SectionManager();
 });
 
-// Exportar para uso en módulos
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { SectionManager, SectionUtils };
-}
+// Re-inicializar cuando se carga contenido dinámico
+document.addEventListener('contentLoaded', () => {
+    if (window.sectionManager) {
+        window.sectionManager.reinitialize();
+    }
+});
 
-if (typeof window !== 'undefined') {
-    window.SectionManager = SectionManager;
-    window.SectionUtils = SectionUtils;
-}
+// Exportar para uso global
+window.SectionManager = SectionManager;
+window.SectionUtils = SectionUtils;

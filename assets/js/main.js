@@ -1,204 +1,543 @@
 /**
- * SCRUM Guide - Main JavaScript
- * Core functionality and initialization
+ * Main.js - Controlador principal de SCRUM Pro Guide
+ * Coordina todos los componentes y gestiona el estado global de la aplicación
  */
 
-class ScrumGuide {
+class AppController {
     constructor() {
+        this.isInitialized = false;
+        this.components = new Map();
+        this.config = {
+            version: '2.0.0',
+            environment: 'production',
+            features: {
+                lazyLoading: true,
+                errorTracking: true,
+                analytics: false
+            }
+        };
+        
+        this.state = {
+            currentSection: null,
+            isLoading: false,
+            isMobile: false,
+            components: {
+                navigation: null,
+                contentLoader: null,
+                sectionManager: null
+            }
+        };
+        
         this.init();
     }
 
-    init() {
-        this.setupLoader();
-        this.setupSmoothScrolling();
-        this.setupNavbar();
-        this.setupRevealAnimations();
-        this.setupMetricAnimations();
-        this.setupMobileMenu();
+    /**
+     * Inicializa la aplicación
+     */
+    async init() {
+        if (this.isInitialized) return;
         
-        console.log('🚀 SCRUM Pro Guide loaded successfully!');
+        try {
+            console.log('🚀 Initializing SCRUM Guide App v' + this.config.version);
+            
+            // 1. Setup global error handling
+            this.setupErrorHandling();
+            
+            // 2. Detect device and environment
+            this.detectEnvironment();
+            
+            // 3. Initialize core utilities
+            this.initializeUtilities();
+            
+            // 4. Load and setup components
+            await this.loadComponents();
+            
+            // 5. Initialize main systems
+            await this.initializeSystems();
+            
+            // 6. Setup event listeners
+            this.setupEventListeners();
+            
+            // 7. Load initial content
+            await this.loadInitialContent();
+            
+            // 8. Hide loader and show app
+            this.finalizeInitialization();
+            
+            this.isInitialized = true;
+            console.log('✅ App initialized successfully');
+            
+        } catch (error) {
+            console.error('❌ Error initializing app:', error);
+            this.handleInitializationError(error);
+        }
     }
 
     /**
-     * Loader functionality
+     * Configura manejo global de errores
      */
-    setupLoader() {
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                if (loader) {
-                    loader.classList.add('hidden');
-                }
-            }, 1000);
-        });
-    }
-
-    /**
-     * Smooth scrolling for navigation links
-     */
-    setupSmoothScrolling() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+    setupErrorHandling() {
+        window.addEventListener('error', (event) => {
+            this.handleError('JavaScript Error', event.error, {
+                filename: event.filename,
+                lineno: event.lineno,
+                colno: event.colno
             });
         });
+
+        window.addEventListener('unhandledrejection', (event) => {
+            this.handleError('Unhandled Promise Rejection', event.reason);
+        });
+
+        // Custom error handler
+        window.addEventListener('apperror', (event) => {
+            this.handleError('Application Error', event.detail.error, event.detail.context);
+        });
     }
 
     /**
-     * Navbar scroll effects
+     * Detecta entorno y capacidades del dispositivo
      */
-    setupNavbar() {
-        let lastScroll = 0;
+    detectEnvironment() {
+        // Device detection
+        this.state.isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (!navbar) return;
+        // Feature detection
+        const features = {
+            intersectionObserver: 'IntersectionObserver' in window,
+            fetch: 'fetch' in window,
+            localStorage: this.testLocalStorage(),
+            webAnimations: 'animate' in document.createElement('div')
+        };
+        
+        // Log capabilities
+        console.log('📱 Device capabilities:', {
+            isMobile: this.state.isMobile,
+            viewport: `${window.innerWidth}x${window.innerHeight}`,
+            features
+        });
+        
+        // Apply device-specific classes
+        document.documentElement.classList.toggle('mobile', this.state.isMobile);
+        document.documentElement.classList.toggle('desktop', !this.state.isMobile);
+    }
+
+    /**
+     * Test localStorage availability
+     */
+    testLocalStorage() {
+        try {
+            const test = '__localStorage_test__';
+            localStorage.setItem(test, test);
+            localStorage.removeItem(test);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    /**
+     * Inicializa utilidades core
+     */
+    initializeUtilities() {
+        // Ensure Utils is available
+        if (!window.Utils) {
+            console.warn('Utils library not loaded, some features may not work');
+            return;
+        }
+        
+        // Set global utilities
+        this.utils = window.Utils;
+        
+        // Initialize global helpers
+        this.debounce = this.utils.Event.debounce;
+        this.throttle = this.utils.Event.throttle;
+    }
+
+    /**
+     * Carga componentes de la aplicación
+     */
+    async loadComponents() {
+        const loadingMessages = [
+            'Cargando componentes...',
+            'Configurando navegación...',
+            'Preparando contenido...',
+            'Inicializando sistemas...'
+        ];
+        
+        try {
+            // Update loading status
+            this.updateLoadingStatus(loadingMessages[0]);
             
-            const currentScroll = window.pageYOffset;
+            // Load navigation component
+            await this.loadComponent('navigation', 'components/navigation.html', 'navigation-container');
             
-            if (currentScroll > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+            this.updateLoadingStatus(loadingMessages[1]);
+            
+            // Load footer component
+            await this.loadComponent('footer', 'components/footer.html', 'footer-container');
+            
+            this.updateLoadingStatus(loadingMessages[2]);
+            
+            console.log('📦 Components loaded successfully');
+            
+        } catch (error) {
+            console.error('Error loading components:', error);
+            throw new Error('Failed to load application components');
+        }
+    }
+
+    /**
+     * Carga un componente individual
+     */
+    async loadComponent(name, url, containerId) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
             
-            lastScroll = currentScroll;
-        });
-    }
-
-    /**
-     * Reveal animations on scroll
-     */
-    setupRevealAnimations() {
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        revealElements.forEach(el => {
-            revealObserver.observe(el);
-        });
-    }
-
-    /**
-     * Animate metric values when they come into view
-     */
-    setupMetricAnimations() {
-        const animateValue = (element, start, end, duration) => {
-            const startTime = performance.now();
+            const html = await response.text();
+            const container = document.getElementById(containerId);
             
-            const step = (currentTime) => {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                const current = start + (end - start) * progress;
-                
-                // Format based on content type
-                if (element.textContent.includes('%')) {
-                    element.textContent = Math.floor(current) + '%';
-                } else if (element.textContent.includes('★')) {
-                    element.textContent = (current / 10).toFixed(1) + '★';
-                } else if (element.textContent.includes('.')) {
-                    element.textContent = current.toFixed(1);
-                } else if (element.textContent.includes('x')) {
-                    element.textContent = Math.floor(current) + 'x';
-                } else {
-                    element.textContent = Math.floor(current);
-                }
-                
-                if (currentTime < startTime + duration) {
-                    requestAnimationFrame(step);
-                }
-            };
+            if (container) {
+                container.innerHTML = html;
+                this.components.set(name, { url, containerId, loaded: true });
+                console.log(`✅ Component '${name}' loaded`);
+            } else {
+                console.warn(`Container '${containerId}' not found for component '${name}'`);
+            }
             
-            requestAnimationFrame(step);
-        };
-
-        // Observer for metric cards
-        const metricObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
-                    entry.target.classList.add('animated');
-                    const text = entry.target.textContent;
-                    let end = 0;
-                    
-                    // Parse the end value based on format
-                    if (text.includes('%')) {
-                        end = parseInt(text);
-                    } else if (text.includes('★')) {
-                        end = parseFloat(text) * 10;
-                    } else if (text.includes('.')) {
-                        end = parseFloat(text);
-                    } else if (text.includes('x')) {
-                        end = parseInt(text);
-                    } else {
-                        end = parseInt(text);
-                    }
-                    
-                    if (!isNaN(end)) {
-                        animateValue(entry.target, 0, end, 1500);
-                    }
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.metric-value').forEach(el => {
-            metricObserver.observe(el);
-        });
-    }
-
-    /**
-     * Mobile menu toggle
-     */
-    setupMobileMenu() {
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        if (menuToggle && navMenu) {
-            menuToggle.addEventListener('click', () => {
-                navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-                
-                // Animate hamburger menu
-                menuToggle.classList.toggle('active');
-            });
-
-            // Close mobile menu when clicking on a link
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        navMenu.style.display = 'none';
-                        menuToggle.classList.remove('active');
-                    }
-                });
-            });
-
-            // Close mobile menu on window resize
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
-                    navMenu.style.display = 'flex';
-                    menuToggle.classList.remove('active');
-                }
-            });
+        } catch (error) {
+            console.error(`Failed to load component '${name}':`, error);
+            this.components.set(name, { url, containerId, loaded: false, error });
         }
+    }
+
+    /**
+     * Inicializa sistemas principales
+     */
+    async initializeSystems() {
+        try {
+            // Initialize ContentLoader
+            if (window.ContentLoader) {
+                this.state.components.contentLoader = new window.ContentLoader();
+                console.log('📄 ContentLoader initialized');
+            }
+            
+            // Initialize Navigation
+            if (window.Navigation) {
+                this.state.components.navigation = new window.Navigation();
+                console.log('🧭 Navigation initialized');
+            }
+            
+            // Initialize SectionManager
+            if (window.SectionManager) {
+                this.state.components.sectionManager = new window.SectionManager();
+                console.log('📋 SectionManager initialized');
+            }
+            
+            // Initialize TabManager for any existing tab containers
+            this.initializeTabManagers();
+            
+        } catch (error) {
+            console.error('Error initializing systems:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Inicializa gestores de tabs
+     */
+    initializeTabManagers() {
+        if (!window.TabManager) return;
+        
+        const tabContainers = document.querySelectorAll('.tabs-component, .example-tabs');
+        let initialized = 0;
+        
+        tabContainers.forEach(container => {
+            if (!container.dataset.tabManager) {
+                try {
+                    const tabManager = new window.TabManager(container);
+                    container.dataset.tabManager = 'initialized';
+                    container.tabManager = tabManager;
+                    initialized++;
+                } catch (error) {
+                    console.warn('Failed to initialize TabManager for container:', error);
+                }
+            }
+        });
+        
+        if (initialized > 0) {
+            console.log(`📑 Initialized ${initialized} TabManager instances`);
+        }
+    }
+
+    /**
+     * Configura event listeners globales
+     */
+    setupEventListeners() {
+        // Resize handler
+        window.addEventListener('resize', this.debounce(() => {
+            this.handleResize();
+        }, 250));
+        
+        // Scroll handler
+        window.addEventListener('scroll', this.throttle(() => {
+            this.handleScroll();
+        }, 16)); // ~60fps
+        
+        // Hash change handler
+        window.addEventListener('hashchange', () => {
+            this.handleHashChange();
+        });
+        
+        // Visibility change handler
+        document.addEventListener('visibilitychange', () => {
+            this.handleVisibilityChange();
+        });
+        
+        // Custom app events
+        document.addEventListener('sectionActive', (event) => {
+            this.handleSectionChange(event.detail.sectionId);
+        });
+        
+        console.log('👂 Event listeners configured');
+    }
+
+    /**
+     * Carga contenido inicial
+     */
+    async loadInitialContent() {
+        try {
+            this.updateLoadingStatus('Cargando contenido inicial...');
+            
+            // Determine initial section from URL hash or default
+            const hash = window.location.hash.replace('#', '');
+            const initialSection = hash || 'scrum-foundations';
+            
+            // Load initial section
+            if (this.state.components.contentLoader) {
+                await this.state.components.contentLoader.loadSection(initialSection);
+                this.state.currentSection = initialSection;
+            }
+            
+            console.log(`📄 Initial content loaded: ${initialSection}`);
+            
+        } catch (error) {
+            console.error('Error loading initial content:', error);
+            // Don't throw - app can still function
+        }
+    }
+
+    /**
+     * Finaliza la inicialización
+     */
+    finalizeInitialization() {
+        // Hide loader with animation
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 800);
+        }
+        
+        // Add loaded class to body
+        document.body.classList.add('app-loaded');
+        
+        // Trigger app ready event
+        this.utils?.Event?.trigger('appReady', {
+            version: this.config.version,
+            timestamp: Date.now()
+        });
+        
+        console.log('🎉 App ready!');
+    }
+
+    /**
+     * Maneja errores de inicialización
+     */
+    handleInitializationError(error) {
+        console.error('Initialization failed:', error);
+        
+        const loader = document.getElementById('loader');
+        const errorContainer = document.getElementById('loader-error');
+        const errorMessage = document.getElementById('error-message');
+        
+        if (loader && errorContainer && errorMessage) {
+            errorMessage.textContent = error.message || 'Error desconocido al inicializar la aplicación';
+            errorContainer.style.display = 'block';
+            
+            // Setup retry button
+            const retryButton = document.getElementById('retry-button');
+            if (retryButton) {
+                retryButton.addEventListener('click', () => {
+                    location.reload();
+                });
+            }
+        }
+    }
+
+    /**
+     * Actualiza el estado de carga
+     */
+    updateLoadingStatus(message) {
+        const statusElement = document.getElementById('loading-status');
+        if (statusElement) {
+            statusElement.textContent = message;
+        }
+        console.log('📊', message);
+    }
+
+    /**
+     * Maneja cambios de tamaño de ventana
+     */
+    handleResize() {
+        const wasMobile = this.state.isMobile;
+        this.state.isMobile = window.innerWidth <= 768;
+        
+        if (wasMobile !== this.state.isMobile) {
+            document.documentElement.classList.toggle('mobile', this.state.isMobile);
+            document.documentElement.classList.toggle('desktop', !this.state.isMobile);
+            
+            // Reinitialize components that depend on viewport
+            this.reinitializeViewportDependentComponents();
+        }
+    }
+
+    /**
+     * Maneja eventos de scroll
+     */
+    handleScroll() {
+        // Let individual components handle their own scroll logic
+        // This is just for global scroll state
+        const scrollPercent = Math.min(100, 
+            (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+        );
+        
+        document.documentElement.style.setProperty('--scroll-percent', scrollPercent + '%');
+    }
+
+    /**
+     * Maneja cambios de hash en URL
+     */
+    async handleHashChange() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash && hash !== this.state.currentSection) {
+            if (this.state.components.contentLoader) {
+                await this.state.components.contentLoader.loadSection(hash);
+                this.state.currentSection = hash;
+            }
+        }
+    }
+
+    /**
+     * Maneja cambios de visibilidad de la página
+     */
+    handleVisibilityChange() {
+        if (document.hidden) {
+            console.log('📱 App went to background');
+        } else {
+            console.log('📱 App came to foreground');
+        }
+    }
+
+    /**
+     * Maneja cambios de sección activa
+     */
+    handleSectionChange(sectionId) {
+        if (sectionId !== this.state.currentSection) {
+            this.state.currentSection = sectionId;
+            console.log(`📄 Active section: ${sectionId}`);
+        }
+    }
+
+    /**
+     * Reincializa componentes que dependen del viewport
+     */
+    reinitializeViewportDependentComponents() {
+        // Reinitialize SectionManager
+        if (this.state.components.sectionManager) {
+            this.state.components.sectionManager.reinitialize();
+        }
+        
+        console.log('🔄 Viewport-dependent components reinitialized');
+    }
+
+    /**
+     * Maneja errores globales
+     */
+    handleError(type, error, context = {}) {
+        const errorInfo = {
+            type,
+            message: error?.message || String(error),
+            stack: error?.stack,
+            context,
+            timestamp: new Date().toISOString(),
+            url: window.location.href,
+            userAgent: navigator.userAgent
+        };
+        
+        console.error(`${type}:`, errorInfo);
+        
+        // Show user-friendly error message
+        if (window.showError) {
+            window.showError(`Error en la aplicación: ${errorInfo.message}`);
+        }
+        
+        // Track error if analytics enabled
+        if (this.config.features.errorTracking) {
+            this.trackError(errorInfo);
+        }
+    }
+
+    /**
+     * Rastrea errores para analytics
+     */
+    trackError(errorInfo) {
+        // Placeholder for error tracking
+        console.log('🔍 Error tracked:', errorInfo);
+    }
+
+    /**
+     * Obtiene estado actual de la aplicación
+     */
+    getAppState() {
+        return {
+            ...this.state,
+            config: this.config,
+            isInitialized: this.isInitialized,
+            components: Array.from(this.components.keys())
+        };
+    }
+
+    /**
+     * Destruye la aplicación (cleanup)
+     */
+    destroy() {
+        // Destroy component instances
+        Object.values(this.state.components).forEach(component => {
+            if (component && typeof component.destroy === 'function') {
+                component.destroy();
+            }
+        });
+        
+        // Clear state
+        this.components.clear();
+        this.state = {};
+        this.isInitialized = false;
+        
+        console.log('🧹 App destroyed');
     }
 }
 
-// Initialize when DOM is loaded
+// Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    new ScrumGuide();
+    window.appController = new AppController();
 });
+
+// Export for global access
+window.AppController = AppController;

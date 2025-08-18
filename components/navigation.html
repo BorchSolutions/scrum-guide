@@ -1,18 +1,309 @@
 <!-- Navigation Component -->
-<nav class="nav" id="navbar">
+<nav class="navbar" id="navbar">
     <div class="nav-container">
-        <div class="logo">SCRUM Pro</div>
-        <ul class="nav-menu">
-            <li><a href="#intro" class="nav-link">SCRUM Foundations</a></li>
-            <li><a href="#estimacion" class="nav-link">Estimación Ágil</a></li>
-            <li><a href="#metricas" class="nav-link">Medición & Métricas</a></li>
-            <li><a href="#aplicacion" class="nav-link">Aplicación Práctica</a></li>
-            <li><a href="#herramientas" class="nav-link">Recursos</a></li>
-        </ul>
-        <div class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
+        <!-- Brand -->
+        <div class="nav-brand">
+            <a href="#hero" class="brand-link">
+                <span class="brand-icon">🚀</span>
+                <span class="brand-text">SCRUM Mastery</span>
+            </a>
+        </div>
+        
+        <!-- Navigation Links -->
+        <div class="nav-menu" id="nav-menu">
+            <a href="#scrum-foundations" class="nav-link" data-section="scrum-foundations">
+                <span class="nav-icon">📋</span>
+                <span class="nav-text">Fundamentos</span>
+            </a>
+            <a href="#estimacion-agil" class="nav-link" data-section="estimacion-agil">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Estimación</span>
+            </a>
+            <a href="#medicion-metricas" class="nav-link" data-section="medicion-metricas">
+                <span class="nav-icon">📈</span>
+                <span class="nav-text">Métricas</span>
+            </a>
+            <a href="#aplicacion-practica" class="nav-link" data-section="aplicacion-practica">
+                <span class="nav-icon">⚡</span>
+                <span class="nav-text">Práctica</span>
+            </a>
+            <a href="#recursos-herramientas" class="nav-link" data-section="recursos-herramientas">
+                <span class="nav-icon">🛠️</span>
+                <span class="nav-text">Recursos</span>
+            </a>
+        </div>
+
+        <!-- Mobile menu toggle -->
+        <div class="nav-mobile">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
         </div>
     </div>
+    
+    <!-- Progress indicator -->
+    <div class="nav-progress">
+        <div class="progress-line" id="scroll-progress"></div>
+    </div>
 </nav>
+
+<style>
+/* Navigation Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(15, 23, 42, 0.98);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.hidden {
+    transform: translateY(-100%);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+
+/* Brand */
+.nav-brand {
+    display: flex;
+    align-items: center;
+}
+
+.brand-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--light);
+    font-weight: 700;
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+}
+
+.brand-link:hover {
+    color: var(--primary);
+}
+
+.brand-icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--gray);
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.nav-link.active {
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.15);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 1px;
+}
+
+.nav-icon {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+}
+
+.nav-text {
+    font-size: 0.9rem;
+}
+
+/* Mobile Menu */
+.nav-mobile {
+    display: none;
+}
+
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    gap: 4px;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 2px;
+    background: var(--light);
+    transition: all 0.3s ease;
+    border-radius: 1px;
+}
+
+.menu-toggle.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Progress Bar */
+.nav-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(148, 163, 184, 0.1);
+}
+
+.progress-line {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.1s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 1rem;
+        height: 60px;
+    }
+    
+    .nav-mobile {
+        display: block;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.5rem;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        border-top: 1px solid rgba(148, 163, 184, 0.1);
+    }
+    
+    .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-link {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+    
+    .nav-icon {
+        font-size: 1.2rem;
+        margin-right: 0.75rem;
+    }
+    
+    .brand-text {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0 0.75rem;
+    }
+    
+    .brand-link {
+        font-size: 1.1rem;
+    }
+    
+    .nav-text {
+        font-size: 0.95rem;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .navbar,
+    .nav-link,
+    .menu-toggle,
+    .hamburger-line,
+    .progress-line {
+        transition: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .navbar {
+        background: #000;
+        border-bottom: 2px solid #fff;
+    }
+    
+    .nav-link {
+        border: 1px solid transparent;
+    }
+    
+    .nav-link:hover,
+    .nav-link.active {
+        border-color: #fff;
+    }
+}
+</style>

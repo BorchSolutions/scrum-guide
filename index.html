@@ -32,7 +32,7 @@
     <link rel="preload" href="sections/estimacion-agil.html" as="fetch" crossorigin>
 </head>
 <body>
-    <!-- Loader -->
+    <!-- Loader Completo -->
     <div class="loader" id="loader">
         <div class="loader-content">
             <div class="loader-spinner"></div>
@@ -40,6 +40,37 @@
             <div style="margin-top: 1rem; color: var(--primary); font-size: 0.9rem;" id="loading-status">
                 Inicializando contenido modular...
             </div>
+            <div class="loader-progress" style="margin-top: 1.5rem;">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </div>
+        
+        <!-- Loading Tips -->
+        <div class="loader-tips" id="loader-tips">
+            <div class="tip active">
+                <span class="tip-icon">💡</span>
+                <span class="tip-text">SCRUM utiliza la escala Fibonacci para estimación porque refleja la incertidumbre natural</span>
+            </div>
+            <div class="tip">
+                <span class="tip-icon">📊</span>
+                <span class="tip-text">Un equipo ágil típico mejora su velocity en un 23% después de 3 sprints</span>
+            </div>
+            <div class="tip">
+                <span class="tip-icon">⚡</span>
+                <span class="tip-text">Planning Poker ayuda a reducir el sesgo de anclaje en las estimaciones</span>
+            </div>
+            <div class="tip">
+                <span class="tip-icon">🎯</span>
+                <span class="tip-text">La Definition of Done debe ser clara y compartida por todo el equipo</span>
+            </div>
+        </div>
+        
+        <!-- Error State -->
+        <div class="loader-error" id="loader-error" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <h3>Error al cargar</h3>
+            <p id="error-message">No se pudo cargar la aplicación</p>
+            <button id="retry-button" class="retry-btn">🔄 Reintentar</button>
         </div>
     </div>
 
@@ -52,12 +83,12 @@
         <div class="hero-content">
             <h1 class="hero-title">SCRUM</h1>
             <p class="hero-subtitle">Framework ágil para equipos de alto rendimiento</p>
-            <a href="#intro" class="hero-cta">
+            <a href="#scrum-foundations" class="hero-cta">
                 Comenzar el viaje
                 <span>→</span>
             </a>
             <div style="margin-top: 2rem; font-size: 0.9rem; color: var(--gray);">
-                🚀 Contenido modular | 📊 Estimación Fibonacci | 💻 .NET + Angular
+                🚀 Contenido modular | 📊 Estimación Fibonacci | 💻 Ejemplos prácticos
             </div>
         </div>
         <div class="scroll-indicator">
@@ -80,164 +111,102 @@
     <!-- Footer Component Container -->
     <div id="footer-container"></div>
 
-    <!-- JavaScript Modules -->
+    <!-- JavaScript Modules - Orden correcto -->
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/tabs.js"></script>
     <script src="assets/js/charts.js"></script>
     <script src="assets/js/animations.js"></script>
     <script src="assets/js/content-loader.js"></script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/data/sections.js"></script>
 
-    <!-- Component Loader -->
+    <!-- Component & App Initialization -->
     <script>
-        // Component loader for navigation and footer
-        class ComponentLoader {
-            constructor() {
-                this.loadComponents();
-            }
-
-            async loadComponents() {
-                await Promise.all([
-                    this.loadNavigation(),
-                    this.loadFooter()
-                ]);
-            }
-
-            async loadNavigation() {
-                try {
-                    const response = await fetch('components/navigation.html');
-                    const html = await response.text();
-                    document.getElementById('navigation-container').innerHTML = html;
-                } catch (error) {
-                    console.warn('Failed to load navigation component:', error);
-                    // Fallback navigation
-                    this.createFallbackNavigation();
-                }
-            }
-
-            async loadFooter() {
-                try {
-                    const response = await fetch('components/footer.html');
-                    const html = await response.text();
-                    document.getElementById('footer-container').innerHTML = html;
-                } catch (error) {
-                    console.warn('Failed to load footer component:', error);
-                    this.createFallbackFooter();
-                }
-            }
-
-            createFallbackNavigation() {
-                const nav = document.createElement('nav');
-                nav.className = 'nav';
-                nav.id = 'navbar';
-                nav.innerHTML = `
-                    <div class="nav-container">
-                        <div class="logo">SCRUM Pro</div>
-                        <ul class="nav-menu">
-                            <li><a href="#intro" class="nav-link">SCRUM Foundations</a></li>
-                            <li><a href="#estimacion" class="nav-link">Estimación Ágil</a></li>
-                            <li><a href="#metricas" class="nav-link">Medición & Métricas</a></li>
-                            <li><a href="#aplicacion" class="nav-link">Aplicación Práctica</a></li>
-                            <li><a href="#herramientas" class="nav-link">Recursos</a></li>
-                        </ul>
-                    </div>
-                `;
-                document.getElementById('navigation-container').appendChild(nav);
-            }
-
-            createFallbackFooter() {
-                const footer = document.createElement('footer');
-                footer.innerHTML = `
-                    <div class="footer-content">
-                        <div class="footer-bottom">
-                            <p>© 2024 SCRUM Pro - Guía completa para equipos ágiles</p>
-                        </div>
-                    </div>
-                `;
-                document.getElementById('footer-container').appendChild(footer);
-            }
-        }
-
-        // Update loading status
-        function updateLoadingStatus(message) {
-            const statusElement = document.getElementById('loading-status');
-            if (statusElement) {
-                statusElement.textContent = message;
-            }
-        }
-
-        // Initialize everything when DOM is ready
-        document.addEventListener('DOMContentLoaded', async () => {
-            updateLoadingStatus('Cargando componentes...');
-            
-            // Load components first
-            const componentLoader = new ComponentLoader();
-            
-            // Wait a bit for components to load
-            await new Promise(resolve => setTimeout(resolve, 500));
-            
-            updateLoadingStatus('Inicializando content loader...');
-            
-            // Content loader will be initialized by its own script
-            // We just need to wait for it
-            const waitForContentLoader = () => {
-                if (window.contentLoader) {
-                    updateLoadingStatus('Contenido listo!');
-                    console.log('🚀 SCRUM Pro Guide fully loaded with modular content!');
-                } else {
-                    setTimeout(waitForContentLoader, 100);
-                }
-            };
-            
-            waitForContentLoader();
-        });
-
-        // Service worker for PWA functionality
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
-
-        // Performance monitoring
-        window.addEventListener('load', () => {
-            if (window.performanceMonitor) {
-                const metrics = window.performanceMonitor.getMetrics();
-                console.log('📊 Performance metrics:', metrics);
-            }
-        });
-
-        // Error handling for missing content
+        // Global error handler
         window.addEventListener('error', (event) => {
-            if (event.target.tagName === 'SCRIPT' || event.target.tagName === 'LINK') {
-                console.warn('Failed to load resource:', event.target.src || event.target.href);
-                // Could show a user-friendly error message here
+            console.error('Global error:', event.error);
+            if (window.showError) {
+                window.showError('Error en la aplicación: ' + event.error.message);
             }
         });
-    </script>
 
-    <!-- Analytics placeholder -->
-    <script>
-        // Analytics integration would go here
-        // Example: Google Analytics, Mixpanel, etc.
-        function trackPageView(section) {
-            if (typeof gtag !== 'undefined') {
-                gtag('config', 'GA_MEASUREMENT_ID', {
-                    page_title: `SCRUM Guide - ${section}`,
-                    page_location: window.location.href
-                });
+        // Component loader
+        async function loadComponents() {
+            try {
+                // Load navigation
+                const navResponse = await fetch('components/navigation.html');
+                if (navResponse.ok) {
+                    const navHtml = await navResponse.text();
+                    document.getElementById('navigation-container').innerHTML = navHtml;
+                }
+
+                // Load footer
+                const footerResponse = await fetch('components/footer.html');
+                if (footerResponse.ok) {
+                    const footerHtml = await footerResponse.text();
+                    document.getElementById('footer-container').innerHTML = footerHtml;
+                }
+            } catch (error) {
+                console.warn('Error loading components:', error);
             }
         }
-        
-        // Track content loading events
-        document.addEventListener('contentLoaded', (event) => {
-            trackPageView(event.detail.section);
+
+        // Initialize app when DOM is ready
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('🚀 Initializing SCRUM Guide App...');
+            
+            try {
+                // Load components first
+                await loadComponents();
+                
+                // Initialize content loader
+                if (window.contentLoader) {
+                    await window.contentLoader.init();
+                } else {
+                    console.warn('ContentLoader not available');
+                }
+                
+                // Initialize navigation
+                if (window.Navigation) {
+                    window.navigation = new window.Navigation();
+                }
+                
+                // Load initial section
+                const hash = window.location.hash.replace('#', '');
+                const initialSection = hash || 'scrum-foundations';
+                
+                if (window.contentLoader) {
+                    await window.contentLoader.loadSection(initialSection);
+                }
+                
+                // Hide loader
+                setTimeout(() => {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.style.opacity = '0';
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                        }, 500);
+                    }
+                }, 1500);
+                
+                console.log('✅ App initialized successfully');
+                
+            } catch (error) {
+                console.error('❌ Error initializing app:', error);
+                if (window.showError) {
+                    window.showError('Error al inicializar la aplicación');
+                }
+            }
+        });
+
+        // Handle navigation
+        window.addEventListener('hashchange', async () => {
+            const section = window.location.hash.replace('#', '');
+            if (section && window.contentLoader) {
+                await window.contentLoader.loadSection(section);
+            }
         });
     </script>
 </body>
