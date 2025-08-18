@@ -6,6 +6,7 @@
     <title>SCRUM Mastery - Guía Completa para Equipos Ágiles</title>
     
     <!-- External CSS Files -->
+    <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/components.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
@@ -117,8 +118,10 @@
     <script src="assets/js/tabs.js"></script>
     <script src="assets/js/charts.js"></script>
     <script src="assets/js/animations.js"></script>
+    <script src="assets/js/component_manager.js"></script>
     <script src="assets/js/content-loader.js"></script>
     <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/sprint_board.js"></script>
     <script src="assets/data/sections.js"></script>
 
     <!-- Component & App Initialization -->
@@ -130,34 +133,14 @@
                 window.showError('Error en la aplicación: ' + event.error.message);
             }
         });
-
-        // Component loader
-        async function loadComponents() {
-            try {
-                // Load navigation
-                const navResponse = await fetch('components/navigation.html');
-                if (navResponse.ok) {
-                    const navHtml = await navResponse.text();
-                    document.getElementById('navigation-container').innerHTML = navHtml;
-                }
-
-                // Load footer
-                const footerResponse = await fetch('components/footer.html');
-                if (footerResponse.ok) {
-                    const footerHtml = await footerResponse.text();
-                    document.getElementById('footer-container').innerHTML = footerHtml;
-                }
-            } catch (error) {
-                console.warn('Error loading components:', error);
-            }
-        }
-
+        
         // Initialize app when DOM is ready
         document.addEventListener('DOMContentLoaded', async () => {
             
             try {
-                // Load components first
-                await loadComponents();
+                // Initialize component manager
+                window.componentManager = new ComponentManager();
+                await window.componentManager.init();
                 
                 // Initialize content loader
                 if (window.contentLoader) {
