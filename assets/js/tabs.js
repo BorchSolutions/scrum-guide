@@ -1,307 +1,163 @@
 /**
- * SCRUM Guide - Tabs Functionality
- * Handles all tab switching and content management
+ * SCRUM Guide - Unified Tab System
+ * Solución unificada para navegación de tabs
  */
 
-class TabManager {
+class ScrumTabManager {
     constructor() {
+        this.activeTab = null;
         this.init();
     }
 
     init() {
+        console.log('🎯 Initializing SCRUM Tab Manager...');
         this.setupTabListeners();
         this.setupKeyboardNavigation();
+        this.setupAccessibility();
+        console.log('✅ Tab Manager ready!');
     }
 
-    /**
-     * Setup click listeners for all tab buttons
-     */
     setupTabListeners() {
-        document.querySelectorAll('.tab-button').forEach(button => {
+        // Seleccionar TODOS los botones de tab en la página
+        const tabButtons = document.querySelectorAll('.tab-button');
+        
+        tabButtons.forEach(button => {
             button.addEventListener('click', (e) => {
-                this.switchTab(e.target);
+                e.preventDefault();
+                this.switchTab(button);
             });
         });
+
+        console.log(`📄 Setup listeners for ${tabButtons.length} tab buttons`);
     }
 
-    /**
-     * Setup keyboard navigation for tabs (accessibility)
-     */
-    setupKeyboardNavigation() {
-        document.querySelectorAll('.tab-button').forEach(button => {
-            button.addEventListener('keydown', (e) => {
-                const tabContainer = button.closest('.example-tabs');
-                const tabs = tabContainer.querySelectorAll('.tab-button');
-                const currentIndex = Array.from(tabs).indexOf(button);
-
-                switch(e.key) {
-                    case 'ArrowLeft':
-                        e.preventDefault();
-                        const prevIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
-                        this.switchTab(tabs[prevIndex]);
-                        tabs[prevIndex].focus();
-                        break;
-                    
-                    case 'ArrowRight':
-                        e.preventDefault();
-                        const nextIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
-                        this.switchTab(tabs[nextIndex]);
-                        tabs[nextIndex].focus();
-                        break;
-                    
-                    case 'Home':
-                        e.preventDefault();
-                        this.switchTab(tabs[0]);
-                        tabs[0].focus();
-                        break;
-                    
-                    case 'End':
-                        e.preventDefault();
-                        this.switchTab(tabs[tabs.length - 1]);
-                        tabs[tabs.length - 1].focus();
-                        break;
-                }
-            });
-        });
-    }
-
-    /**
-     * Switch to the specified tab
-     * @param {HTMLElement} clickedButton - The tab button that was clicked
-     */
     switchTab(clickedButton) {
         const tabName = clickedButton.getAttribute('data-tab');
-        const tabContainer = clickedButton.closest('.example-container');
-        
-        if (!tabName || !tabContainer) return;
+        if (!tabName) return;
 
-        // Remove active class from all buttons in this container
-        tabContainer.querySelectorAll('.tab-button').forEach(btn => {
+        // Encontrar el contenedor padre para evitar conflictos entre diferentes sets de tabs
+        const container = clickedButton.closest('.example-container');
+        if (!container) return;
+
+        // Remover active de todos los botones en ESTE contenedor
+        container.querySelectorAll('.tab-button').forEach(btn => {
             btn.classList.remove('active');
             btn.setAttribute('aria-selected', 'false');
+            btn.setAttribute('tabindex', '-1');
         });
-        
-        // Remove active class from all content in this container
-        tabContainer.querySelectorAll('.tab-content').forEach(content => {
+
+        // Remover active de todos los contenidos en ESTE contenedor  
+        container.querySelectorAll('.tab-content').forEach(content => {
             content.classList.remove('active');
             content.setAttribute('aria-hidden', 'true');
         });
-        
-        // Add active class to clicked button
+
+        // Activar el botón clickeado
         clickedButton.classList.add('active');
         clickedButton.setAttribute('aria-selected', 'true');
-        
-        // Show corresponding content
+        clickedButton.setAttribute('tabindex', '0');
+
+        // Mostrar el contenido correspondiente
         const targetContent = document.getElementById(tabName);
         if (targetContent) {
             targetContent.classList.add('active');
             targetContent.setAttribute('aria-hidden', 'false');
             
-            // Trigger any animations or special handling for the new tab
-            this.handleTabSpecialContent(tabName, targetContent);
+            // Trigger animation
+            this.animateTabContent(targetContent);
         }
 
-        // Analytics tracking (if needed)
-        this.trackTabChange(tabName);
+        this.activeTab = tabName;
+        console.log(`🔄 Switched to tab: ${tabName}`);
     }
 
-    /**
-     * Handle special content when tabs are switched
-     * @param {string} tabName - Name of the activated tab
-     * @param {HTMLElement} content - The content element
-     */
-    handleTabSpecialContent(tabName, content) {
-        switch(tabName) {
-            case 'code':
-                // Trigger syntax highlighting if needed
-                this.highlightCode(content);
-                break;
-            
-            case 'metricas-proyecto':
-                // Trigger metric animations
-                this.animateMetrics(content);
-                break;
-            
-            case 'planning-poker':
-                // Initialize any interactive elements
-                this.initializePlanningPoker(content);
-                break;
-        }
-    }
+    animateTabContent(content) {
+        // Reset animation
+        content.style.animation = 'none';
+        content.offsetHeight; // Force reflow
+        content.style.animation = 'fadeIn 0.5s ease';
 
-    /**
-     * Highlight code blocks in the tab content
-     * @param {HTMLElement} content - The tab content
-     */
-    highlightCode(content) {
-        const codeBlocks = content.querySelectorAll('.code-block pre');
-        codeBlocks.forEach(block => {
-            // Add syntax highlighting class if not already present
-            if (!block.classList.contains('highlighted')) {
-                block.classList.add('highlighted');
+        // Animate child elements with stagger effect
+        const children = content.querySelectorAll('div, ul, p, h4, h5, h6');
+        children.forEach((child, index) => {
+            if (index < 10) { // Limit to first 10 elements for performance
+                child.style.opacity = '0';
+                child.style.transform = 'translateY(10px)';
                 
-                // You could integrate with libraries like Prism.js or highlight.js here
-                this.applySyntaxHighlighting(block);
-            }
-        });
-    }
-
-    /**
-     * Apply basic syntax highlighting
-     * @param {HTMLElement} codeBlock - The code block element
-     */
-    applySyntaxHighlighting(codeBlock) {
-        let html = codeBlock.innerHTML;
-        
-        // Basic highlighting patterns
-        const patterns = [
-            { regex: /\/\*[\s\S]*?\*\/|\/\/.*$/gm, class: 'comment' },
-            { regex: /\b(using|namespace|class|public|private|var|await|async|return|if|else|for|while|function|const|let)\b/g, class: 'keyword' },
-            { regex: /"[^"]*"/g, class: 'string' },
-            { regex: /\b\w+(?=\()/g, class: 'function' }
-        ];
-        
-        patterns.forEach(pattern => {
-            html = html.replace(pattern.regex, `<span class="${pattern.class}">$&</span>`);
-        });
-        
-        codeBlock.innerHTML = html;
-    }
-
-    /**
-     * Animate metrics when metrics tab is shown
-     * @param {HTMLElement} content - The tab content
-     */
-    animateMetrics(content) {
-        const metricCards = content.querySelectorAll('.metric-card');
-        metricCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.style.transform = 'scale(1.05)';
                 setTimeout(() => {
-                    card.style.transform = 'scale(1)';
-                }, 200);
-            }, index * 100);
-        });
-    }
-
-    /**
-     * Initialize planning poker interactive elements
-     * @param {HTMLElement} content - The tab content
-     */
-    initializePlanningPoker(content) {
-        const cards = content.querySelectorAll('[style*="background: var(--gradient-primary)"]');
-        
-        cards.forEach(card => {
-            if (!card.classList.contains('poker-card-interactive')) {
-                card.classList.add('poker-card-interactive');
-                card.style.cursor = 'pointer';
-                card.style.transition = 'all 0.3s ease';
-                
-                card.addEventListener('click', () => {
-                    // Remove selection from other cards
-                    cards.forEach(c => c.classList.remove('selected'));
-                    
-                    // Add selection to clicked card
-                    card.classList.add('selected');
-                    card.style.transform = 'scale(1.1)';
-                    
-                    // Show selection feedback
-                    this.showPokerSelection(card.textContent.trim());
-                });
-                
-                card.addEventListener('mouseover', () => {
-                    if (!card.classList.contains('selected')) {
-                        card.style.transform = 'scale(1.05)';
-                    }
-                });
-                
-                card.addEventListener('mouseout', () => {
-                    if (!card.classList.contains('selected')) {
-                        card.style.transform = 'scale(1)';
-                    }
-                });
+                    child.style.transition = 'all 0.3s ease';
+                    child.style.opacity = '1';
+                    child.style.transform = 'translateY(0)';
+                }, index * 50);
             }
         });
     }
 
-    /**
-     * Show poker card selection feedback
-     * @param {string} value - Selected card value
-     */
-    showPokerSelection(value) {
-        // Create or update selection indicator
-        let indicator = document.getElementById('poker-selection');
-        if (!indicator) {
-            indicator = document.createElement('div');
-            indicator.id = 'poker-selection';
-            indicator.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: var(--gradient-primary);
-                color: white;
-                padding: 1rem 2rem;
-                border-radius: 50px;
-                font-weight: bold;
-                z-index: 1000;
-                animation: fadeInUp 0.3s ease;
-            `;
-            document.body.appendChild(indicator);
-        }
-        
-        indicator.textContent = `Tu estimación: ${value}`;
-        
-        // Auto-hide after 3 seconds
-        setTimeout(() => {
-            if (indicator.parentNode) {
-                indicator.style.animation = 'fadeOut 0.3s ease';
-                setTimeout(() => {
-                    indicator.remove();
-                }, 300);
-            }
-        }, 3000);
-    }
+    setupKeyboardNavigation() {
+        document.querySelectorAll('.tab-button').forEach((button, index, buttons) => {
+            button.addEventListener('keydown', (e) => {
+                // Solo procesar si es parte del mismo contenedor
+                const container = button.closest('.example-container');
+                const containerButtons = Array.from(container.querySelectorAll('.tab-button'));
+                const currentIndex = containerButtons.indexOf(button);
+                let targetIndex = currentIndex;
 
-    /**
-     * Track tab changes for analytics
-     * @param {string} tabName - Name of the tab
-     */
-    trackTabChange(tabName) {
-        // You can integrate with Google Analytics or other tracking here
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'tab_change', {
-                'event_category': 'engagement',
-                'event_label': tabName
+                switch(e.key) {
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        targetIndex = currentIndex < containerButtons.length - 1 ? currentIndex + 1 : 0;
+                        break;
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        targetIndex = currentIndex > 0 ? currentIndex - 1 : containerButtons.length - 1;
+                        break;
+                    case 'Home':
+                        e.preventDefault();
+                        targetIndex = 0;
+                        break;
+                    case 'End':
+                        e.preventDefault();
+                        targetIndex = containerButtons.length - 1;
+                        break;
+                    default:
+                        return;
+                }
+
+                containerButtons[targetIndex].focus();
+                this.switchTab(containerButtons[targetIndex]);
             });
-        }
-        
-        console.log(`📊 Tab switched to: ${tabName}`);
+        });
     }
 
-    /**
-     * Get the currently active tab in a container
-     * @param {HTMLElement} container - The tab container
-     * @returns {string|null} - The active tab name
-     */
-    getActiveTab(container) {
-        const activeButton = container.querySelector('.tab-button.active');
-        return activeButton ? activeButton.getAttribute('data-tab') : null;
+    setupAccessibility() {
+        document.querySelectorAll('.tab-button').forEach((button, index) => {
+            button.setAttribute('role', 'tab');
+            button.setAttribute('tabindex', button.classList.contains('active') ? '0' : '-1');
+        });
+
+        document.querySelectorAll('.tab-content').forEach((content, index) => {
+            content.setAttribute('role', 'tabpanel');
+            content.setAttribute('aria-labelledby', `tab-${index}`);
+        });
     }
 
-    /**
-     * Programmatically switch to a specific tab
-     * @param {string} tabName - Name of the tab to switch to
-     * @param {HTMLElement} container - Optional container to search in
-     */
-    switchToTab(tabName, container = document) {
-        const button = container.querySelector(`[data-tab="${tabName}"]`);
+    // Método público para cambiar tabs programáticamente
+    activateTab(tabName) {
+        const button = document.querySelector(`[data-tab="${tabName}"]`);
         if (button) {
             this.switchTab(button);
         }
     }
 }
 
-// Initialize tabs when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new TabManager();
-});
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        window.scrumTabManager = new ScrumTabManager();
+    });
+} else {
+    window.scrumTabManager = new ScrumTabManager();
+}
+
+// Export for use in other modules
+window.ScrumTabManager = ScrumTabManager;
