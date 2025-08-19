@@ -1,8 +1,10 @@
 
-document.addEventListener('DOMContentLoaded', function() {
+function setupPlanningPoker() {
     const pokerCards = document.querySelectorAll('.poker-card');
     const overlay = document.getElementById('card-overlay');
     const selectedCard = document.getElementById('selected-card');
+
+    if (!overlay || !selectedCard) return;
 
     pokerCards.forEach(card => {
         card.addEventListener('click', () => {
@@ -17,4 +19,4 @@ document.addEventListener('DOMContentLoaded', function() {
             overlay.classList.remove('visible');
         }
     });
-});
+}
