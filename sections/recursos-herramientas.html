@@ -1,183 +1,31 @@
 <!-- Recursos y Herramientas Section -->
 <section id="recursos" class="section">
     <div class="container">
-        <div class="section-header reveal">
-            <h2 class="section-title">Recursos y Herramientas</h2>
-            <p class="section-subtitle">El arsenal de un equipo SCRUM de alto rendimiento</p>
-        </div>
+        <!-- ... (secciones existentes) ... -->
 
-        <!-- Herramientas de Gestión de Proyectos -->
+        <!-- Planning Poker Cards -->
         <div class="example-container reveal">
             <div class="example-header">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">🚀 Herramientas de Gestión de Proyectos</h3>
-                <p style="color: var(--gray);">Plataformas diseñadas para implementar y gestionar el framework SCRUM</p>
+                <h3>🎲 Cartas de Planning Poker</h3>
+                <p>Selecciona una carta para mostrarla en pantalla durante la estimación.</p>
             </div>
-
-            <div class="example-tabs">
-                <button class="tab-button active" data-tab="jira">Jira</button>
-                <button class="tab-button" data-tab="azure-devops">Azure DevOps</button>
-            </div>
-
-            <div class="tab-content active" id="jira">
-                <div class="grid grid-2">
-                    <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                        <h4 style="color: var(--primary); margin-bottom: 1rem;">Jira Software</h4>
-                        <p style="color: var(--gray);">El estándar de la industria para equipos ágiles, altamente configurable y potente.</p>
-                        <h5 style="color: var(--accent); margin-top: 1.5rem; margin-bottom: 1rem;">Características Clave</h5>
-                        <ul style="color: var(--gray); list-style: none; padding: 0;">
-                            <li style="margin-bottom: 0.8rem;">✅ Tableros Scrum y Kanban personalizables</li>
-                            <li style="margin-bottom: 0.8rem;">✅ Gestión avanzada de Backlog</li>
-                            <li style="margin-bottom: 0.8rem;">✅ Reportes ágiles (Burndown, Velocity)</li>
-                            <li style="margin-bottom: 0.8rem;">✅ Flujos de trabajo automatizados</li>
-                        </ul>
-                    </div>
-                    <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                        <div style="margin-bottom: 1.5rem;">
-                            <h5 style="color: var(--secondary); margin-bottom: 1rem;">Pros y Contras</h5>
-                            <p style="color: var(--gray);"><strong style="color: #10B981;">Pros:</strong> Potencia, personalización, integraciones.</p>
-                            <p style="color: var(--gray);"><strong style="color: #EF4444;">Contras:</strong> Curva de aprendizaje, puede ser lento.</p>
-                        </div>
-                        <div style="padding: 1.5rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
-                            <h5 style="color: var(--primary); margin-bottom: 1rem;">Ideal para:</h5>
-                            <p style="color: var(--gray); margin: 0;">Equipos medianos a grandes y empresas que necesitan un control granular.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="azure-devops">
-                <div class="grid grid-2">
-                    <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                        <h4 style="color: var(--primary); margin-bottom: 1rem;">Azure DevOps</h4>
-                        <p style="color: var(--gray);">Solución integral de Microsoft que cubre todo el ciclo de vida del desarrollo.</p>
-                        <h5 style="color: var(--accent); margin-top: 1.5rem; margin-bottom: 1rem;">Características Clave</h5>
-                        <ul style="color: var(--gray); list-style: none; padding: 0;">
-                            <li style="margin-bottom: 0.8rem;">✅ Azure Boards (Scrum/Kanban)</li>
-                            <li style="margin-bottom: 0.8rem;">✅ Azure Repos (Git)</li>
-                            <li style="margin-bottom: 0.8rem;">✅ Azure Pipelines (CI/CD)</li>
-                            <li style="margin-bottom: 0.8rem;">✅ Integración nativa con ecosistema Azure</li>
-                        </ul>
-                    </div>
-                    <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                        <div style="margin-bottom: 1.5rem;">
-                            <h5 style="color: var(--secondary); margin-bottom: 1rem;">Pros y Contras</h5>
-                            <p style="color: var(--gray);"><strong style="color: #10B981;">Pros:</strong> Todo en uno, CI/CD integrado, excelente para equipos .NET.</p>
-                            <p style="color: var(--gray);"><strong style="color: #EF4444;">Contras:</strong> Interfaz puede ser compleja, menos personalizable que Jira.</p>
-                        </div>
-                        <div style="padding: 1.5rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
-                            <h5 style="color: var(--primary); margin-bottom: 1rem;">Ideal para:</h5>
-                            <p style="color: var(--gray); margin: 0;">Equipos que ya utilizan el ecosistema de Microsoft y Azure.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="poker-grid">
+                <div class="poker-card" data-value="0">0</div>
+                <div class="poker-card" data-value="1">1</div>
+                <div class="poker-card" data-value="2">2</div>
+                <div class="poker-card" data-value="3">3</div>
+                <div class="poker-card" data-value="5">5</div>
+                <div class="poker-card" data-value="8">8</div>
+                <div class="poker-card" data-value="13">13</div>
+                <div class="poker-card" data-value="21">21</div>
+                <div class="poker-card" data-value="?">?</div>
+                <div class="poker-card" data-value="☕">☕</div>
             </div>
         </div>
 
-        <!-- Herramientas de Colaboración -->
-        <div class="example-container reveal">
-            <div class="example-header">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">💬 Herramienta de Colaboración: Discord</h3>
-                <p style="color: var(--gray);">Creando un espacio de trabajo virtual ágil y dinámico.</p>
-            </div>
-            <div class="grid grid-2">
-                 <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                    <h4 style="color: #5865F2; margin-bottom: 1rem;">¿Por qué Discord para SCRUM?</h4>
-                    <p style="color: var(--gray);">Originalmente para gamers, su flexibilidad lo hace ideal para equipos de desarrollo que buscan comunicación instantánea y organizada.</p>
-                    <h5 style="color: var(--accent); margin-top: 1.5rem; margin-bottom: 1rem;">Casos de Uso</h5>
-                    <ul style="color: var(--gray); list-style: none; padding: 0;">
-                        <li style="margin-bottom: 0.8rem;">🎤 <strong>Canales de voz:</strong> Para Daily Standups, Pair Programming o discusiones ad-hoc.</li>
-                        <li style="margin-bottom: 0.8rem;">#️⃣ <strong>Canales de texto:</strong> Organiza conversaciones por tema (#general, #backlog, #builds).</li>
-                        <li style="margin-bottom: 0.8rem;">🤖 <strong>Integraciones:</strong> Bots para notificaciones de GitHub, Jira, y Azure DevOps.</li>
-                        <li style="margin-bottom: 0.8rem;">💻 <strong>Screen Sharing:</strong> Ideal para demos rápidas, revisiones de código o Sprint Reviews.</li>
-                    </ul>
-                </div>
-                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                    <div style="padding: 1.5rem; background: rgba(88, 101, 242, 0.1); border-radius: 10px;">
-                        <h5 style="color: #5865F2; margin-bottom: 1rem;">Estructura de Servidor Recomendada</h5>
-                        <p style="color: var(--gray); margin: 0;">
-                            <b>CATEGORÍA: GENERAL</b><br>
-                            # announcements<br>
-                            # general-chat<br>
-                            <br>
-                            <b>CATEGORÍA: SPRINT ACTUAL</b><br>
-                            # sprint-planning<br>
-                            # sprint-backlog<br>
-                            🎤 Daily Standup (Voz)<br>
-                            <br>
-                            <b>CATEGORÍA: DEV</b><br>
-                            # code-review<br>
-                            # pull-requests<br>
-                            🎤 Pair Programming (Voz)
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <!-- Overlay para mostrar la carta seleccionada -->
+        <div id="card-overlay" class="card-overlay">
+            <div id="selected-card" class="selected-card"></div>
         </div>
-        
-        <!-- Recursos de Aprendizaje -->
-        <div class="example-container reveal">
-            <div class="example-header">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">📚 Recursos de Aprendizaje</h3>
-                <p style="color: var(--gray);">Expande tu conocimiento SCRUM con estas lecturas y comunidades.</p>
-            </div>
-            <div class="grid grid-3">
-                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                    <h4 style="color: var(--primary); margin-bottom: 1rem;">📖 Lecturas Esenciales</h4>
-                    <ul style="color: var(--gray);">
-                        <li><a href="https://scrumguides.org/" target="_blank">The Scrum Guide</a></li>
-                        <li>"Scrum: The Art of Doing Twice the Work in Half the Time"</li>
-                        <li>"Agile Estimating and Planning"</li>
-                        <li>"User Stories Applied"</li>
-                    </ul>
-                </div>
-                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">🌐 Comunidades y Blogs</h4>
-                    <ul style="color: var(--gray);">
-                        <li><a href="https://www.scrum.org/forum" target="_blank">Scrum.org Forum</a></li>
-                        <li><a href="https://www.mountaingoatsoftware.com/blog" target="_blank">Mountain Goat Software</a></li>
-                        <li><a href="https://martinfowler.com/agile.html" target="_blank">Martin Fowler on Agile</a></li>
-                         <li><a href="https://www.atlassian.com/agile" target="_blank">Atlassian Agile Coach</a></li>
-                    </ul>
-                </div>
-                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                    <h4 style="color: var(--accent); margin-bottom: 1rem;">🎓 Certificaciones Populares</h4>
-                     <ul style="color: var(--gray);">
-                        <li><b>PSM I</b> (Professional Scrum Master)</li>
-                        <li><b>CSM</b> (Certified ScrumMaster)</li>
-                        <li><b>PSPO I</b> (Professional Scrum Product Owner)</li>
-                        <li><b>SAFe Agilist</b> (Para escalar Scrum)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Plantillas Descargables -->
-        <div class="example-container reveal">
-            <div class="example-header">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">📋 Plantillas Descargables</h3>
-                <p style="color: var(--gray);">Acelera tus ceremonias con estas plantillas listas para usar.</p>
-            </div>
-            <div class="grid grid-3">
-                <div class="template-card">
-                    <div class="template-icon">🔄</div>
-                    <h4 class="template-title">Plantilla de Retrospectiva</h4>
-                    <p class="template-description">Formato "Start, Stop, Continue" para facilitar la mejora continua.</p>
-                    <a href="#" class="template-button">Descargar PDF</a>
-                </div>
-                <div class="template-card">
-                    <div class="template-icon">✅</div>
-                    <h4 class="template-title">Checklist de Definition of Done</h4>
-                    <p class="template-description">Un checklist completo para asegurar la calidad de tus incrementos.</p>
-                    <a href="#" class="template-button">Descargar PDF</a>
-                </div>
-                <div class="template-card">
-                    <div class="template-icon">📅</div>
-                    <h4 class="template-title">Guía de Sprint Planning</h4>
-                    <p class="template-description">Una guía paso a paso para asegurar que tus Sprint Plannings sean efectivas.</p>
-                    <a href="#" class="template-button">Descargar PDF</a>
-                </div>
-            </div>
-        </div>
-
     </div>
 </section>
