@@ -1,4 +1,4 @@
-<!-- SCRUM Foundations Section - Enhanced Implementation -->
+<!-- SCRUM Foundations Section - Refactored -->
 <section id="intro" class="section">
     <div class="container">
         <div class="section-header reveal">
@@ -9,27 +9,27 @@
         <!-- SCRUM Definition & Philosophy -->
         <div class="example-container reveal">
             <div class="example-header">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">¿Qué es SCRUM?</h3>
-                <p style="color: var(--gray);">Framework liviano que ayuda a personas, equipos y organizaciones a generar valor a través de soluciones adaptativas para problemas complejos</p>
+                <h3>¿Qué es SCRUM?</h3>
+                <p>Framework liviano que ayuda a personas, equipos y organizaciones a generar valor a través de soluciones adaptativas para problemas complejos</p>
             </div>
 
             <div class="grid grid-2">
-                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                    <h4 style="color: var(--primary); margin-bottom: 1rem;">📖 Definición Oficial</h4>
-                    <p style="color: var(--gray); line-height: 1.8; font-style: italic;">
+                <div class="card card-dark">
+                    <h4>📖 Definición Oficial</h4>
+                    <p class="italic">
                         "Scrum es un <strong>marco de trabajo liviano</strong> que ayuda a las personas, equipos y organizaciones a <strong>generar valor</strong> a través de soluciones adaptativas para <strong>problemas complejos</strong>."
                     </p>
-                    <p style="color: var(--gray); margin-top: 1rem; font-size: 0.9rem;">
+                    <p class="caption">
                         — Scrum Guide 2020, Ken Schwaber & Jeff Sutherland
                     </p>
                 </div>
                 
-                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">🎯 Propósito Fundamental</h4>
-                    <ul style="color: var(--gray); list-style: none; padding: 0;">
-                        <li style="margin-bottom: 0.8rem;">🔍 <strong>Empirismo:</strong> Tomar decisiones basadas en observación</li>
-                        <li style="margin-bottom: 0.8rem;">🧠 <strong>Lean thinking:</strong> Reducir desperdicio, enfoque en esencial</li>
-                        <li style="margin-bottom: 0.8rem;">⚡ <strong>Adaptabilidad:</strong> Responder rápido a cambios</li>
+                <div class="card card-dark">
+                    <h4>🎯 Propósito Fundamental</h4>
+                    <ul>
+                        <li>🔍 <strong>Empirismo:</strong> Tomar decisiones basadas en observación</li>
+                        <li>🧠 <strong>Lean thinking:</strong> Reducir desperdicio, enfoque en esencial</li>
+                        <li>⚡ <strong>Adaptabilidad:</strong> Responder rápido a cambios</li>
                         <li>🎯 <strong>Valor continuo:</strong> Entrega incremental funcional</li>
                     </ul>
                 </div>
@@ -39,59 +39,50 @@
         <!-- Pilares de SCRUM -->
         <div class="example-container reveal">
             <div class="example-header">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Los 3 Pilares del Empirismo</h3>
-                <p style="color: var(--gray);">Fundamentos sobre los que se construye todo el framework SCRUM</p>
+                <h3>Los 3 Pilares del Empirismo</h3>
+                <p>Fundamentos sobre los que se construye todo el framework SCRUM</p>
             </div>
 
             <div class="grid grid-3">
-                <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px; text-align: center; position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%); animation: pulse 3s ease infinite;"></div>
-                    <div style="position: relative; z-index: 1;">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">🔍</div>
-                        <h4 style="color: var(--primary); margin-bottom: 1rem;">Transparencia</h4>
-                        <p style="color: var(--gray);">El proceso emergente y el trabajo deben ser visibles para quienes realizan el trabajo y quienes reciben el trabajo.</p>
-                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
-                            <strong style="color: var(--primary);">Ejemplos prácticos:</strong>
-                            <ul style="list-style: none; padding: 0; margin-top: 0.5rem; font-size: 0.9rem;">
-                                <li>• Sprint Backlog visible para todos</li>
-                                <li>• Definition of Done compartida</li>
-                                <li>• Impedimentos comunicados abiertamente</li>
-                            </ul>
-                        </div>
+                <div class="card card-pulse">
+                    <div class="card-icon">🔍</div>
+                    <h4 class="text-primary">Transparencia</h4>
+                    <p>El proceso emergente y el trabajo deben ser visibles para quienes realizan el trabajo y quienes reciben el trabajo.</p>
+                    <div class="card-footer">
+                        <strong>Ejemplos prácticos:</strong>
+                        <ul>
+                            <li>• Sprint Backlog visible para todos</li>
+                            <li>• Definition of Done compartida</li>
+                            <li>• Impedimentos comunicados abiertamente</li>
+                        </ul>
                     </div>
                 </div>
                 
-                <div style="padding: 2rem; background: rgba(236, 72, 153, 0.1); border-radius: 15px; text-align: center; position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%); animation: pulse 3s ease infinite;"></div>
-                    <div style="position: relative; z-index: 1;">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">👁️</div>
-                        <h4 style="color: var(--secondary); margin-bottom: 1rem;">Inspección</h4>
-                        <p style="color: var(--gray);">Los artefactos de Scrum y el progreso hacia objetivos acordados deben ser inspeccionados frecuentemente.</p>
-                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
-                            <strong style="color: var(--secondary);">Momentos clave:</strong>
-                            <ul style="list-style: none; padding: 0; margin-top: 0.5rem; font-size: 0.9rem;">
-                                <li>• Daily Scrum (progreso diario)</li>
-                                <li>• Sprint Review (incremento)</li>
-                                <li>• Sprint Retrospective (proceso)</li>
-                            </ul>
-                        </div>
+                <div class="card card-pulse">
+                    <div class="card-icon">👁️</div>
+                    <h4 class="text-secondary">Inspección</h4>
+                    <p>Los artefactos de Scrum y el progreso hacia objetivos acordados deben ser inspeccionados frecuentemente.</p>
+                    <div class="card-footer">
+                        <strong>Momentos clave:</strong>
+                        <ul>
+                            <li>• Daily Scrum (progreso diario)</li>
+                            <li>• Sprint Review (incremento)</li>
+                            <li>• Sprint Retrospective (proceso)</li>
+                        </ul>
                     </div>
                 </div>
                 
-                <div style="padding: 2rem; background: rgba(16, 185, 129, 0.1); border-radius: 15px; text-align: center; position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%); animation: pulse 3s ease infinite;"></div>
-                    <div style="position: relative; z-index: 1;">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">🔄</div>
-                        <h4 style="color: var(--accent); margin-bottom: 1rem;">Adaptación</h4>
-                        <p style="color: var(--gray);">Si cualquier aspecto de un proceso se desvía fuera de límites aceptables, el proceso o el material debe ajustarse.</p>
-                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
-                            <strong style="color: var(--accent);">Acciones típicas:</strong>
-                            <ul style="list-style: none; padding: 0; margin-top: 0.5rem; font-size: 0.9rem;">
-                                <li>• Refinamiento del Product Backlog</li>
-                                <li>• Cambios en Sprint Planning</li>
-                                <li>• Mejoras de Retrospective</li>
-                            </ul>
-                        </div>
+                <div class="card card-pulse">
+                    <div class="card-icon">🔄</div>
+                    <h4 class="text-accent">Adaptación</h4>
+                    <p>Si cualquier aspecto de un proceso se desvía fuera de límites aceptables, el proceso o el material debe ajustarse.</p>
+                    <div class="card-footer">
+                        <strong>Acciones típicas:</strong>
+                        <ul>
+                            <li>• Refinamiento del Product Backlog</li>
+                            <li>• Cambios en Sprint Planning</li>
+                            <li>• Mejoras de Retrospective</li>
+                        </ul>
                     </div>
                 </div>
             </div>
