@@ -6,18 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target.matches('.tab-button')) {
             const tabButton = e.target;
             const tabContainer = tabButton.closest('.example-tabs');
-            
-            // Si no se encuentra un contenedor, salir
-            if (!tabContainer) return;
-
             const contentContainer = tabContainer.nextElementSibling.parentElement;
 
-            // Actualizar estado de los botones
+            // Remover la clase 'active' de todos los botones de la misma sección
             tabContainer.querySelectorAll('.tab-button').forEach(button => {
-                const isSelected = button === tabButton;
-                button.classList.toggle('active', isSelected);
-                button.setAttribute('aria-selected', isSelected);
+                button.classList.remove('active');
             });
+
+            // Añadir 'active' al botón presionado
+            tabButton.classList.add('active');
 
             // Ocultar todo el contenido de las pestañas de esa sección
             contentContainer.querySelectorAll('.tab-content').forEach(content => {

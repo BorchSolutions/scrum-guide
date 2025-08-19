@@ -10,40 +10,18 @@ class ComponentManager {
         this.componentCache = new Map();
         this.eventListeners = new Map();
         this.observers = new Map();
+        
+        this.init();
     }
 
     /**
-     * Inicializa el component manager y carga los componentes estáticos
+     * Inicializa el component manager
      */
-    async init() {
+    init() {
         this.setupGlobalErrorHandler();
         this.setupPerformanceMonitoring();
-        await this.loadStaticComponents();
     }
 
-    /**
-     * Carga componentes estáticos como la navegación y el pie de página.
-     */
-    async loadStaticComponents() {
-        try {
-            // Registrar componentes estáticos
-            this.registerComponent('navigation', {
-                htmlPath: 'components/navigation.html',
-                singleton: true
-            });
-            this.registerComponent('footer', {
-                htmlPath: 'components/footer.html',
-                singleton: true
-            });
-
-            // Cargar componentes en sus contenedores
-            await this.loadComponent('navigation', '#navigation-container');
-
-        } catch (error) {
-            console.error("Error loading static components:", error);
-        }
-    }
-    
     /**
      * Registra un componente en el sistema
      * @param {string} name - Nombre del componente
@@ -546,4 +524,48 @@ class ComponentManager {
         this.eventListeners.clear();
         
     }
+}
+
+// Auto-inicialización
+document.addEventListener('DOMContentLoaded', () => {
+    window.componentManager = new ComponentManager();
+    
+    // Registrar componentes predeterminados
+    window.componentManager.registerComponent('navigation', {
+        htmlPath: '/components/navigation.html',
+        singleton: true
+    });
+    
+    window.componentManager.registerComponent('footer', {
+        htmlPath: '/components/footer.html',
+        singleton: true
+    });
+    
+    window.componentManager.registerComponent('tabs', {
+        htmlPath: '/components/interactive/tabs.html',
+        jsPath: '/assets/js/components/tab-manager.js',
+        cssPath: '/assets/css/components/tabs.css'
+    });
+    
+    window.componentManager.registerComponent('wsjf-calculator', {
+        htmlPath: '/components/interactive/wsjf-calculator.html',
+        jsPath: '/assets/js/components/wsjf-calculator.js',
+        cssPath: '/assets/css/components/calculator.css'
+    });
+    
+    window.componentManager.registerComponent('sprint-board', {
+        htmlPath: '/components/interactive/sprint-board.html',
+        jsPath: '/assets/js/components/sprint-board.js',
+        cssPath: '/assets/css/components/board.css'
+    });
+
+});
+
+// Hacer disponible globalmente
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = ComponentManager;
+}
+
+if (typeof window !== 'undefined') {
+    window.ComponentManager = ComponentManager;
 }
