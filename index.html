@@ -3,192 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Guía completa e interactiva de SCRUM con enfoque especial en estimación Fibonacci para equipos de desarrollo .NET Core y Angular">
-    <meta name="keywords" content="SCRUM, Agile, Fibonacci, Estimación, .NET, Angular, Story Points, Planning Poker">
-    <meta name="author" content="SCRUM Pro Guide">
+    <title>SCRUM Mastery - Guía Completa para Equipos Ágiles</title>
     
-    <title>SCRUM Pro Guide - Estimación Ágil con Fibonacci</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-    
-    <!-- CSS -->
+    <!-- External CSS Files -->
+    <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
     
-    <!-- Preload key resources -->
-    <link rel="preload" href="assets/js/main.js" as="script">
-    <link rel="preload" href="components/navigation.html" as="fetch" crossorigin>
+    <!-- Favicon and Meta -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <meta name="description" content="Guía completa de SCRUM con enfoque en estimación Fibonacci para equipos .NET y Angular">
+    <meta name="keywords" content="SCRUM, Agile, Fibonacci, Story Points, .NET, Angular, Estimación">
+    <meta name="author" content="SCRUM Pro Guide">
+    
+    <!-- Progressive Web App -->
+    <meta name="theme-color" content="#6366F1">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="SCRUM Pro Guide - Estimación Fibonacci">
+    <meta property="og:description" content="Guía completa de SCRUM con enfoque en estimación Fibonacci">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tu-usuario.github.io/scrum-guide/">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/js/content-loader.js" as="script">
+    <link rel="preload" href="sections/scrum-foundations.html" as="fetch" crossorigin>
+    <link rel="preload" href="sections/estimacion-agil.html" as="fetch" crossorigin>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen" style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #0f1729 0%, #1e293b 100%);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-        transition: opacity 0.5s ease;
-    ">
-        <div style="
-            width: 60px;
-            height: 60px;
-            border: 3px solid rgba(99, 102, 241, 0.3);
-            border-top: 3px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1rem;
-        "></div>
-        <h3 style="
-            color: var(--light);
-            margin: 0;
-            font-size: 1.2rem;
-            font-weight: 600;
-        ">Inicializando SCRUM Pro Guide...</h3>
-        <p style="
-            color: var(--gray);
-            margin: 0.5rem 0 0 0;
-            font-size: 0.9rem;
-        ">Cargando contenido modular</p>
-    </div>
-
-    <!-- Navigation Container -->
-    <div id="navigation-container">
-        <!-- Navigation component will be loaded here -->
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero" id="hero" style="
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #0f1729 0%, #1e293b 50%, #0f1729 100%);
-        position: relative;
-        overflow: hidden;
-    ">
-        <!-- Background Effects -->
-        <div style="
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        "></div>
-
-        <div style="
-            text-align: center;
-            z-index: 2;
-            max-width: 800px;
-            padding: 0 2rem;
-        ">
-            <h1 style="
-                font-size: clamp(3rem, 8vw, 6rem);
-                font-weight: 900;
-                margin: 0 0 1rem 0;
-                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-                background-clip: text;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                text-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
-            ">SCRUM</h1>
-            
-            <p style="
-                font-size: clamp(1.2rem, 3vw, 2rem);
-                color: var(--light);
-                margin: 0 0 2rem 0;
-                font-weight: 300;
-                line-height: 1.4;
-            ">Framework ágil para equipos de alto rendimiento</p>
-            
-            <div style="
-                display: flex;
-                gap: 1rem;
-                justify-content: center;
-                flex-wrap: wrap;
-                margin-bottom: 3rem;
-            ">
-                <a href="#scrum-foundations" style="
-                    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-                    color: white;
-                    text-decoration: none;
-                    padding: 1rem 2rem;
-                    border-radius: 50px;
-                    font-weight: 600;
-                    font-size: 1.1rem;
-                    transition: all 0.3s ease;
-                    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 40px rgba(99, 102, 241, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(99, 102, 241, 0.3)'">
-                    Comenzar el viaje
-                    <span style="font-size: 1.2rem;">→</span>
-                </a>
-                
-                <a href="#recursos" style="
-                    background: transparent;
-                    color: var(--primary);
-                    text-decoration: none;
-                    padding: 1rem 2rem;
-                    border-radius: 50px;
-                    font-weight: 600;
-                    font-size: 1.1rem;
-                    border: 2px solid var(--primary);
-                    transition: all 0.3s ease;
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                " onmouseover="this.style.background='var(--primary)'; this.style.color='white'" onmouseout="this.style.background='transparent'; this.style.color='var(--primary)'">
-                    <span style="font-size: 1.2rem;">🛠️</span>
-                    Herramientas
-                </a>
+    <!-- Loader Completo -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p style="margin-top: 1rem; color: var(--gray);">Cargando experiencia Scrum...</p>
+            <div style="margin-top: 1rem; color: var(--primary); font-size: 0.9rem;" id="loading-status">
+                Inicializando contenido modular...
             </div>
-            
-            <div style="
-                display: flex;
-                justify-content: center;
-                gap: 2rem;
-                font-size: 0.9rem;
-                color: var(--gray);
-                flex-wrap: wrap;
-            ">
-                <span style="
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                ">🚀 Contenido modular</span>
-                <span style="
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                ">📊 Estimación Fibonacci</span>
-                <span style="
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                ">💻 Ejemplos .NET + Angular</span>
+            <div class="loader-progress" style="margin-top: 1.5rem;">
+                <div class="progress-bar" id="progress-bar"></div>
             </div>
         </div>
+        
+        <!-- Loading Tips -->
+        <div class="loader-tips" id="loader-tips">
+            <div class="tip active">
+                <span class="tip-icon">💡</span>
+                <span class="tip-text">SCRUM utiliza la escala Fibonacci para estimación porque refleja la incertidumbre natural</span>
+            </div>
+            <div class="tip">
+                <span class="tip-icon">📊</span>
+                <span class="tip-text">Un equipo ágil típico mejora su velocity en un 23% después de 3 sprints</span>
+            </div>
+            <div class="tip">
+                <span class="tip-icon">⚡</span>
+                <span class="tip-text">Planning Poker ayuda a reducir el sesgo de anclaje en las estimaciones</span>
+            </div>
+            <div class="tip">
+                <span class="tip-icon">🎯</span>
+                <span class="tip-text">La Definition of Done debe ser clara y compartida por todo el equipo</span>
+            </div>
+        </div>
+        
+        <!-- Error State -->
+        <div class="loader-error" id="loader-error" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <h3>Error al cargar</h3>
+            <p id="error-message">No se pudo cargar la aplicación</p>
+            <button id="retry-button" class="retry-btn">🔄 Reintentar</button>
+        </div>
+    </div>
 
-        <!-- Scroll Indicator -->
-        <div style="
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            cursor: pointer;
-        " onclick="document.getElementById('scrum-foundations').scrollIntoView({behavior: 'smooth'})">
+    <!-- Navigation Component Container -->
+    <div id="navigation-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">SCRUM</h1>
+            <p class="hero-subtitle">Framework ágil para equipos de alto rendimiento</p>
+            <a href="#scrum-foundations" class="hero-cta">
+                Comenzar el viaje
+                <span>→</span>
+            </a>
+            <div style="margin-top: 2rem; font-size: 0.9rem; color: var(--gray);">
+                🚀 Contenido modular | 📊 Estimación Fibonacci | 💻 Ejemplos prácticos
+            </div>
+        </div>
+        <div class="scroll-indicator">
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
                 <path d="M15 20L9 14L10.4 12.6L15 17.2L19.6 12.6L21 14L15 20Z" fill="white" opacity="0.5"/>
             </svg>
@@ -196,215 +100,96 @@
     </section>
 
     <!-- Main Content Container -->
-    <main id="main-content" style="
-        background: var(--dark);
-        min-height: 100vh;
-    ">
-        <!-- Content Loading Placeholder -->
-        <div id="content-placeholder" style="
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--gray);
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
-            margin: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(99, 102, 241, 0.1);
-        ">
-            <div style="
-                font-size: 3rem;
-                margin-bottom: 1rem;
-                opacity: 0.5;
-            ">📄</div>
-            <h3 style="
-                color: var(--light);
-                margin-bottom: 0.5rem;
-                font-size: 1.5rem;
-            ">Cargando contenido...</h3>
-            <p style="
-                margin: 0;
-                font-size: 1rem;
-            ">El contenido se está cargando dinámicamente</p>
+    <main id="main-content" class="main-content">
+        <!-- Dynamic content will be loaded here -->
+        <div class="content-placeholder" style="text-align: center; padding: 4rem 2rem; color: var(--gray);">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">📄</div>
+            <h3>Cargando contenido...</h3>
+            <p>El contenido se está cargando dinámicamente</p>
         </div>
-
-        <!-- Dynamic Content Sections -->
-        <section id="scrum-foundations" class="reveal">
-            <!-- Content will be loaded dynamically -->
-        </section>
-
-        <section id="estimacion" class="reveal">
-            <!-- Content will be loaded dynamically -->
-        </section>
-
-        <section id="metricas" class="reveal">
-            <!-- Content will be loaded dynamically -->
-        </section>
-
-        <section id="practica" class="reveal">
-            <!-- Content will be loaded dynamically -->
-        </section>
-
-        <section id="recursos" class="reveal">
-            <!-- Content will be loaded dynamically -->
-        </section>
     </main>
 
-    <!-- Footer Container -->
-    <div id="footer-container">
-        <!-- Footer component will be loaded here -->
-    </div>
+    <!-- Footer Component Container -->
+    <div id="footer-container"></div>
 
-    <!-- Back to Top Button (will be created by JavaScript) -->
-    <!-- Error Notification Container -->
-    <div id="error-container"></div>
-
-    <!-- JavaScript -->
+    <!-- JavaScript Modules - Orden correcto -->
+    <script src="assets/js/utils.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/component_manager.js"></script>
+    <script src="assets/js/content-loader.js"></script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/sprint_board.js"></script>
+    <script src="assets/js/planning_poker.js"></script>
+    <script src="assets/data/sections.js"></script>
 
-    <!-- App Initialization -->
+    <!-- Component & App Initialization -->
     <script>
-        // Hide loading screen once everything is loaded
-        window.addEventListener('load', function() {
-            const loadingScreen = document.getElementById('loading-screen');
-            const contentPlaceholder = document.getElementById('content-placeholder');
+        // Global error handler
+        window.addEventListener('error', (event) => {
+            console.error('Global error:', event.error);
+            if (window.showError) {
+                window.showError('Error en la aplicación: ' + event.error.message);
+            }
+        });
+        
+        // Initialize app when DOM is ready
+        document.addEventListener('DOMContentLoaded', async () => {
             
-            // Add a small delay for better UX
-            setTimeout(() => {
-                if (loadingScreen) {
-                    loadingScreen.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingScreen.style.display = 'none';
-                    }, 500);
+            try {
+                // Initialize component manager
+                window.componentManager = new ComponentManager();
+                await window.componentManager.init();
+                
+                // Initialize content loader
+                if (window.contentLoader) {
+                    await window.contentLoader.init();
+                } else {
+                    console.warn('ContentLoader not available');
                 }
                 
-                // Hide content placeholder after sections load
+                // Initialize navigation
+                if (window.Navigation) {
+                    window.navigation = new window.Navigation();
+                }
+                
+                // Load initial section
+                const hash = window.location.hash.replace('#', '');
+                const initialSection = hash || 'scrum-foundations';
+                
+                if (window.contentLoader) {
+                    await window.contentLoader.loadSection(initialSection);
+                }
+                
+                // Hide loader
                 setTimeout(() => {
-                    if (contentPlaceholder) {
-                        contentPlaceholder.style.display = 'none';
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.style.opacity = '0';
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                        }, 500);
                     }
-                }, 2000);
-            }, 1000);
-        });
-
-        // Global error handler
-        window.addEventListener('error', function(event) {
-            console.error('Error global:', event.error);
-            const errorContainer = document.getElementById('error-container');
-            if (errorContainer && event.error) {
-                errorContainer.innerHTML = `
-                    <div style="
-                        position: fixed;
-                        top: 20px;
-                        right: 20px;
-                        background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
-                        color: white;
-                        padding: 1rem 1.5rem;
-                        border-radius: 12px;
-                        z-index: 10000;
-                        max-width: 300px;
-                        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-                    ">
-                        <strong>Error:</strong> ${event.error.message || 'Error desconocido'}
-                    </div>
-                `;
+                }, 1500);
+                
+                
+            } catch (error) {
+                console.error('❌ Error initializing app:', error);
+                if (window.showError) {
+                    window.showError('Error al inicializar la aplicación');
+                }
             }
         });
 
-        // Progressive Enhancement
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add smooth scrolling fallback for older browsers
-            if (!('scrollBehavior' in document.documentElement.style)) {
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth'
-                            });
-                        }
-                    });
-                });
+        // Handle navigation
+        window.addEventListener('hashchange', async () => {
+            const section = window.location.hash.replace('#', '');
+            if (section && window.contentLoader) {
+                await window.contentLoader.loadSection(section);
             }
         });
     </script>
-
-    <!-- CSS Animations -->
-    <style>
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-
-        .reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Ensure proper spacing and layout */
-        section {
-            padding: 2rem 0;
-        }
-
-        section:not(:last-child) {
-            margin-bottom: 2rem;
-        }
-
-        /* Responsive hero section */
-        @media (max-width: 768px) {
-            .hero {
-                min-height: 80vh;
-                padding: 2rem 0;
-            }
-        }
-
-        /* Smooth scroll padding for fixed navbar */
-        html {
-            scroll-padding-top: 100px;
-        }
-
-        /* Accessibility improvements */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Focus styles for accessibility */
-        a:focus, button:focus {
-            outline: 2px solid var(--primary);
-            outline-offset: 2px;
-        }
-    </style>
 </body>
 </html>

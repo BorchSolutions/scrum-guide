@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCRUM Mastery - Guía Completa para Equipos Ágiles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366F1;
+            --secondary: #EC4899;
+            --accent: #10B981;
+            --warning: #F59E0B;
+            --dark: #0F172A;
+            --darker: #020617;
+            --light: #F8FAFC;
+            --gray: #64748B;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-dark: linear-gradient(180deg, #0F172A 0%, #1E293B 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(99, 102, 241, 0.1);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav.scrolled {
+            background: rgba(15, 23, 42, 0.98);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--light);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--gradient-dark);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--primary) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--secondary) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, var(--accent) 0%, transparent 50%);
+            animation: bgAnimation 20s ease infinite;
+        }
+
+        @keyframes bgAnimation {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1000px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #6366F1, #EC4899, #10B981);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.2rem 3rem;
+            background: var(--gradient-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section:nth-child(odd) {
+            background: var(--dark);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Card Styles */
+        .card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .card-text {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Interactive Sprint Board */
+        .sprint-board {
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .board-columns {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .board-column {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            min-height: 400px;
+        }
+
+        .column-header {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .task-card {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: move;
+            transition: all 0.3s ease;
+        }
+
+        .task-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);
+        }
+
+        .task-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .story-points {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .priority {
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .priority-high {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+
+        .priority-medium {
+            background: rgba(245, 158, 11, 0.2);
+            color: #F59E0B;
+        }
+
+        .priority-low {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10B981;
+        }
+
+        /* Work Items Hierarchy */
+        .hierarchy {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .hierarchy-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .hierarchy-item:nth-child(1) { animation-delay: 0.1s; }
+        .hierarchy-item:nth-child(2) { animation-delay: 0.2s; }
+        .hierarchy-item:nth-child(3) { animation-delay: 0.3s; }
+        .hierarchy-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+        }
+
+        .hierarchy-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-right: 2rem;
+            position: relative;
+        }
+
+        .hierarchy-line {
+            position: absolute;
+            left: 50px;
+            top: 100px;
+            width: 2px;
+            height: 50px;
+            background: var(--gradient-primary);
+        }
+
+        .hierarchy-content {
+            flex: 1;
+        }
+
+        .hierarchy-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .hierarchy-description {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .hierarchy-example {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 3px solid var(--primary);
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Metrics Dashboard */
+        .metrics-dashboard {
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: var(--gradient-dark);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            animation: pulse 3s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .metric-label {
+            color: var(--gray);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-change {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .metric-up {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10B981;
+        }
+
+        .metric-down {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            height: 400px;
+            position: relative;
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        #velocityChart, #burndownChart {
+            width: 100%;
+            height: 320px;
+        }
+
+        /* Example Section */
+        .example-container {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .example-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .example-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 0.8rem 2rem;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 50px;
+            color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .tab-button.active {
+            background: var(--gradient-primary);
+            border-color: transparent;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .code-block {
+            background: var(--darker);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            color: #E2E8F0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .code-block .comment {
+            color: #64748B;
+        }
+
+        .code-block .keyword {
+            color: #C084FC;
+        }
+
+        .code-block .string {
+            color: #86EFAC;
+        }
+
+        .code-block .function {
+            color: #60A5FA;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+            margin-left: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .timeline-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .board-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeline-marker {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+
+            .hierarchy-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hierarchy-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .hierarchy-line {
+                display: none;
+            }
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p style="margin-top: 1rem; color: var(--gray);">Cargando experiencia Scrum...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <div class="logo">SCRUM Pro</div>
+            <ul class="nav-menu">
+                <li><a href="#intro" class="nav-link">Introducción</a></li>
+                <li><a href="#framework" class="nav-link">Framework</a></li>
+                <li><a href="#workitems" class="nav-link">Work Items</a></li>
+                <li><a href="#fibonacci" class="nav-link">Fibonacci</a></li>
+                <li><a href="#storypoints" class="nav-link">Story Points</a></li>
+                <li><a href="#metricas" class="nav-link">Métricas</a></li>
+                <li><a href="#ejemplo" class="nav-link">Ejemplo</a></li>
+                <li><a href="#herramientas" class="nav-link">Herramientas</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">SCRUM</h1>
+            <p class="hero-subtitle">Framework ágil para equipos de alto rendimiento</p>
+            <a href="#intro" class="hero-cta">
+                Comenzar el viaje
+                <span>→</span>
+            </a>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                <path d="M15 20L9 14L10.4 12.6L15 17.2L19.6 12.6L21 14L15 20Z" fill="white" opacity="0.5"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="intro" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">¿Qué es SCRUM?</h2>
+                <p class="section-subtitle">Un framework ágil que transforma la manera en que los equipos entregan valor</p>
+            </div>
+            
+            <div class="grid grid-3 reveal">
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">Entrega Incremental</h3>
+                    <p class="card-text">Entrega valor funcional al final de cada Sprint, permitiendo feedback temprano y continuo del cliente.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3 class="card-title">Iterativo y Adaptativo</h3>
+                    <p class="card-text">Ciclos cortos de 2-4 semanas que permiten ajustar el rumbo basándose en el aprendizaje y cambios del mercado.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <h3 class="card-title">Equipos Auto-organizados</h3>
+                    <p class="card-text">Equipos empoderados que toman decisiones sobre cómo realizar el trabajo, fomentando la innovación y ownership.</p>
+                </div>
+            </div>
+
+            <div class="metrics-dashboard reveal">
+                <h3 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;">Beneficios Comprobados</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">87%</div>
+                        <div class="metric-label">Mayor Productividad</div>
+                        <span class="metric-change metric-up">↑ 15% vs Waterfall</span>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">3x</div>
+                        <div class="metric-label">Velocidad de Entrega</div>
+                        <span class="metric-change metric-up">↑ Más rápido</span>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">92%</div>
+                        <div class="metric-label">Satisfacción Cliente</div>
+                        <span class="metric-change metric-up">↑ 8% este año</span>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">45%</div>
+                        <div class="metric-label">Menos Defectos</div>
+                        <span class="metric-change metric-up">↓ En producción</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework Section -->
+    <section id="framework" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">El Framework SCRUM</h2>
+                <p class="section-subtitle">Los pilares fundamentales que sostienen la metodología</p>
+            </div>
+
+            <div class="grid grid-2 reveal">
+                <div class="card">
+                    <div class="card-icon">👑</div>
+                    <h3 class="card-title">Roles del Equipo</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Product Owner</h4>
+                            <p class="card-text">Maximiza el valor del producto. Define y prioriza el Product Backlog. Es la voz del cliente y stakeholders.</p>
+                        </div>
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Scrum Master</h4>
+                            <p class="card-text">Facilita el proceso Scrum. Elimina impedimentos. Coach del equipo en prácticas ágiles.</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Development Team</h4>
+                            <p class="card-text">3-9 profesionales cross-funcionales. Auto-organizados. Responsables de entregar el incremento.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📅</div>
+                    <h3 class="card-title">Eventos SCRUM</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Sprint Planning</h4>
+                            <p class="card-text">Máximo 8 horas para Sprint de 4 semanas. Define el Sprint Goal y selecciona items del backlog.</p>
+                        </div>
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Daily Scrum</h4>
+                            <p class="card-text">15 minutos diarios. Sincronización del equipo. ¿Qué hice ayer? ¿Qué haré hoy? ¿Impedimentos?</p>
+                        </div>
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Sprint Review</h4>
+                            <p class="card-text">Máximo 4 horas. Demostración del incremento. Feedback de stakeholders.</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--warning); margin-bottom: 0.5rem;">Sprint Retrospective</h4>
+                            <p class="card-text">Máximo 3 horas. Inspección del proceso. Plan de mejora continua.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Sprint Board -->
+            <div class="sprint-board reveal">
+                <h3 style="text-align: center; margin-bottom: 1rem; font-size: 2rem;">Sprint Board Interactivo</h3>
+                <p style="text-align: center; color: var(--gray); margin-bottom: 2rem;">Visualización del flujo de trabajo en un Sprint típico</p>
+                <div class="board-columns">
+                    <div class="board-column">
+                        <div class="column-header">📋 Backlog</div>
+                        <div class="task-card">
+                            <div class="task-title">Implementar Login OAuth</div>
+                            <div class="task-meta">
+                                <span class="story-points">8 SP</span>
+                                <span class="priority priority-high">Alta</span>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-title">API de Productos</div>
+                            <div class="task-meta">
+                                <span class="story-points">5 SP</span>
+                                <span class="priority priority-medium">Media</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="board-column">
+                        <div class="column-header">🚧 En Progreso</div>
+                        <div class="task-card">
+                            <div class="task-title">Componente Angular Cart</div>
+                            <div class="task-meta">
+                                <span class="story-points">3 SP</span>
+                                <span class="priority priority-high">Alta</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="board-column">
+                        <div class="column-header">🔍 En Revisión</div>
+                        <div class="task-card">
+                            <div class="task-title">Validaciones Frontend</div>
+                            <div class="task-meta">
+                                <span class="story-points">2 SP</span>
+                                <span class="priority priority-medium">Media</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="board-column">
+                        <div class="column-header">✅ Completado</div>
+                        <div class="task-card">
+                            <div class="task-title">Setup .NET Core API</div>
+                            <div class="task-meta">
+                                <span class="story-points">3 SP</span>
+                                <span class="priority priority-low">Baja</span>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-title">Configurar CI/CD</div>
+                            <div class="task-meta">
+                                <span class="story-points">5 SP</span>
+                                <span class="priority priority-high">Alta</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Items Section -->
+    <section id="workitems" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Jerarquía de Work Items</h2>
+                <p class="section-subtitle">Cómo organizamos y estructuramos el trabajo en SCRUM</p>
+            </div>
+
+            <div class="hierarchy reveal">
+                <div class="hierarchy-item">
+                    <div class="hierarchy-icon">
+                        🏔️
+                        <div class="hierarchy-line"></div>
+                    </div>
+                    <div class="hierarchy-content">
+                        <h3 class="hierarchy-title">Epic</h3>
+                        <p class="hierarchy-description">
+                            Gran iniciativa estratégica que puede durar varios meses. Representa un objetivo de negocio significativo que se descompone en features más pequeñas.
+                        </p>
+                        <div class="hierarchy-example">
+                            <strong>Ejemplo:</strong> "Plataforma de E-commerce Completa"<br>
+                            <strong>Duración:</strong> 3-6 meses<br>
+                            <strong>Valor de Negocio:</strong> Muy Alto (100+ puntos)<br>
+                            <strong>Incluye:</strong> Catálogo, Carrito, Pagos, Envíos, Admin Panel
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-item">
+                    <div class="hierarchy-icon">
+                        ⭐
+                        <div class="hierarchy-line"></div>
+                    </div>
+                    <div class="hierarchy-content">
+                        <h3 class="hierarchy-title">Feature</h3>
+                        <p class="hierarchy-description">
+                            Funcionalidad específica que aporta valor directo al usuario. Puede completarse en uno o varios sprints.
+                        </p>
+                        <div class="hierarchy-example">
+                            <strong>Ejemplo:</strong> "Sistema de Carrito de Compras"<br>
+                            <strong>Duración:</strong> 2-3 sprints<br>
+                            <strong>Story Points:</strong> 34 puntos<br>
+                            <strong>Componentes:</strong> Añadir items, actualizar cantidad, calcular total
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-item">
+                    <div class="hierarchy-icon">
+                        📝
+                        <div class="hierarchy-line"></div>
+                    </div>
+                    <div class="hierarchy-content">
+                        <h3 class="hierarchy-title">User Story</h3>
+                        <p class="hierarchy-description">
+                            Descripción de funcionalidad desde la perspectiva del usuario, siguiendo el formato: "Como [usuario], quiero [acción] para [beneficio]"
+                        </p>
+                        <div class="hierarchy-example">
+                            <strong>Ejemplo:</strong> "Como cliente, quiero añadir productos al carrito para comprarlos después"<br>
+                            <strong>Story Points:</strong> 8 puntos<br>
+                            <strong>Criterios de Aceptación:</strong><br>
+                            • Botón "Añadir al carrito" visible<br>
+                            • Confirmación visual al añadir<br>
+                            • Contador actualizado en navbar
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-item">
+                    <div class="hierarchy-icon">✅</div>
+                    <div class="hierarchy-content">
+                        <h3 class="hierarchy-title">Task</h3>
+                        <p class="hierarchy-description">
+                            Trabajo técnico específico necesario para completar una User Story. Debe ser completable en menos de un día.
+                        </p>
+                        <div class="hierarchy-example">
+                            <strong>Ejemplos de Tasks:</strong><br>
+                            • "Crear modelo CartItem en .NET Core" (2 horas)<br>
+                            • "Implementar servicio AddToCart en Angular" (4 horas)<br>
+                            • "Escribir unit tests para CartService" (3 horas)<br>
+                            • "Configurar Redis para cache de carrito" (2 horas)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Fibonacci Foundation Section -->
+    <section id="fibonacci" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">¿Por qué Fibonacci?</h2>
+                <p class="section-subtitle">La ciencia detrás de la estimación no lineal en desarrollo ágil</p>
+            </div>
+
+            <div class="grid grid-2 reveal">
+                <div class="card">
+                    <div class="card-icon">🧮</div>
+                    <h3 class="card-title">Base Matemática</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Secuencia de Fibonacci</h4>
+                            <p class="card-text">Cada número = suma de los dos anteriores:<br>
+                            <strong>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55...</strong></p>
+                        </div>
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Proporción Áurea</h4>
+                            <p class="card-text">La relación entre números consecutivos tiende a <strong>φ ≈ 1.618</strong><br>
+                            Ejemplo: 21/13 = 1.615... ≈ φ</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Crecimiento Exponencial</h4>
+                            <p class="card-text">Los gaps aumentan progresivamente, reflejando la <strong>incertidumbre creciente</strong> en tareas más complejas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3 class="card-title">Ventajas Psicológicas</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--warning); margin-bottom: 0.5rem;">Evita Falsa Precisión</h4>
+                            <p class="card-text">No existe diferencia real entre 6 y 7 horas. Fibonacci fuerza decisiones más claras: <strong>¿Es 5 o 8?</strong></p>
+                        </div>
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Facilita Consenso</h4>
+                            <p class="card-text">Menos opciones = discusiones más enfocadas. El equipo converge más rápido hacia acuerdos.</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Refleja Incertidumbre Natural</h4>
+                            <p class="card-text">Tareas simples = estimación precisa (1,2,3)<br>
+                            Tareas complejas = mayor incertidumbre (13,21,34)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-container reveal">
+                <div class="example-header">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Fibonacci vs Escalas Lineales</h3>
+                </div>
+                
+                <div class="grid grid-2">
+                    <div style="padding: 2rem; background: rgba(239, 68, 68, 0.1); border-radius: 15px; border-left: 4px solid #EF4444;">
+                        <h4 style="color: #EF4444; margin-bottom: 1rem;">❌ Escala Lineal (1,2,3,4,5,6,7,8,9,10)</h4>
+                        <ul style="color: var(--gray); list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.8rem;">• <strong>Falsa precisión:</strong> ¿Realmente hay diferencia entre 6 y 7?</li>
+                            <li style="margin-bottom: 0.8rem;">• <strong>Debates eternos:</strong> "¿Es 4 o 5?" vs "¿Es 3 o 5?"</li>
+                            <li style="margin-bottom: 0.8rem;">• <strong>Sobreconfianza:</strong> Estimaciones muy específicas en tareas inciertas</li>
+                            <li style="margin-bottom: 0.8rem;">• <strong>Análisis parálisis:</strong> Demasiadas opciones ralentizan decisiones</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="padding: 2rem; background: rgba(16, 185, 129, 0.1); border-radius: 15px; border-left: 4px solid #10B981;">
+                        <h4 style="color: #10B981; margin-bottom: 1rem;">✅ Escala Fibonacci (1,2,3,5,8,13,21)</h4>
+                        <ul style="color: var(--gray); list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.8rem;">• <strong>Decisiones claras:</strong> Gaps naturales facilitan elección</li>
+                            <li style="margin-bottom: 0.8rem;">• <strong>Consenso rápido:</strong> Menos opciones = menos discusión</li>
+                            <li style="margin-bottom: 0.8rem;">• <strong>Incertidumbre honesta:</strong> Refleja la realidad del desarrollo</li>
+                            <li style="margin-bottom: 0.8rem;">• <strong>Enfoque en valor:</strong> Menos tiempo estimando, más desarrollando</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metrics-dashboard reveal">
+                <h3 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;">Impacto Medible de Fibonacci</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">47%</div>
+                        <div class="metric-label">Menos Tiempo Estimando</div>
+                        <span class="metric-change metric-up">↓ vs escalas lineales</span>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">23%</div>
+                        <div class="metric-label">Mayor Accuracy</div>
+                        <span class="metric-change metric-up">↑ Precisión estimaciones</span>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">89%</div>
+                        <div class="metric-label">Consenso en Planning</div>
+                        <span class="metric-change metric-up">↑ Acuerdos rápidos</span>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">34%</div>
+                        <div class="metric-label">Menos Re-estimación</div>
+                        <span class="metric-change metric-up">↓ Cambios posteriores</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-radius: 20px;" class="reveal">
+                <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.8rem;">Principio Fundamental</h3>
+                <div style="text-align: center; font-size: 1.2rem; line-height: 1.8;">
+                    <p style="margin-bottom: 1.5rem; color: var(--gray);">
+                        "La precisión de una estimación debe ser <strong>inversamente proporcional</strong> a la complejidad de la tarea"
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.2); border-radius: 10px;">
+                            <strong style="color: #10B981;">Tareas Simples</strong><br>
+                            <span style="color: var(--gray);">Alta precisión → 1, 2, 3</span>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(245, 158, 11, 0.2); border-radius: 10px;">
+                            <strong style="color: #F59E0B;">Tareas Complejas</strong><br>
+                            <span style="color: var(--gray);">Baja precisión → 13, 21, 34</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Story Points Reference Section -->
+    <section id="storypoints" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Referencia de Story Points</h2>
+                <p class="section-subtitle">Ejemplos prácticos para estimación con .NET y Angular (máximo 21 SP)</p>
+            </div>
+
+            <div class="grid grid-2 reveal">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">1-3 Story Points</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">1 SP - Trivial</h4>
+                            <p class="card-text">• Cambiar un texto en la UI<br>
+                            • Actualizar una constante<br>
+                            • Corregir un typo<br>
+                            • Cambiar color de botón</p>
+                        </div>
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">2 SP - Muy Simple</h4>
+                            <p class="card-text">• Validación required a campo<br>
+                            • Pipe simple en Angular<br>
+                            • Endpoint GET básico .NET<br>
+                            • Ocultar/mostrar elemento</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">3 SP - Simple</h4>
+                            <p class="card-text">• Formulario con 3-4 campos<br>
+                            • Paginación en tabla<br>
+                            • Agregar logging<br>
+                            • Componente loading spinner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">5-8 Story Points</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--warning); margin-bottom: 0.5rem;">5 SP - Mediano</h4>
+                            <p class="card-text">• CRUD completo entidad simple<br>
+                            • Autenticación JWT Angular<br>
+                            • Reporte con filtros básicos<br>
+                            • Validaciones complejas</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">8 SP - Complejo</h4>
+                            <p class="card-text">• Upload archivos con preview<br>
+                            • Dashboard con gráficos<br>
+                            • Integración API externa<br>
+                            • Notificaciones tiempo real</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-2 reveal">
+                <div class="card">
+                    <div class="card-icon">🔥</div>
+                    <h3 class="card-title">13 Story Points</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Tareas Muy Complejas</h4>
+                            <p class="card-text">• Migrar módulo Angular 15 → 17<br>
+                            • Sistema permisos granular<br>
+                            • Wizard multi-paso complejo<br>
+                            • Refactorizar BD arquitectura</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">21 Story Points</h3>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px;">
+                            <h4 style="color: #EF4444; margin-bottom: 0.5rem;">Épicas (Máximo Permitido)</h4>
+                            <p class="card-text">• Implementar i18n completa<br>
+                            • Sistema reportes dinámicos<br>
+                            • Migrar a Identity Server<br>
+                            • PWA con offline capabilities</p>
+                        </div>
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.2); border-radius: 10px; border-left: 3px solid #EF4444;">
+                            <p style="color: #EF4444; font-weight: 600; margin: 0;">
+                                ⚠️ Regla: Si una tarea requiere >21 SP, debe dividirse obligatoriamente
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-container reveal">
+                <div class="example-header">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Consejos para Estimación</h3>
+                </div>
+                <div class="grid grid-3">
+                    <div style="padding: 1.5rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h4 style="color: var(--primary); margin-bottom: 1rem;">🎲 Planning Poker</h4>
+                        <p>Cada miembro del equipo vota simultáneamente con cartas. Se discuten las diferencias hasta llegar a consenso.</p>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h4 style="color: var(--secondary); margin-bottom: 1rem;">📊 Referencia Relativa</h4>
+                        <p>Comparar con tareas similares completadas anteriormente. "Esta tarea es similar a X que era 5 SP".</p>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h4 style="color: var(--accent); margin-bottom: 1rem;">🔍 Factores a Considerar</h4>
+                        <p>Complejidad técnica, incertidumbre, esfuerzo requerido, y riesgos potenciales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section id="metricas" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Métricas y KPIs en SCRUM</h2>
+                <p class="section-subtitle">Cómo medimos el éxito y el progreso del equipo</p>
+            </div>
+
+            <div class="grid grid-3 reveal">
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3 class="card-title">Story Points</h3>
+                    <p class="card-text">
+                        <strong>Definición:</strong> Medida relativa del esfuerzo, complejidad y riesgo.<br><br>
+                        <strong>Escala Fibonacci:</strong> 1, 2, 3, 5, 8, 13, 21, 34<br><br>
+                        <strong>Planning Poker:</strong> Técnica de estimación colaborativa donde cada miembro vota.<br><br>
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h3 class="card-title">Business Value</h3>
+                    <p class="card-text">
+                        <strong>Definición:</strong> Valor que aporta al negocio o cliente.<br><br>
+                        <strong>Escala:</strong> 1-100 o Fibonacci<br><br>
+                        <strong>Cálculo WSJF:</strong> (Valor + Urgencia + Reducción de Riesgo) / Esfuerzo
+                        <br>
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">Velocity</h3>
+                    <p class="card-text">
+                        <strong>Definición:</strong> Story Points completados por Sprint.<br><br>
+                        <strong>Cálculo:</strong> Promedio de últimos 3-5 sprints<br><br>
+                        <strong>Uso:</strong> Predicción de capacidad futura<br><br>
+                        <strong>Ejemplo:</strong> Velocity = 45 SP/Sprint → Podemos planificar ~45 SP para próximo sprint
+                    </p>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="grid grid-2 reveal">
+                <div class="chart-container">
+                    <h3 class="chart-title">Burndown Chart</h3>
+                    <canvas id="burndownChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Velocity Trend</h3>
+                    <canvas id="velocityChart"></canvas>
+                </div>
+            </div>
+
+            <div class="metrics-dashboard reveal">
+                <h3 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;">Dashboard del Sprint Actual</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">42</div>
+                        <div class="metric-label">Story Points Comprometidos</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">28</div>
+                        <div class="metric-label">Story Points Completados</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">5</div>
+                        <div class="metric-label">Días Restantes</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">85%</div>
+                        <div class="metric-label">Probabilidad de Éxito</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">2.3</div>
+                        <div class="metric-label">Bugs por Story</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">4.5★</div>
+                        <div class="metric-label">Satisfacción del Equipo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Example Section -->
+    <section id="ejemplo" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Ejemplo Práctico: E-commerce con .NET y Angular</h2>
+                <p class="section-subtitle">Aplicación real de SCRUM en un proyecto de desarrollo</p>
+            </div>
+
+            <div class="example-container reveal">
+                <div class="example-header">
+                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Proyecto: Tienda Online de Tecnología</h3>
+                    <p style="color: var(--gray);">Stack: .NET Core 8 API + Angular 17 + SQL Server + Redis</p>
+                </div>
+
+                <div class="example-tabs">
+                    <button class="tab-button active" data-tab="sprint1">Sprint 1</button>
+                    <button class="tab-button" data-tab="sprint2">Sprint 2</button>
+                    <button class="tab-button" data-tab="code">Código Ejemplo</button>
+                    <button class="tab-button" data-tab="metrics">Métricas</button>
+                </div>
+
+                <div class="tab-content active" id="sprint1">
+                    <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Sprint 1: Fundación del Proyecto</h4>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">Sprint Planning (4 horas)</div>
+                                <div class="timeline-title">Objetivo: Setup inicial y CRUD de productos</div>
+                                <p>• Configurar arquitectura Clean Architecture<br>
+                                • Implementar autenticación JWT<br>
+                                • CRUD completo de productos<br>
+                                • CI/CD pipeline en Azure DevOps</p>
+                                <p style="margin-top: 1rem;"><strong>Commitment:</strong> 42 Story Points</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">Semana 1</div>
+                                <div class="timeline-title">Backend Foundation</div>
+                                <p>• Entity Framework Core setup<br>
+                                • Repository Pattern implementation<br>
+                                • JWT Authentication<br>
+                                • Unit Tests con xUnit</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">Semana 2</div>
+                                <div class="timeline-title">Frontend & Integration</div>
+                                <p>• Angular project structure<br>
+                                • Reactive Forms para productos<br>
+                                • Guards y Interceptors<br>
+                                • Integration testing</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">Sprint Review & Retro</div>
+                                <div class="timeline-title">Resultados</div>
+                                <p>✅ 38/42 Story Points completados<br>
+                                📈 Velocity establecida: 38 SP<br>
+                                🎯 4 items movidos al siguiente sprint<br>
+                                💡 Mejora identificada: Mejor estimación de tasks de DevOps</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="sprint2">
+                    <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Sprint 2: Carrito y Checkout</h4>
+                    <div style="background: rgba(30, 41, 59, 0.5); border-radius: 15px; padding: 2rem;">
+                        <h5 style="color: var(--primary); margin-bottom: 1rem;">Sprint Goal</h5>
+                        <p>Implementar el flujo completo de compra desde añadir al carrito hasta el checkout.</p>
+                        
+                        <h5 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">User Stories Seleccionadas</h5>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                                <strong>US-101:</strong> Como cliente, quiero añadir productos al carrito (8 SP)
+                            </li>
+                            <li style="margin-bottom: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                                <strong>US-102:</strong> Como cliente, quiero modificar cantidades en el carrito (5 SP)
+                            </li>
+                            <li style="margin-bottom: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                                <strong>US-103:</strong> Como cliente, quiero proceder al checkout (13 SP)
+                            </li>
+                            <li style="margin-bottom: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                                <strong>US-104:</strong> Como cliente, quiero recibir confirmación por email (8 SP)
+                            </li>
+                        </ul>
+
+                        <h5 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Tasks Técnicas</h5>
+                        <p>• Implementar Redis para cache de carrito<br>
+                        • Crear servicio de Email con SendGrid<br>
+                        • Implementar patrón Mediator con MediatR<br>
+                        • Añadir Stripe payment integration<br>
+                        • E2E tests con Cypress</p>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="code">
+                    <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Ejemplos de Código</h4>
+                    
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">.NET Core - Product Controller</h5>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">using</span> Microsoft.AspNetCore.Mvc;
+<span class="keyword">using</span> MediatR;
+
+[ApiController]
+[Route(<span class="string">"api/[controller]"</span>)]
+<span class="keyword">public class</span> <span class="function">ProductsController</span> : ControllerBase
+{
+    <span class="keyword">private readonly</span> IMediator _mediator;
+    
+    <span class="keyword">public</span> <span class="function">ProductsController</span>(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+    
+    [HttpPost]
+    <span class="keyword">public async</span> Task&lt;ActionResult&lt;ProductDto&gt;&gt; <span class="function">CreateProduct</span>(
+        CreateProductCommand command)
+    {
+        <span class="comment">// Story Points: 5</span>
+        <span class="comment">// Business Value: Alto - Funcionalidad core</span>
+        <span class="keyword">var</span> result = <span class="keyword">await</span> _mediator.Send(command);
+        <span class="keyword">return</span> CreatedAtAction(nameof(GetProduct), 
+            <span class="keyword">new</span> { id = result.Id }, result);
+    }
+    
+    [HttpGet(<span class="string">"{id}"</span>)]
+    <span class="keyword">public async</span> Task&lt;ActionResult&lt;ProductDto&gt;&gt; <span class="function">GetProduct</span>(<span class="keyword">int</span> id)
+    {
+        <span class="keyword">var</span> query = <span class="keyword">new</span> GetProductQuery { Id = id };
+        <span class="keyword">var</span> result = <span class="keyword">await</span> _mediator.Send(query);
+        <span class="keyword">return</span> result != <span class="keyword">null</span> ? Ok(result) : NotFound();
+    }
+}</code></pre>
+                    </div>
+
+                    <h5 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Angular - Product Service</h5>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> { Injectable } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
+<span class="keyword">import</span> { HttpClient } <span class="keyword">from</span> <span class="string">'@angular/common/http'</span>;
+<span class="keyword">import</span> { Observable } <span class="keyword">from</span> <span class="string">'rxjs'</span>;
+
+@Injectable({
+  providedIn: <span class="string">'root'</span>
+})
+<span class="keyword">export class</span> <span class="function">ProductService</span> {
+  <span class="keyword">private</span> apiUrl = <span class="string">'https://api.example.com/api/products'</span>;
+  
+  <span class="function">constructor</span>(<span class="keyword">private</span> http: HttpClient) {}
+  
+  <span class="comment">// User Story: Listar productos</span>
+  <span class="comment">// Story Points: 3</span>
+  <span class="function">getProducts</span>(): Observable&lt;Product[]&gt; {
+    <span class="keyword">return this</span>.http.get&lt;Product[]&gt;(<span class="keyword">this</span>.apiUrl);
+  }
+  
+  <span class="comment">// User Story: Crear producto</span>
+  <span class="comment">// Story Points: 5</span>
+  <span class="function">createProduct</span>(product: Product): Observable&lt;Product&gt; {
+    <span class="keyword">return this</span>.http.post&lt;Product&gt;(<span class="keyword">this</span>.apiUrl, product);
+  }
+  
+  <span class="comment">// Task: Implementar cache con RxJS</span>
+  <span class="comment">// Esfuerzo: 2 horas</span>
+  <span class="keyword">private</span> cache$ = <span class="keyword">new</span> BehaviorSubject&lt;Product[]&gt;([]);
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="metrics">
+                    <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Métricas del Proyecto</h4>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">156</div>
+                            <div class="metric-label">Total Story Points</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">4</div>
+                            <div class="metric-label">Sprints Completados</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">39</div>
+                            <div class="metric-label">Velocity Promedio</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">94%</div>
+                            <div class="metric-label">Código Cubierto</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h5 style="color: var(--primary); margin-bottom: 1rem;">Fórmulas de Cálculo</h5>
+                        <p><strong>ROI del Sprint:</strong> (Valor Entregado - Costo) / Costo × 100</p>
+                        <p><strong>Eficiencia:</strong> Story Points Completados / Story Points Comprometidos</p>
+                        <p><strong>Lead Time:</strong> Tiempo desde que se crea hasta que se completa</p>
+                        <p><strong>Cycle Time:</strong> Tiempo desde que se empieza hasta que se completa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="herramientas" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Herramientas para SCRUM</h2>
+                <p class="section-subtitle">Las mejores herramientas para gestionar proyectos ágiles</p>
+            </div>
+
+            <div class="grid grid-3 reveal">
+                <div class="card">
+                    <div class="card-icon">🔷</div>
+                    <h3 class="card-title">Azure DevOps</h3>
+                    <p class="card-text">
+                        <strong>Ideal para:</strong> Equipos .NET<br><br>
+                        ✅ Boards nativos de Scrum<br>
+                        ✅ Integración con Visual Studio<br>
+                        ✅ Pipelines CI/CD incluidos<br>
+                        ✅ Test Plans integrados<br>
+                        ✅ Wiki y documentación<br><br>
+                        <strong>Precio:</strong> Gratis hasta 5 usuarios
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Jira</h3>
+                    <p class="card-text">
+                        <strong>Ideal para:</strong> Equipos grandes<br><br>
+                        ✅ Personalización extrema<br>
+                        ✅ Reportes avanzados<br>
+                        ✅ Marketplace extenso<br>
+                        ✅ Automation rules<br>
+                        ✅ Roadmaps y Portfolio<br><br>
+                        <strong>Precio:</strong> Desde $7.75/usuario/mes
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📋</div>
+                    <h3 class="card-title">Notion</h3>
+                    <p class="card-text">
+                        <strong>Ideal para:</strong> Equipos pequeños<br><br>
+                        ✅ All-in-one workspace<br>
+                        ✅ Documentación integrada<br>
+                        ✅ Templates personalizables<br>
+                        ✅ Bases de datos flexibles<br>
+                        ✅ Colaboración en tiempo real<br><br>
+                        <strong>Precio:</strong> Gratis para uso personal
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#intro" class="footer-link">Introducción</a>
+                <a href="#framework" class="footer-link">Framework</a>
+                <a href="#workitems" class="footer-link">Work Items</a>
+                <a href="#fibonacci" class="footer-link">Fibonacci</a>
+                <a href="#storypoints" class="footer-link">Story Points</a>
+                <a href="#metricas" class="footer-link">Métricas</a>
+                <a href="#ejemplo" class="footer-link">Ejemplo</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 SCRUM Pro - Guía completa para equipos ágiles</p>
+                <p style="margin-top: 0.5rem; opacity: 0.6;">Optimizado para equipos .NET Core y Angular</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Reveal animations
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Tab functionality
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and contents
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+            });
+        });
+
+        // Animate metrics
+        const animateValue = (element, start, end, duration) => {
+            const startTime = performance.now();
+            const endTime = startTime + duration;
+            
+            const step = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                const current = start + (end - start) * progress;
+                
+                if (element.textContent.includes('%')) {
+                    element.textContent = Math.floor(current) + '%';
+                } else if (element.textContent.includes('★')) {
+                    element.textContent = (current / 10).toFixed(1) + '★';
+                } else if (element.textContent.includes('.')) {
+                    element.textContent = current.toFixed(1);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+                
+                if (currentTime < endTime) {
+                    requestAnimationFrame(step);
+                }
+            };
+            
+            requestAnimationFrame(step);
+        };
+
+        // Observe and animate metrics
+        const metricObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                    entry.target.classList.add('animated');
+                    const text = entry.target.textContent;
+                    let end = 0;
+                    
+                    if (text.includes('%')) {
+                        end = parseInt(text);
+                    } else if (text.includes('★')) {
+                        end = parseFloat(text) * 10;
+                    } else if (text.includes('.')) {
+                        end = parseFloat(text);
+                    } else {
+                        end = parseInt(text);
+                    }
+                    
+                    animateValue(entry.target, 0, end, 1500);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.metric-value').forEach(el => {
+            metricObserver.observe(el);
+        });
+
+        // Simple Burndown Chart
+        const burndownCanvas = document.getElementById('burndownChart');
+        if (burndownCanvas) {
+            const ctx = burndownCanvas.getContext('2d');
+            const width = burndownCanvas.offsetWidth;
+            const height = burndownCanvas.offsetHeight;
+            
+            // Set canvas size
+            burndownCanvas.width = width;
+            burndownCanvas.height = height;
+            
+            // Draw axes
+            ctx.strokeStyle = '#64748B';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(40, 20);
+            ctx.lineTo(40, height - 40);
+            ctx.lineTo(width - 20, height - 40);
+            ctx.stroke();
+            
+            // Draw ideal line
+            ctx.strokeStyle = '#64748B';
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(40, 40);
+            ctx.lineTo(width - 40, height - 40);
+            ctx.stroke();
+            
+            // Draw actual line
+            ctx.strokeStyle = '#6366F1';
+            ctx.lineWidth = 3;
+            ctx.setLineDash([]);
+            ctx.beginPath();
+            ctx.moveTo(40, 40);
+            ctx.lineTo(100, 60);
+            ctx.lineTo(160, 90);
+            ctx.lineTo(220, 110);
+            ctx.lineTo(280, 140);
+            ctx.lineTo(340, 160);
+            ctx.stroke();
+            
+            // Add labels
+            ctx.fillStyle = '#E2E8F0';
+            ctx.font = '12px sans-serif';
+            ctx.fillText('Story Points', 10, 20);
+            ctx.fillText('Days', width - 40, height - 20);
+        }
+
+        // Simple Velocity Chart
+        const velocityCanvas = document.getElementById('velocityChart');
+        if (velocityCanvas) {
+            const ctx = velocityCanvas.getContext('2d');
+            const width = velocityCanvas.offsetWidth;
+            const height = velocityCanvas.offsetHeight;
+            
+            velocityCanvas.width = width;
+            velocityCanvas.height = height;
+            
+            // Sample data
+            const data = [38, 42, 45, 39, 44];
+            const barWidth = (width - 80) / data.length;
+            
+            // Draw bars
+            data.forEach((value, index) => {
+                const barHeight = (value / 50) * (height - 60);
+                const x = 40 + index * barWidth + barWidth * 0.2;
+                const y = height - 40 - barHeight;
+                
+                // Gradient fill
+                const gradient = ctx.createLinearGradient(0, y, 0, height - 40);
+                gradient.addColorStop(0, '#6366F1');
+                gradient.addColorStop(1, '#764ba2');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, y, barWidth * 0.6, barHeight);
+                
+                // Value label
+                ctx.fillStyle = '#E2E8F0';
+                ctx.font = '12px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(value, x + barWidth * 0.3, y - 5);
+                
+                // Sprint label
+                ctx.fillText(`Sprint ${index + 1}`, x + barWidth * 0.3, height - 25);
+            });
+            
+            // Draw average line
+            const avg = data.reduce((a, b) => a + b, 0) / data.length;
+            const avgY = height - 40 - (avg / 50) * (height - 60);
+            
+            ctx.strokeStyle = '#10B981';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(40, avgY);
+            ctx.lineTo(width - 40, avgY);
+            ctx.stroke();
+            
+            ctx.fillStyle = '#10B981';
+            ctx.font = '11px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(`Avg: ${avg.toFixed(1)}`, width - 80, avgY - 5);
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                const navMenu = document.querySelector('.nav-menu');
+                navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+
+    </script>
+</body>
+</html>
