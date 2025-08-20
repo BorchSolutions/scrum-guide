@@ -16,7 +16,7 @@ Una guía completa e interactiva de SCRUM con enfoque especial en estimación Fi
 ## 📋 Contenido
 
 ### 1. **SCRUM Foundations**
-- Roles del equipo (Product Owner, Scrum Master, Development Team)
+- Roles del equipo (Product Owner, Scrum Master, Developers)
 - Eventos principales (Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospective)
 - Sprint Board interactivo
 - Beneficios comprobados con métricas

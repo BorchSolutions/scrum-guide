@@ -15,7 +15,7 @@
                 <h4 style="color: var(--primary); margin-bottom: 1rem;">📋 Marco Conceptual SCRUM</h4>
                 <p style="color: var(--gray); margin-bottom: 1rem;">
                     En <strong>SCRUM puro</strong>, la jerarquía oficial es: <strong>Epic → Feature → Product Backlog Item (User Story)</strong>. 
-                    Los "Tasks" son descomposiciones técnicas internas del Development Team durante el Sprint, no work items del Product Backlog.
+                    Los "Tasks" son descomposiciones técnicas internas del Developers durante el Sprint, no work items del Product Backlog.
                 </p>
                 <p style="color: var(--light); font-size: 0.9rem; margin: 0;">
                     <strong>Nota:</strong> En herramientas como Azure DevOps o Jira, las "Tasks" aparecen como work items para fines de tracking, 
@@ -76,7 +76,7 @@
                             <strong>Story Points:</strong> 8 puntos<br>
                             <strong>Sprint:</strong> Completable en 1 sprint<br>
                             <strong>Valor:</strong> Independiente y entregable<br>
-                            <strong>Owner:</strong> Product Owner (prioriza), Development Team (estima y desarrolla)
+                            <strong>Owner:</strong> Product Owner (prioriza), Developers (estima y desarrolla)
                         </div>
                         
                         <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
@@ -99,12 +99,12 @@
                     <div class="hierarchy-content">
                         <h3 class="hierarchy-title" style="color: var(--gray);">Task (Descomposición Técnica)</h3>
                         <p class="hierarchy-description" style="color: var(--gray);">
-                            <strong>Actividad técnica específica</strong> que el Development Team define durante Sprint Planning para completar una User Story. No es un work item del Product Backlog, sino una descomposición interna del equipo.
+                            <strong>Actividad técnica específica</strong> que el Developers define durante Sprint Planning para completar una User Story. No es un work item del Product Backlog, sino una descomposición interna del equipo.
                         </p>
                         <div class="hierarchy-example" style="background: rgba(100, 116, 139, 0.1);">
                             <strong>Ejemplo:</strong> "Implementar API endpoint POST /cart/items"<br>
                             <strong>Estimación:</strong> 4-6 horas (no Story Points)<br>
-                            <strong>Owner:</strong> Development Team member específico<br>
+                            <strong>Owner:</strong> Developers member específico<br>
                             <strong>Propósito:</strong> Descomponer User Story en trabajo realizable<br>
                             <strong>Visibilidad:</strong> Taskboard del Sprint (interno del equipo)
                         </div>
@@ -112,7 +112,7 @@
                         <div style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px; border-left: 3px solid #EF4444;">
                             <p style="color: #EF4444; font-weight: 600; margin: 0; font-size: 0.9rem;">
                                 ⚠️ <strong>Importante:</strong> Las Tasks NO se estiman en Story Points ni son priorizadas por el Product Owner. 
-                                Son herramientas de auto-organización del Development Team.
+                                Son herramientas de auto-organización del Developers.
                             </p>
                         </div>
                     </div>
@@ -146,6 +146,7 @@
                 <button class="tab-button active" data-tab="scrum-puro">SCRUM Puro</button>
                 <button class="tab-button" data-tab="azure-devops">Azure DevOps</button>
                 <button class="tab-button" data-tab="jira">Jira Software</button>
+                <button class="tab-button" data-tab="frameworks-escalados">Frameworks Escalados</button>
             </div>
 
             <div class="tab-content active" id="scrum-puro">
@@ -174,7 +175,7 @@
                     
                     <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
                         <p style="color: var(--light); margin: 0;">
-                            <strong>Principio clave:</strong> El Development Team se auto-organiza para completar PBIs. 
+                            <strong>Principio clave:</strong> El Developers se auto-organiza para completar PBIs. 
                             La descomposición en tasks es opcional y siempre interna al equipo.
                         </p>
                     </div>
@@ -236,9 +237,68 @@
                             <li style="margin-bottom: 0.8rem;">✅ Sub-tasks solo para tracking interno</li>
                             <li style="margin-bottom: 0.8rem;">✅ Product Owner prioriza Stories, no Sub-tasks</li>
                             <li style="margin-bottom: 0.8rem;">✅ Story Points solo en Stories</li>
-                            <li>✅ Mantener autonomía del Development Team</li>
+                            <li>✅ Mantener autonomía del Developers</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="frameworks-escalados">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">🏗️ Scrum vs Frameworks Escalados</h4>
+                
+                <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid var(--primary);">
+                    <h5 style="color: var(--primary); margin-bottom: 1rem;">📖 Marco Conceptual</h5>
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <strong>Scrum</strong> está diseñado para un solo equipo (3-9 Developers). Para organizaciones grandes 
+                        con múltiples equipos, existen frameworks que <em>extienden</em> Scrum, no lo reemplazan.
+                    </p>
+                    <p style="color: var(--light); font-size: 0.9rem; margin: 0;">
+                        <strong>Importante:</strong> Estos frameworks agregan ceremonias, roles y artefactos adicionales 
+                        al Scrum básico, manteniendo sus principios fundamentales.
+                    </p>
+                </div>
+                
+                <div class="grid grid-3">
+                    <div style="padding: 1.5rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h6 style="color: var(--accent); margin-bottom: 1rem;">🎯 SAFe (Scaled Agile)</h6>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.5rem;">• Program Increment (PI) Planning</li>
+                            <li style="margin-bottom: 0.5rem;">• Agile Release Train (ART)</li>
+                            <li style="margin-bottom: 0.5rem;">• WSJF prioritization</li>
+                            <li style="margin-bottom: 0.5rem;">• Portfolio/Solution levels</li>
+                            <li>• <strong>Uso:</strong> Enterprises 50+ equipos</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="padding: 1.5rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h6 style="color: var(--secondary); margin-bottom: 1rem;">🔗 LeSS (Large-Scale Scrum)</h6>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.5rem;">• Un Product Owner para todos</li>
+                            <li style="margin-bottom: 0.5rem;">• Overall Retrospective</li>
+                            <li style="margin-bottom: 0.5rem;">• Sprint Planning One/Two</li>
+                            <li style="margin-bottom: 0.5rem;">• Coordinate & Integrate</li>
+                            <li>• <strong>Uso:</strong> 2-8 equipos</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="padding: 1.5rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                        <h6 style="color: var(--warning); margin-bottom: 1rem;">⚡ Nexus</h6>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.5rem;">• Nexus Integration Team</li>
+                            <li style="margin-bottom: 0.5rem;">• Nexus Sprint Planning</li>
+                            <li style="margin-bottom: 0.5rem;">• Nexus Daily Scrum</li>
+                            <li style="margin-bottom: 0.5rem;">• Integrated Increment</li>
+                            <li>• <strong>Uso:</strong> 3-9 equipos</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px; border-left: 3px solid #EF4444;">
+                    <h6 style="color: #EF4444; margin-bottom: 1rem;">⚠️ Consideración Importante</h6>
+                    <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">
+                        Antes de implementar frameworks escalados, asegúrate de que el Scrum básico funcione bien en cada equipo. 
+                        Los problemas de un equipo individual se amplifican exponencialmente al escalar.
+                    </p>
                 </div>
             </div>
         </div>
@@ -396,7 +456,7 @@
         <h5 style="color: var(--primary); margin-bottom: 1rem;">📖 Conceptos en el Código</h5>
         <p style="color: var(--gray); margin: 0;">
             Los comentarios en el código distinguen entre <strong>User Stories</strong> (estimadas en Story Points) 
-            y <strong>Tasks técnicas</strong> (estimadas en horas). Tasks son descomposición interna del Development Team.
+            y <strong>Tasks técnicas</strong> (estimadas en horas). Tasks son descomposición interna del Developers.
         </p>
     </div>
 
@@ -406,7 +466,7 @@
             <div class="code-block">
                 <pre><code><span class="comment">// 📝 USER STORY: "Como admin, quiero gestionar productos para mantener el catálogo actualizado"</span>
 <span class="comment">// 🎯 Story Points: 8 SP (complejidad media-alta)</span>
-<span class="comment">// 👥 Estimado por: Development Team en Planning Poker</span>
+<span class="comment">// 👥 Estimado por: Developers en Planning Poker</span>
 
 [ApiController]
 [Route("api/[controller]")]
@@ -456,7 +516,7 @@
             <div class="code-block">
                 <pre><code><span class="comment">// 📝 USER STORY: "Como cliente, quiero ver productos con filtros para encontrar lo que busco"</span>
 <span class="comment">// 🎯 Story Points: 5 SP (complejidad media)</span>
-<span class="comment">// 👥 Estimado por: Development Team en Planning Poker</span>
+<span class="comment">// 👥 Estimado por: Developers en Planning Poker</span>
 
 <span class="keyword">import</span> { Component, OnInit } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
 <span class="keyword">import</span> { ProductService } <span class="keyword">from</span> <span class="string">'../services/product.service'</span>;
@@ -529,7 +589,7 @@
                 <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
                     <li style="margin-bottom: 0.8rem;">• <strong>Qué:</strong> Funcionalidad completa de valor</li>
                     <li style="margin-bottom: 0.8rem;">• <strong>Estimación:</strong> Story Points (tamaño relativo)</li>
-                    <li style="margin-bottom: 0.8rem;">• <strong>Quién estima:</strong> Development Team completo</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Quién estima:</strong> Developers completo</li>
                     <li style="margin-bottom: 0.8rem;">• <strong>Cuándo:</strong> Sprint Planning / Backlog Refinement</li>
                     <li style="margin-bottom: 0.8rem;">• <strong>Prioriza:</strong> Product Owner</li>
                     <li>• <strong>Ejemplo:</strong> "Gestionar productos" = 8 SP</li>
@@ -543,7 +603,7 @@
                     <li style="margin-bottom: 0.8rem;">• <strong>Estimación:</strong> Horas (tiempo estimado)</li>
                     <li style="margin-bottom: 0.8rem;">• <strong>Quién estima:</strong> Developer individual</li>
                     <li style="margin-bottom: 0.8rem;">• <strong>Cuándo:</strong> Durante Sprint Planning (Parte 2)</li>
-                    <li style="margin-bottom: 0.8rem;">• <strong>Prioriza:</strong> Development Team (auto-organización)</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Prioriza:</strong> Developers (auto-organización)</li>
                     <li>• <strong>Ejemplo:</strong> "Implementar endpoint POST" = 4h</li>
                 </ul>
             </div>

@@ -14,7 +14,7 @@
                 <p class="card-text">
                     <strong>Definición:</strong> Medida relativa del <em>tamaño</em> de una User Story basada en complejidad, incertidumbre y esfuerzo.<br><br>
                     <strong>Escala Fibonacci:</strong> 1, 2, 3, 5, 8, 13, 21<br><br>
-                    <strong>Planning Poker:</strong> Técnica de estimación colaborativa donde cada miembro del Development Team vota.<br><br>
+                    <strong>Planning Poker:</strong> Técnica de estimación colaborativa donde cada miembro del Developers vota.<br><br>
                     <strong>Clave:</strong> Relatividad, no medida absoluta de tiempo
                 </p>
                 
@@ -50,17 +50,38 @@
                 <div class="card-icon">🚀</div>
                 <h3 class="card-title">Velocity</h3>
                 <p class="card-text">
-                    <strong>Definición:</strong> Story Points completados ("Done") por Sprint por un equipo específico.<br><br>
-                    <strong>Cálculo:</strong> Análisis de tendencias de 3-6 sprints recientes considerando contexto<br><br>
-                    <strong>Uso:</strong> Predicción de capacidad y planificación de Sprint<br><br>
-                    <strong>Contexto:</strong> Única por equipo, no comparable entre equipos
+                    <strong>Definición:</strong> Cantidad de Story Points completados por el equipo en un Sprint.<br><br>
+                    <strong>Uso correcto:</strong> Herramienta de planificación interna del equipo<br><br>
+                    <strong>Cálculo:</strong> Suma de SP de User Stories "Done" al final del Sprint
                 </p>
                 
-                <!-- 🔧 ACLARACIÓN SOBRE VELOCITY -->
-                <div style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px; border-left: 3px solid var(--accent);">
+                <!-- 🔧 ACLARACIÓN CONCEPTUAL CRÍTICA -->
+                <div style="margin-top: 1rem; padding: 1.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px; border-left: 3px solid #EF4444;">
+                    <h6 style="color: #EF4444; margin-bottom: 1rem;">⚠️ Velocity NO es:</h6>
+                    <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                        <li style="margin-bottom: 0.5rem;">❌ Métrica de productividad del equipo</li>
+                        <li style="margin-bottom: 0.5rem;">❌ Comparable entre equipos diferentes</li>
+                        <li style="margin-bottom: 0.5rem;">❌ Indicador de calidad del trabajo</li>
+                        <li style="margin-bottom: 0.5rem;">❌ Meta a maximizar constantemente</li>
+                        <li>❌ Herramienta de evaluación de performance</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px; border-left: 3px solid var(--accent);">
+                    <h6 style="color: var(--accent); margin-bottom: 1rem;">✅ Velocity SÍ es:</h6>
+                    <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                        <li style="margin-bottom: 0.5rem;">✅ Herramienta de planificación del Sprint</li>
+                        <li style="margin-bottom: 0.5rem;">✅ Indicador de capacidad histórica del equipo</li>
+                        <li style="margin-bottom: 0.5rem;">✅ Ayuda para forecasting de releases</li>
+                        <li style="margin-bottom: 0.5rem;">✅ Métrica interna para auto-organización</li>
+                        <li>✅ Base para inspect & adapt del proceso</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
                     <p style="color: var(--light); margin: 0; font-size: 0.9rem;">
-                        <strong>⚠️ Importante:</strong> Velocity no es una métrica de productividad. 
-                        No usar para comparar equipos o como KPI de performance individual.
+                        <strong>📊 Uso correcto:</strong> Analizar tendencias en 3-5 Sprints para entender la capacidad del equipo. 
+                        Una velocity estable indica madurez del equipo, no necesariamente mayor productividad.
                     </p>
                 </div>
             </div>
