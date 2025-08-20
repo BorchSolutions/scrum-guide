@@ -1,0 +1,272 @@
+/* 
+ * Animaciones CSS para reemplazar funcionalidad JavaScript perdida
+ * Agregar este archivo a assets/css/animations.css 
+ */
+
+/* Animación de contador para métricas */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Animación de entrada desde la izquierda */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animación de entrada desde abajo */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación de fade in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animación de scale in */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Aplicar animaciones automáticamente cuando elementos sean visibles */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animaciones para métricas cuando aparecen */
+.metric-value {
+    animation: countUp 1s ease forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.metric-value:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.metric-value:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.metric-value:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+/* Animaciones para elementos de timeline */
+.timeline-item {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInLeft 0.6s ease forwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+/* Hover effects para elementos interactivos */
+.timeline-item {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+    transform: translateX(10px);
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+/* Animaciones para cards */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+}
+
+/* Animaciones para tabs */
+.tab-button {
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary);
+}
+
+.tab-button.active {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.tab-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    display: none;
+}
+
+.tab-content.active {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+/* Animaciones para elementos de código */
+.code-block, pre {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInLeft 0.5s ease forwards;
+}
+
+/* Animaciones para botones */
+.btn, button, .hero-cta {
+    transition: all 0.3s ease;
+}
+
+.btn:hover, button:hover, .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Animaciones para nav links */
+.nav-link {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Animaciones para loading states */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Animación de pulsación para elementos destacados */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Animaciones para elementos de formulario */
+input[type="range"] {
+    transition: all 0.3s ease;
+}
+
+input[type="range"]:hover {
+    transform: scale(1.02);
+}
+
+/* Efectos de entrada para secciones completas */
+.content-section {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Animaciones responsivas - reducir en móviles */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: no-preference) {
+    .scroll-smooth {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Animaciones para estados de error */
+.error-shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Animaciones para success states */
+.success-bounce {
+    animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}

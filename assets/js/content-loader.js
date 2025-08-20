@@ -1,6 +1,6 @@
 /**
  * Content Loader - Sistema de carga dinámica de contenido
- * Maneja la carga de secciones, cache y navegación
+ * VERSIÓN SIMPLIFICADA - Sin re-ejecución de scripts problemática
  */
 
 class ContentLoader {
@@ -162,7 +162,7 @@ class ContentLoader {
     }
 
     /**
-     * Render section content
+     * 🔧 SIMPLIFICADO: Render section content sin procesar scripts
      */
     async renderSection(sectionId, content, config) {
         const mainContainer = document.getElementById('main-content');
@@ -173,165 +173,35 @@ class ContentLoader {
         // Clear current content
         mainContainer.innerHTML = '';
         
+        // 🔧 CLAVE: Remover todos los scripts ANTES de insertar el HTML
+        const cleanContent = this.removeScripts(content);
+        
         // Create section wrapper
         const sectionWrapper = document.createElement('section');
         sectionWrapper.id = sectionId;
         sectionWrapper.className = 'content-section';
-        sectionWrapper.innerHTML = content;
+        sectionWrapper.innerHTML = cleanContent;
         
         // Add section to DOM
         mainContainer.appendChild(sectionWrapper);
         
-        // Process any scripts in the content
-        this.processScripts(sectionWrapper);
-        
         // Trigger reveal animations
         this.triggerRevealAnimations(sectionWrapper);
+    }
+
+    /**
+     * 🔧 NUEVO: Remover scripts del HTML para evitar re-ejecución
+     */
+    removeScripts(htmlContent) {
+        // Crear un parser temporal para limpiar scripts
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = htmlContent;
         
-    }
-
-    /**
-     * Process scripts in loaded content
-     */
-    processScripts(container) {
-        const scripts = container.querySelectorAll('script');
-        scripts.forEach(script => {
-            const newScript = document.createElement('script');
-            
-            if (script.src) {
-                newScript.src = script.src;
-            } else {
-                newScript.textContent = script.textContent;
-            }
-            
-            // Replace old script with new one to execute it
-            script.parentNode.replaceChild(newScript, script);
-        });
-    }
-
-    /**
-     * Trigger reveal animations for elements
-     */
-    triggerRevealAnimations(container) {
-        const revealElements = container.querySelectorAll('.reveal');
+        // Remover todos los scripts
+        const scripts = tempDiv.querySelectorAll('script');
+        scripts.forEach(script => script.remove());
         
-        revealElements.forEach((element, index) => {
-            setTimeout(() => {
-                element.classList.add('active');
-            }, index * 100);
-        });
-    }
-
-    /**
-     * Initialize section-specific features
-     */
-    initializeSectionFeatures(sectionId) {
-        switch (sectionId) {
-            case 'estimacion-agil':
-                this.initializeEstimationFeatures();
-                break;
-            case 'medicion-metricas':
-                this.initializeMetricsFeatures();
-                break;
-            case 'aplicacion-practica':
-                this.initializePracticalFeatures();
-                break;
-        }
-    }
-
-    /**
-     * Initialize estimation features
-     */
-    initializeEstimationFeatures() {
-        // Initialize planning poker if present
-        const pokerContainer = document.querySelector('.planning-poker');
-        if (pokerContainer && window.PlanningPoker) {
-            new window.PlanningPoker(pokerContainer);
-        }
-
-        // Initialize calculators
-        const calculators = document.querySelectorAll('.calculator');
-        calculators.forEach(calc => {
-            if (window.Calculator) {
-                new window.Calculator(calc);
-            }
-        });
-    }
-
-    /**
-     * Initialize metrics features
-     */
-    initializeMetricsFeatures() {
-        // Initialize charts
-        const chartContainers = document.querySelectorAll('.chart-container');
-        chartContainers.forEach(container => {
-            if (window.ChartManager) {
-                window.ChartManager.initializeChart(container);
-            }
-        });
-
-        // Initialize metrics dashboard
-        if (window.MetricsDashboard) {
-            window.MetricsDashboard.init();
-        }
-    }
-
-    /**
-     * Initialize practical features
-     */
-    initializePracticalFeatures() {
-        // Initialize tab managers
-        const tabContainers = document.querySelectorAll('.example-tabs');
-        tabContainers.forEach(container => {
-            if (window.TabManager) {
-                new window.TabManager(container);
-            }
-        });
-
-        // Initialize code highlighters
-        if (window.hljs) {
-            window.hljs.highlightAll();
-        }
-    }
-
-    /**
-     * Update active navigation
-     */
-    updateActiveNavigation(activeLink) {
-        // Remove active from all nav links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-        });
-        
-        // Add active to current link
-        if (activeLink) {
-            activeLink.classList.add('active');
-        }
-    }
-
-    /**
-     * Update browser history
-     */
-    updateHistory(sectionId) {
-        const newUrl = `${window.location.pathname}#${sectionId}`;
-        window.history.pushState({ section: sectionId }, '', newUrl);
-    }
-
-    /**
-     * Scroll to section
-     */
-    scrollToSection(sectionId) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            const headerOffset = 80;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
+        return tempDiv.innerHTML;
     }
 
     /**
@@ -339,7 +209,7 @@ class ContentLoader {
      */
     showLoading() {
         if (this.loadingIndicator) {
-            this.loadingIndicator.style.display = 'block';
+            this.loadingIndicator.style.display = 'flex';
         }
     }
 
@@ -353,16 +223,197 @@ class ContentLoader {
     }
 
     /**
+     * Update active navigation state
+     */
+    updateActiveNavigation(activeLink) {
+        // Remove active class from all nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // Add active class to current link
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+
+    /**
+     * Update browser history
+     */
+    updateHistory(sectionId) {
+        const newUrl = `${window.location.pathname}#${sectionId}`;
+        history.pushState({ section: sectionId }, '', newUrl);
+    }
+
+    /**
+     * Scroll to section
+     */
+    scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start' 
+            });
+        } else {
+            // Scroll to top if section not found
+            window.scrollTo({ 
+                top: 0, 
+                behavior: 'smooth' 
+            });
+        }
+    }
+
+    /**
+     * Initialize section-specific features
+     */
+    initializeSectionFeatures(sectionId) {
+        // Initialize tabs if present
+        this.initializeTabs();
+        
+        // Initialize charts if present  
+        this.initializeCharts();
+
+        // Initialize any interactive elements
+        this.initializeInteractiveElements();
+
+        // Trigger section loaded event
+        document.dispatchEvent(new CustomEvent('sectionLoaded', {
+            detail: { sectionId, timestamp: Date.now() }
+        }));
+    }
+
+    /**
+     * 🔧 NUEVO: Inicializar tabs sin scripts
+     */
+    initializeTabs() {
+        const tabContainers = document.querySelectorAll('.example-tabs');
+        
+        tabContainers.forEach(container => {
+            const buttons = container.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and contents
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    contents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and target content
+                    button.classList.add('active');
+                    const targetContent = document.getElementById(targetTab);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+                });
+            });
+        });
+    }
+
+    /**
+     * 🔧 NUEVO: Inicializar charts básicos sin scripts complejos
+     */
+    initializeCharts() {
+        const chartContainers = document.querySelectorAll('.chart-container, .metrics-dashboard');
+        
+        chartContainers.forEach(container => {
+            // Agregar animación CSS básica a las métricas
+            const metrics = container.querySelectorAll('.metric-value');
+            metrics.forEach((metric, index) => {
+                setTimeout(() => {
+                    metric.style.animation = 'countUp 1s ease forwards';
+                }, index * 200);
+            });
+        });
+    }
+
+    /**
+     * 🔧 NUEVO: Inicializar elementos interactivos básicos
+     */
+    initializeInteractiveElements() {
+        // Manejar calculadoras WSJF si existen
+        const calculators = document.querySelectorAll('.wsjf-calculator');
+        calculators.forEach(calc => this.setupWSJFCalculator(calc));
+        
+        // Manejar sliders si existen
+        const sliders = document.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => this.setupSlider(slider));
+    }
+
+    /**
+     * 🔧 NUEVO: Setup WSJF Calculator
+     */
+    setupWSJFCalculator(calculator) {
+        const inputs = calculator.querySelectorAll('input[type="number"], input[type="range"]');
+        const resultElement = calculator.querySelector('.wsjf-result');
+        
+        if (!resultElement) return;
+        
+        const calculateWSJF = () => {
+            const values = Array.from(inputs).map(input => parseFloat(input.value) || 0);
+            if (values.length >= 4) {
+                const [businessValue, urgency, riskReduction, effort] = values;
+                const wsjf = effort > 0 ? ((businessValue + urgency + riskReduction) / effort).toFixed(2) : 0;
+                resultElement.textContent = wsjf;
+            }
+        };
+        
+        inputs.forEach(input => {
+            input.addEventListener('input', calculateWSJF);
+        });
+        
+        // Calcular inicial
+        calculateWSJF();
+    }
+
+    /**
+     * 🔧 NUEVO: Setup slider displays
+     */
+    setupSlider(slider) {
+        const updateDisplay = () => {
+            const value = slider.value;
+            const display = slider.nextElementSibling;
+            if (display && display.classList.contains('slider-display')) {
+                display.textContent = value;
+            }
+        };
+        
+        slider.addEventListener('input', updateDisplay);
+        updateDisplay(); // Initial update
+    }
+
+    /**
+     * Trigger reveal animations
+     */
+    triggerRevealAnimations(container) {
+        const reveals = container.querySelectorAll('.reveal');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(reveal => {
+            observer.observe(reveal);
+        });
+    }
+
+    /**
      * Show error message
      */
     showError(error) {
-        this.hideLoading();
-        
         const errorDiv = document.createElement('div');
         errorDiv.className = 'content-error';
         errorDiv.innerHTML = `
-            <div style="text-align: center; padding: 3rem; color: var(--gray);">
-                <h3>⚠️ Error al cargar contenido</h3>
+            <div style="text-align: center; padding: 4rem 2rem; color: var(--gray);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">❌</div>
+                <h3>Error al cargar contenido</h3>
                 <p>No se pudo cargar la sección solicitada.</p>
                 <p style="font-size: 0.9rem; color: #EF4444; margin-top: 1rem;">${error.message}</p>
                 <button onclick="location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--gradient-primary); color: white; border: none; border-radius: 5px; cursor: pointer;">
@@ -376,19 +427,6 @@ class ContentLoader {
             mainContainer.innerHTML = '';
             mainContainer.appendChild(errorDiv);
         }
-    }
-
-    /**
-     * Get section loading progress
-     */
-    getLoadingProgress() {
-        const totalSections = Object.keys(this.getSectionConfig()).length;
-        const cachedSections = this.cache.size;
-        return {
-            total: totalSections,
-            loaded: cachedSections,
-            percentage: Math.round((cachedSections / totalSections) * 100)
-        };
     }
 
     /**
@@ -408,10 +446,25 @@ class ContentLoader {
             loadingProgress: this.getLoadingProgress()
         };
     }
+
+    /**
+     * Get section loading progress
+     */
+    getLoadingProgress() {
+        const totalSections = Object.keys(this.getSectionConfig()).length;
+        const cachedSections = this.cache.size;
+        return {
+            total: totalSections,
+            loaded: cachedSections,
+            percentage: Math.round((cachedSections / totalSections) * 100)
+        };
+    }
 }
 
-// Global error handler function
-window.showError = function(message) {
+// Simplified error handler
+window.showError = function(message, details = null) {
+    console.error('Error:', message, details);
+    
     const errorDiv = document.createElement('div');
     errorDiv.style.cssText = `
         position: fixed;
@@ -423,17 +476,37 @@ window.showError = function(message) {
         border-radius: 8px;
         z-index: 10000;
         max-width: 300px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        cursor: pointer;
     `;
-    errorDiv.textContent = message;
+    errorDiv.innerHTML = `
+        <strong>Error:</strong> ${message}
+        ${details ? `<br><small style="opacity: 0.8">${details}</small>` : ''}
+        <br><small style="opacity: 0.6">Click para cerrar</small>
+    `;
     
     document.body.appendChild(errorDiv);
     
+    // Auto remove after 5 seconds
     setTimeout(() => {
-        errorDiv.remove();
+        if (errorDiv.parentNode) {
+            errorDiv.remove();
+        }
     }, 5000);
+    
+    // Click to dismiss
+    errorDiv.addEventListener('click', () => {
+        errorDiv.remove();
+    });
 };
 
-// Initialize content loader when DOM is ready
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    window.contentLoader = new ContentLoader();
+    try {
+        window.contentLoader = new ContentLoader();
+        console.log('✅ ContentLoader initialized successfully');
+    } catch (error) {
+        console.error('❌ Failed to initialize ContentLoader:', error);
+        window.showError('Error al inicializar el sistema de navegación', error.message);
+    }
 });
