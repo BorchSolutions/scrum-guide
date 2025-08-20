@@ -37,11 +37,12 @@
                     <strong>Uso:</strong> Priorización del Product Backlog por ROI
                 </p>
                 
-                <!-- 🔧 NOTA SOBRE WSJF -->
+                <!-- 🔧 NOTA SOBRE WSJF ACTUALIZADA -->
                 <div style="margin-top: 1rem; padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px; border-left: 3px solid var(--secondary);">
                     <p style="color: var(--light); margin: 0; font-size: 0.9rem;">
-                        <strong>📋 Extensión SAFe:</strong> WSJF (Weighted Shortest Job First) es una técnica de 
-                        <em>Scaled Agile Framework</em>, no parte del SCRUM oficial. Útil para priorización avanzada.
+                        <strong>📋 Técnica SAFe:</strong> WSJF (Weighted Shortest Job First) es una herramienta de 
+                        <em>Scaled Agile Framework</em>, <strong>no parte del SCRUM oficial</strong>. Útil para priorización 
+                        cuantitativa avanzada en organizaciones complejas.
                     </p>
                 </div>
             </div>
@@ -238,70 +239,146 @@
             </div>
         </div>
 
-        <!-- WSJF Calculator - Con aclaración de que es extensión SAFe -->
-        <div class="example-container reveal">
-            <div class="example-header">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Calculadora WSJF</h3>
-                <p style="color: var(--gray);">Weighted Shortest Job First - <strong>Técnica de SAFe para priorización avanzada</strong></p>
-                
-                <!-- 🔧 ACLARACIÓN SAFe -->
-                <div style="margin-top: 1rem; padding: 1rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px; border-left: 3px solid var(--secondary);">
-                    <p style="color: var(--light); margin: 0; font-size: 0.9rem;">
-                        <strong>📋 Contexto:</strong> WSJF es una técnica del <em>Scaled Agile Framework (SAFe)</em>, 
-                        no parte del marco SCRUM oficial. Es útil para equipos que necesitan priorización cuantitativa avanzada.
-                    </p>
+<!-- 🔧 ACLARACIÓN CONCEPTUAL IMPORTANTE -->
+<div style="padding: 2rem; background: rgba(236, 72, 153, 0.1); border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid var(--secondary);">
+    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📋 WSJF: Extensión SAFe, no SCRUM Oficial</h4>
+    <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.95rem;">
+        <strong>WSJF (Weighted Shortest Job First)</strong> es una técnica de priorización del 
+        <em>Scaled Agile Framework (SAFe)</em>, <strong>no parte del marco SCRUM oficial</strong>. 
+        Es especialmente útil para organizaciones que necesitan priorización cuantitativa avanzada.
+    </p>
+    <div class="grid grid-2" style="gap: 1.5rem;">
+        <div>
+            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">✅ Útil para:</h6>
+            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                <li style="margin-bottom: 0.4rem;">• Equipos con múltiples stakeholders</li>
+                <li style="margin-bottom: 0.4rem;">• Priorizaciones complejas basadas en datos</li>
+                <li style="margin-bottom: 0.4rem;">• Portfolio management escalado</li>
+                <li>• Decisiones de inversión cuantificadas</li>
+            </ul>
+        </div>
+        <div>
+            <h6 style="color: #EF4444; margin-bottom: 0.5rem;">⚠️ No requerido en SCRUM básico:</h6>
+            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                <li style="margin-bottom: 0.4rem;">• SCRUM solo requiere Product Backlog ordenado</li>
+                <li style="margin-bottom: 0.4rem;">• Product Owner decide priorización</li>
+                <li style="margin-bottom: 0.4rem;">• Business Value puede ser cualitativo</li>
+                <li>• Simplicidad sobre complejidad técnica</li>
+            </ul>
+        </div>
+    </div>
+    <p style="color: var(--light); margin: 1rem 0 0 0; font-size: 0.85rem; font-style: italic;">
+        💡 <strong>Recomendación:</strong> Usa WSJF como herramienta complementaria cuando el equipo 
+        ya domina SCRUM básico y necesita criterios de priorización más sofisticados.
+    </p>
+</div>
+
+<!-- WSJF Calculator - Versión Corregida -->
+<div style="background: rgba(30, 41, 59, 0.5); border-radius: 15px; padding: 2rem;">
+    <h4 style="color: var(--accent); margin-bottom: 2rem; text-align: center;">🎯 Calculadora WSJF Interactiva (Extensión SAFe)</h4>
+    
+ <!-- Inputs Section -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+        <div style="text-align: center;">
+            <label style="display: block; color: var(--accent); margin-bottom: 0.5rem; font-weight: bold;">💰 Business Value</label>
+            <input type="range" id="wsjf-businessValue" min="1" max="21" value="8" step="1" 
+                oninput="calculateWSJF()" onchange="calculateWSJF()"
+                style="width: 100%; margin-bottom: 0.5rem; height: 8px; border-radius: 5px; background: #ddd; outline: none;">
+            <div style="color: var(--primary); font-weight: bold; font-size: 1.2rem;" id="wsjf-businessValueDisplay">8</div>
+            <small style="color: var(--gray);">Valor para el negocio</small>
+        </div>
+        
+        <div style="text-align: center;">
+            <label style="display: block; color: var(--accent); margin-bottom: 0.5rem; font-weight: bold;">⏰ Urgencia</label>
+            <input type="range" id="wsjf-urgency" min="1" max="21" value="5" step="1"
+                oninput="calculateWSJF()" onchange="calculateWSJF()"
+                style="width: 100%; margin-bottom: 0.5rem; height: 8px; border-radius: 5px; background: #ddd; outline: none;">
+            <div style="color: var(--primary); font-weight: bold; font-size: 1.2rem;" id="wsjf-urgencyDisplay">5</div>
+            <small style="color: var(--gray);">Qué tan pronto se necesita</small>
+        </div>
+        
+        <div style="text-align: center;">
+            <label style="display: block; color: var(--accent); margin-bottom: 0.5rem; font-weight: bold;">🛡️ Reducción Riesgo</label>
+            <input type="range" id="wsjf-riskReduction" min="1" max="21" value="3" step="1"
+                oninput="calculateWSJF()" onchange="calculateWSJF()"
+                style="width: 100%; margin-bottom: 0.5rem; height: 8px; border-radius: 5px; background: #ddd; outline: none;">
+            <div style="color: var(--primary); font-weight: bold; font-size: 1.2rem;" id="wsjf-riskReductionDisplay">3</div>
+            <small style="color: var(--gray);">Mitigación de riesgos</small>
+        </div>
+        
+        <div style="text-align: center;">
+            <label style="display: block; color: var(--warning); margin-bottom: 0.5rem; font-weight: bold;">🎯 Esfuerzo (SP)</label>
+            <input type="range" id="wsjf-effort" min="1" max="21" value="8" step="1"
+                oninput="calculateWSJF()" onchange="calculateWSJF()"
+                style="width: 100%; margin-bottom: 0.5rem; height: 8px; border-radius: 5px; background: #ddd; outline: none;">
+            <div style="color: var(--warning); font-weight: bold; font-size: 1.2rem;" id="wsjf-effortDisplay">8</div>
+            <small style="color: var(--gray);">Story Points estimados</small>
+        </div>
+    </div>
+    
+    <!-- Results Section -->
+    <div style="background: rgba(99, 102, 241, 0.1); border-radius: 12px; padding: 2rem; text-align: center;">
+        <h5 style="color: var(--primary); margin-bottom: 1rem;">📊 Resultado WSJF</h5>
+        
+        <!-- WSJF Score -->
+        <div style="font-size: 3rem; font-weight: bold; color: var(--accent); margin-bottom: 1rem;" id="wsjf-result">2.0</div>
+        
+        <!-- Formula -->
+        <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 8px;">
+            <h6 style="color: var(--gray); margin-bottom: 0.5rem;">Fórmula:</h6>
+            <div style="font-family: monospace; color: var(--light);">
+                WSJF = (<span id="wsjf-formulaBV">8</span> + <span id="wsjf-formulaU">5</span> + <span id="wsjf-formulaRR">3</span>) / <span id="wsjf-formulaE">8</span> = <span id="wsjf-formulaResult">2.0</span>
+            </div>
+        </div>
+        
+        <!-- Interpretation -->
+        <div style="padding: 1rem; border-radius: 8px; margin-bottom: 1rem;" id="wsjf-interpretation-container">
+            <div style="font-size: 1.1rem; font-weight: bold;" id="wsjf-interpretation">📋 Prioridad MEDIA - Backlog prioritario</div>
+        </div>
+        
+        <!-- Visual Breakdown -->
+        <div style="text-align: left;">
+            <h6 style="color: var(--gray); margin-bottom: 1rem;">Desglose de componentes:</h6>
+            <div style="margin-bottom: 0.8rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                    <span style="color: var(--gray);">Business Value:</span>
+                    <span style="color: var(--primary); font-weight: bold;" id="wsjf-breakdownBV">8 (50%)</span>
+                </div>
+                <div style="background: rgba(100, 116, 139, 0.3); height: 8px; border-radius: 4px;">
+                    <div style="background: var(--primary); height: 100%; border-radius: 4px; transition: width 0.3s;" id="wsjf-barBV"></div>
                 </div>
             </div>
-
-            <div style="background: rgba(30, 41, 59, 0.5); border-radius: 15px; padding: 2rem;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
-                    <div style="text-align: center;">
-                        <label style="display: block; color: var(--accent); margin-bottom: 0.5rem;">💰 Business Value</label>
-                        <input type="range" id="businessValue" min="1" max="21" value="8" style="width: 100%; margin-bottom: 0.5rem;">
-                        <div style="color: var(--primary); font-weight: bold;" id="businessValueDisplay">8</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <label style="display: block; color: var(--accent); margin-bottom: 0.5rem;">⏰ Urgencia</label>
-                        <input type="range" id="urgency" min="1" max="21" value="5" style="width: 100%; margin-bottom: 0.5rem;">
-                        <div style="color: var(--primary); font-weight: bold;" id="urgencyDisplay">5</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <label style="display: block; color: var(--accent); margin-bottom: 0.5rem;">🛡️ Reducción Riesgo</label>
-                        <input type="range" id="riskReduction" min="1" max="21" value="3" style="width: 100%; margin-bottom: 0.5rem;">
-                        <div style="color: var(--primary); font-weight: bold;" id="riskReductionDisplay">3</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <label style="display: block; color: var(--warning); margin-bottom: 0.5rem;">🎯 Esfuerzo (SP)</label>
-                        <input type="range" id="effort" min="1" max="21" value="8" style="width: 100%; margin-bottom: 0.5rem;">
-                        <div style="color: var(--warning); font-weight: bold;" id="effortDisplay">8</div>
-                    </div>
+            
+            <div style="margin-bottom: 0.8rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                    <span style="color: var(--gray);">Urgencia:</span>
+                    <span style="color: var(--secondary); font-weight: bold;" id="wsjf-breakdownU">5 (31%)</span>
                 </div>
-                
-                <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px;">
-                    <h5 style="color: var(--primary); margin-bottom: 1rem;">🧮 Resultado WSJF</h5>
-                    
-                    <div style="text-align: center; padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 10px; margin-bottom: 1.5rem;">
-                        <div style="font-size: 3rem; font-weight: bold; color: var(--primary);" id="wsjfResult">2.0</div>
-                        <div style="color: var(--gray); margin-top: 0.5rem;">Score WSJF</div>
-                    </div>
-                    
-                    <div style="background: rgba(30, 41, 59, 0.3); padding: 1.5rem; border-radius: 10px;">
-                        <h6 style="color: var(--accent); margin-bottom: 1rem;">Fórmula:</h6>
-                        <p style="color: var(--gray); font-family: monospace; text-align: center;">
-                            WSJF = (<span id="formulaBV">8</span> + <span id="formulaU">5</span> + <span id="formulaRR">3</span>) / <span id="formulaE">8</span>
-                        </p>
-                        <p style="color: var(--gray); font-family: monospace; text-align: center; margin-top: 1rem;">
-                            WSJF = <span id="formulaSum">16</span> / <span id="formulaEffort">8</span> = <span id="formulaResult">2.0</span>
-                        </p>
-                    </div>
-                    
-                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
-                        <h6 style="color: var(--accent); margin-bottom: 0.5rem;">💡 Interpretación:</h6>
-                        <p style="color: var(--gray); margin: 0;" id="wsjfInterpretation">Prioridad media - Considerar para próximos sprints</p>
-                    </div>
+                <div style="background: rgba(100, 116, 139, 0.3); height: 8px; border-radius: 4px;">
+                    <div style="background: var(--secondary); height: 100%; border-radius: 4px; transition: width 0.3s;" id="wsjf-barU"></div>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 0.8rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                    <span style="color: var(--gray);">Reducción Riesgo:</span>
+                    <span style="color: var(--accent); font-weight: bold;" id="wsjf-breakdownRR">3 (19%)</span>
+                </div>
+                <div style="background: rgba(100, 116, 139, 0.3); height: 8px; border-radius: 4px;">
+                    <div style="background: var(--accent); height: 100%; border-radius: 4px; transition: width 0.3s;" id="wsjf-barRR"></div>
                 </div>
             </div>
         </div>
+    </div>
+    
+    <!-- Reset Button -->
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="resetWSJFCalculator()" 
+                style="background: var(--gradient-primary); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: bold;">
+            🔄 Reset Calculator
+        </button>
+    </div>
+</div>
 
         <!-- Charts -->
         <div class="grid grid-2 reveal">
@@ -322,63 +399,3 @@
         </div>
     </div>
 </section>
-
-<script>
-// WSJF Calculator
-function calculateWSJF() {
-    const businessValue = parseInt(document.getElementById('businessValue').value);
-    const urgency = parseInt(document.getElementById('urgency').value);
-    const riskReduction = parseInt(document.getElementById('riskReduction').value);
-    const effort = parseInt(document.getElementById('effort').value);
-    
-    // Update displays
-    document.getElementById('businessValueDisplay').textContent = businessValue;
-    document.getElementById('urgencyDisplay').textContent = urgency;
-    document.getElementById('riskReductionDisplay').textContent = riskReduction;
-    document.getElementById('effortDisplay').textContent = effort;
-    
-    // Calculate WSJF
-    const numerator = businessValue + urgency + riskReduction;
-    const wsjf = (numerator / effort);
-    
-    // Update formula displays
-    document.getElementById('formulaBV').textContent = businessValue;
-    document.getElementById('formulaU').textContent = urgency;
-    document.getElementById('formulaRR').textContent = riskReduction;
-    document.getElementById('formulaE').textContent = effort;
-    document.getElementById('formulaSum').textContent = numerator;
-    document.getElementById('formulaEffort').textContent = effort;
-    document.getElementById('formulaResult').textContent = wsjf.toFixed(1);
-    
-    // Update result
-    document.getElementById('wsjfResult').textContent = wsjf.toFixed(1);
-    
-    // Update interpretation
-    let interpretation = '';
-    if (wsjf >= 4) {
-        interpretation = '🔥 Prioridad MUY ALTA - Incluir en próximo sprint';
-    } else if (wsjf >= 2.5) {
-        interpretation = '⚡ Prioridad ALTA - Considerar para próximos 2 sprints';
-    } else if (wsjf >= 1.5) {
-        interpretation = '📋 Prioridad MEDIA - Backlog prioritario';
-    } else {
-        interpretation = '🔻 Prioridad BAJA - Reconsiderar necesidad';
-    }
-    
-    document.getElementById('wsjfInterpretation').textContent = interpretation;
-}
-
-// Initialize calculator
-document.addEventListener('DOMContentLoaded', function() {
-    // Add event listeners
-    const inputs = ['businessValue', 'urgency', 'riskReduction', 'effort'];
-    inputs.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.addEventListener('input', calculateWSJF);
-        }
-    });
-    
-    calculateWSJF();
-});
-</script>

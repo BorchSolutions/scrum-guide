@@ -152,6 +152,376 @@
             }
         }
 
+        function calculateWSJF() {
+    try {
+        // Obtener valores de los sliders
+        const businessValue = parseInt(document.getElementById('wsjf-businessValue').value);
+        const urgency = parseInt(document.getElementById('wsjf-urgency').value);
+        const riskReduction = parseInt(document.getElementById('wsjf-riskReduction').value);
+        const effort = parseInt(document.getElementById('wsjf-effort').value);
+        
+        // Validación
+        if (effort === 0) {
+            console.error('Effort cannot be zero');
+            return;
+        }
+        
+        // Actualizar displays de valores
+        document.getElementById('wsjf-businessValueDisplay').textContent = businessValue;
+        document.getElementById('wsjf-urgencyDisplay').textContent = urgency;
+        document.getElementById('wsjf-riskReductionDisplay').textContent = riskReduction;
+        document.getElementById('wsjf-effortDisplay').textContent = effort;
+        
+        // Calcular WSJF
+        const numerator = businessValue + urgency + riskReduction;
+        const wsjf = numerator / effort;
+        const roundedWSJF = Math.round(wsjf * 10) / 10; // Redondear a 1 decimal
+        
+        // Actualizar resultado principal
+        document.getElementById('wsjf-result').textContent = roundedWSJF;
+        
+        // Actualizar fórmula
+        document.getElementById('wsjf-formulaBV').textContent = businessValue;
+        document.getElementById('wsjf-formulaU').textContent = urgency;
+        document.getElementById('wsjf-formulaRR').textContent = riskReduction;
+        document.getElementById('wsjf-formulaE').textContent = effort;
+        document.getElementById('wsjf-formulaResult').textContent = roundedWSJF;
+        
+        // Actualizar interpretación y colores
+        updateWSJFInterpretation(roundedWSJF);
+        
+        // Actualizar breakdown visual
+        updateWSJFBreakdown(businessValue, urgency, riskReduction, numerator);
+        
+        console.log('WSJF calculated:', roundedWSJF);
+        
+    } catch (error) {
+        console.error('Error calculating WSJF:', error);
+    }
+}
+
+function updateWSJFInterpretation(wsjf) {
+    const interpretationElement = document.getElementById('wsjf-interpretation');
+    const containerElement = document.getElementById('wsjf-interpretation-container');
+    
+    let interpretation = '';
+    let bgColor = '';
+    
+    if (wsjf >= 4) {
+        interpretation = '🔥 Prioridad MUY ALTA - Incluir en próximo sprint';
+        bgColor = 'rgba(239, 68, 68, 0.2)'; // Red
+    } else if (wsjf >= 2.5) {
+        interpretation = '⚡ Prioridad ALTA - Considerar para próximos 2 sprints';
+        bgColor = 'rgba(245, 158, 11, 0.2)'; // Orange
+    } else if (wsjf >= 1.5) {
+        interpretation = '📋 Prioridad MEDIA - Backlog prioritario';
+        bgColor = 'rgba(99, 102, 241, 0.2)'; // Blue
+    } else {
+        interpretation = '🔻 Prioridad BAJA - Reconsiderar necesidad';
+        bgColor = 'rgba(100, 116, 139, 0.2)'; // Gray
+    }
+    
+    interpretationElement.textContent = interpretation;
+    containerElement.style.backgroundColor = bgColor;
+}
+
+function updateWSJFBreakdown(businessValue, urgency, riskReduction, total) {
+    // Calcular porcentajes
+    const bvPercent = Math.round((businessValue / total) * 100);
+    const urgencyPercent = Math.round((urgency / total) * 100);
+    const rrPercent = Math.round((riskReduction / total) * 100);
+    
+    // Actualizar textos
+    document.getElementById('wsjf-breakdownBV').textContent = `${businessValue} (${bvPercent}%)`;
+    document.getElementById('wsjf-breakdownU').textContent = `${urgency} (${urgencyPercent}%)`;
+    document.getElementById('wsjf-breakdownRR').textContent = `${riskReduction} (${rrPercent}%)`;
+    
+    // Actualizar barras visuales
+    document.getElementById('wsjf-barBV').style.width = `${bvPercent}%`;
+    document.getElementById('wsjf-barU').style.width = `${urgencyPercent}%`;
+    document.getElementById('wsjf-barRR').style.width = `${rrPercent}%`;
+}
+
+function resetWSJFCalculator() {
+    // Reset a valores por defecto
+    document.getElementById('wsjf-businessValue').value = 8;
+    document.getElementById('wsjf-urgency').value = 5;
+    document.getElementById('wsjf-riskReduction').value = 3;
+    document.getElementById('wsjf-effort').value = 8;
+    
+    // Recalcular
+    calculateWSJF();
+    
+    console.log('WSJF Calculator reset');
+}
+
+// Inicializar la calculadora cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Initializing WSJF Calculator...');
+    
+    // Agregar event listeners a todos los sliders
+    const sliders = ['wsjf-businessValue', 'wsjf-urgency', 'wsjf-riskReduction', 'wsjf-effort'];
+    
+    sliders.forEach(sliderId => {
+        const slider = document.getElementById(sliderId);
+        if (slider) {
+            slider.addEventListener('input', calculateWSJF);
+            slider.addEventListener('change', calculateWSJF);
+            console.log(`Event listener added to ${sliderId}`);
+        } else {
+            console.error(`Slider ${sliderId} not found`);
+        }
+    });
+    
+    // Cálculo inicial
+    calculateWSJF();
+    console.log('WSJF Calculator initialized successfully');
+});
+
+// Planning Poker Cards Functionality - VERSIÓN CORREGIDA CON VALIDACIONES
+let selectedCard = null;
+let teamVotes = [];
+let isRevealed = false;
+
+function selectPokerCard(cardElement) {
+    try {
+        // Validar que el elemento existe
+        if (!cardElement) {
+            console.warn('Card element not found');
+            return;
+        }
+
+        // Remove previous selection
+        document.querySelectorAll('.poker-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+        
+        // Add selection to clicked card
+        cardElement.classList.add('selected');
+        
+        // Store selected value
+        selectedCard = cardElement.getAttribute('data-value');
+        
+        // Update display
+        updateSelectedCardDisplay();
+        
+        // Add to team votes (simulate team voting)
+        addToTeamVotes(selectedCard);
+        
+        console.log('Selected card:', selectedCard);
+    } catch (error) {
+        console.error('Error selecting poker card:', error);
+    }
+}
+
+function updateSelectedCardDisplay() {
+    try {
+        const display = document.getElementById('selected-card-display');
+        
+        // Validar que el elemento existe
+        if (!display) {
+            console.warn('selected-card-display element not found');
+            return;
+        }
+
+        if (selectedCard) {
+            if (selectedCard === '☕') {
+                display.innerHTML = `<span style="font-size: 3rem;">☕</span>`;
+            } else if (selectedCard === '?') {
+                display.innerHTML = `<span style="font-size: 3rem; color: var(--warning);">?</span>`;
+            } else {
+                display.innerHTML = `<span style="font-size: 3rem; color: var(--primary);">${selectedCard}</span><span style="font-size: 1rem; color: var(--gray); margin-left: 0.5rem;">SP</span>`;
+            }
+        } else {
+            display.innerHTML = '<span style="color: var(--gray); font-size: 1rem;">Ninguna carta seleccionada</span>';
+        }
+    } catch (error) {
+        console.error('Error updating selected card display:', error);
+    }
+}
+
+function addToTeamVotes(vote) {
+    try {
+        // Simulate team member names
+        const teamMembers = ['Alex', 'Sarah', 'Mike', 'Lisa', 'David'];
+        const randomMember = teamMembers[Math.floor(Math.random() * teamMembers.length)];
+        
+        // Remove previous vote from same member
+        teamVotes = teamVotes.filter(v => v.member !== 'Tu voto');
+        
+        // Add current vote
+        teamVotes.push({
+            member: 'Tu voto',
+            vote: vote
+        });
+        
+        // Add some random team votes for demonstration
+        if (teamVotes.length < 4 && Math.random() > 0.6) {
+            const randomVotes = ['1', '2', '3', '5', '8', '13', '21', '?'];
+            const randomVote = randomVotes[Math.floor(Math.random() * randomVotes.length)];
+            
+            teamVotes.push({
+                member: randomMember,
+                vote: randomVote
+            });
+        }
+        
+        if (isRevealed) {
+            updateTeamVotesDisplay();
+        }
+    } catch (error) {
+        console.error('Error adding team votes:', error);
+    }
+}
+
+function updateTeamVotesDisplay() {
+    try {
+        const votesDisplay = document.getElementById('votes-display');
+        
+        // Validar que el elemento existe
+        if (!votesDisplay) {
+            console.warn('votes-display element not found');
+            return;
+        }
+
+        votesDisplay.innerHTML = '';
+        
+        teamVotes.forEach(vote => {
+            const voteElement = document.createElement('div');
+            voteElement.className = 'vote-card';
+            
+            let displayVote = vote.vote;
+            if (vote.vote === '☕') {
+                displayVote = '☕';
+            } else if (vote.vote === '?') {
+                displayVote = '?';
+            }
+            
+            voteElement.innerHTML = `
+                <div style="font-size: 0.8rem; color: var(--gray); margin-bottom: 0.3rem;">${vote.member}</div>
+                <div style="font-size: 1.5rem; color: var(--primary);">${displayVote}</div>
+            `;
+            
+            votesDisplay.appendChild(voteElement);
+        });
+    } catch (error) {
+        console.error('Error updating team votes display:', error);
+    }
+}
+
+function toggleRevealCards() {
+    try {
+        const teamVotesSection = document.getElementById('team-votes');
+        const revealBtn = document.getElementById('reveal-btn');
+        
+        // Validar que los elementos existen
+        if (!teamVotesSection || !revealBtn) {
+            console.warn('Reveal elements not found');
+            return;
+        }
+
+        isRevealed = !isRevealed;
+        
+        if (isRevealed) {
+            teamVotesSection.style.display = 'block';
+            revealBtn.textContent = '🙈 Hide Cards';
+            revealBtn.style.background = 'linear-gradient(135deg, #EF4444, #DC2626)';
+            updateTeamVotesDisplay();
+            
+            // Animate reveal
+            teamVotesSection.style.opacity = '0';
+            teamVotesSection.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                teamVotesSection.style.transition = 'all 0.5s ease';
+                teamVotesSection.style.opacity = '1';
+                teamVotesSection.style.transform = 'translateY(0)';
+            }, 100);
+        } else {
+            teamVotesSection.style.display = 'none';
+            revealBtn.textContent = '🎭 Reveal Cards';
+            revealBtn.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+        }
+    } catch (error) {
+        console.error('Error toggling reveal cards:', error);
+    }
+}
+
+function resetPokerCards() {
+    try {
+        // Clear selection
+        document.querySelectorAll('.poker-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+        
+        // Reset variables
+        selectedCard = null;
+        teamVotes = [];
+        isRevealed = false;
+        
+        // Update displays (with validation)
+        updateSelectedCardDisplay();
+        
+        const teamVotesSection = document.getElementById('team-votes');
+        const revealBtn = document.getElementById('reveal-btn');
+        
+        if (teamVotesSection) {
+            teamVotesSection.style.display = 'none';
+        }
+        
+        if (revealBtn) {
+            revealBtn.textContent = '🎭 Reveal Cards';
+            revealBtn.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+        }
+        
+        console.log('Planning Poker cards reset');
+    } catch (error) {
+        console.error('Error resetting poker cards:', error);
+    }
+}
+
+// Initialize when page loads - CON VALIDACIÓN
+document.addEventListener('DOMContentLoaded', function() {
+    // Delay para asegurar que el contenido dinámico se haya cargado
+    setTimeout(() => {
+        if (document.getElementById('selected-card-display')) {
+            updateSelectedCardDisplay();
+            console.log('Planning Poker initialized successfully');
+        } else {
+            console.log('Planning Poker elements not available yet');
+        }
+    }, 2000); // Aumentar delay para contenido dinámico
+});
+
+// Re-inicializar cuando se carga la sección de recursos
+document.addEventListener('click', function(event) {
+    // Si se hace clic en el enlace de recursos, re-inicializar después de un delay
+    if (event.target.closest('a[href="#recursos-herramientas"]')) {
+        setTimeout(() => {
+            if (document.getElementById('selected-card-display')) {
+                updateSelectedCardDisplay();
+                console.log('Planning Poker re-initialized for recursos section');
+            }
+        }, 1500);
+    }
+});
+// También agregar event listeners cuando la sección se carga dinámicamente
+setTimeout(() => {
+    if (document.getElementById('wsjf-businessValue')) {
+        const sliders = ['wsjf-businessValue', 'wsjf-urgency', 'wsjf-riskReduction', 'wsjf-effort'];
+        
+        sliders.forEach(sliderId => {
+            const slider = document.getElementById(sliderId);
+            if (slider && !slider.hasAttribute('data-listener-added')) {
+                slider.addEventListener('input', calculateWSJF);
+                slider.addEventListener('change', calculateWSJF);
+                slider.setAttribute('data-listener-added', 'true');
+                console.log(`Event listener added to ${sliderId} (delayed)`);
+            }
+        });
+        
+        calculateWSJF();
+    }
+}, 1000);
         // Initialize app when DOM is ready
         document.addEventListener('DOMContentLoaded', async () => {
             
