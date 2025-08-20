@@ -179,5 +179,170 @@
             </div>
         </div>
 
+<!-- Planning Poker Cards -->
+        <div class="example-container reveal" style="margin-top: 4rem;">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">🃏 Planning Poker Cards</h3>
+                <p style="color: var(--gray);">Cartas interactivas para estimación colaborativa - Escala Fibonacci</p>
+            </div>
+
+            <!-- Instrucciones -->
+            <div style="background: rgba(99, 102, 241, 0.1); padding: 1.5rem; border-radius: 15px; margin-bottom: 2rem;">
+                <div class="grid grid-2">
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 1rem;">📖 Cómo usar</h4>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.5rem;">🔄 <strong>Paso 1:</strong> Product Owner lee la User Story</li>
+                            <li style="margin-bottom: 0.5rem;">💭 <strong>Paso 2:</strong> Cada developer piensa individualmente</li>
+                            <li style="margin-bottom: 0.5rem;">🃏 <strong>Paso 3:</strong> Selecciona tu carta (clic para elegir)</li>
+                            <li>🎭 <strong>Paso 4:</strong> Revelar todas las cartas al mismo tiempo</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent); margin-bottom: 1rem;">🎯 Cartas especiales</h4>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.5rem;">❓ <strong>?</strong> → "No tengo información suficiente"</li>
+                            <li style="margin-bottom: 0.5rem;">☕ <strong>Café</strong> → "Necesito un descanso"</li>
+                            <li style="margin-bottom: 0.5rem;">🔄 <strong>Reset</strong> → Limpiar selección del equipo</li>
+                            <li>🎲 <strong>Reveal</strong> → Mostrar/ocultar cartas seleccionadas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planning Poker Interface -->
+            <div style="background: rgba(30, 41, 59, 0.5); border-radius: 20px; padding: 2rem;">
+                
+                <!-- Header with Controls -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h4 style="color: var(--primary); margin: 0;">Tu estimación</h4>
+                        <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Selecciona una carta haciendo clic</p>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button onclick="resetPokerCards()" 
+                                style="background: linear-gradient(135deg, #EF4444, #DC2626); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 10px; cursor: pointer; font-weight: bold; transition: all 0.3s;">
+                            🔄 Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Carta Seleccionada Display -->
+                <div style="text-align: center; margin-bottom: 3rem;">
+                    <div style="background: rgba(99, 102, 241, 0.1); border-radius: 15px; padding: 1.5rem; display: inline-block; min-width: 200px;">
+                        <h5 style="color: var(--primary); margin-bottom: 0.5rem;">Tu carta seleccionada:</h5>
+                        <div id="selected-card-display" style="font-size: 3rem; font-weight: bold; color: var(--accent); min-height: 60px; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: var(--gray); font-size: 1rem;">Ninguna carta seleccionada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Planning Poker Cards Grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1.5rem; max-width: 800px; margin: 0 auto;">
+                    
+                    <!-- Carta 1 -->
+                    <div class="poker-card" data-value="1" onclick="selectPokerCard(this)">
+                        <div class="card-content">
+                            <div class="card-value">1</div>
+                            <div class="card-suit">SP</div>
+                        </div>
+                    </div>
+
+                    <!-- Carta 2 -->
+                    <div class="poker-card" data-value="2" onclick="selectPokerCard(this)">
+                        <div class="card-content">
+                            <div class="card-value">2</div>
+                            <div class="card-suit">SP</div>
+                        </div>
+                    </div>
+
+                    <!-- Carta 3 -->
+                    <div class="poker-card" data-value="3" onclick="selectPokerCard(this)">
+                        <div class="card-content">
+                            <div class="card-value">3</div>
+                            <div class="card-suit">SP</div>
+                        </div>
+                    </div>
+
+                    <!-- Carta 5 -->
+                    <div class="poker-card" data-value="5" onclick="selectPokerCard(this)">
+                        <div class="card-content">
+                            <div class="card-value">5</div>
+                            <div class="card-suit">SP</div>
+                        </div>
+                    </div>
+
+                    <!-- Carta 8 -->
+                    <div class="poker-card" data-value="8" onclick="selectPokerCard(this)">
+                        <div class="card-content">
+                            <div class="card-value">8</div>
+                            <div class="card-suit">SP</div>
+                        </div>
+                    </div>
+
+                    <!-- Carta 13 -->
+                    <div class="poker-card" data-value="13" onclick="selectPokerCard(this)">
+                        <div class="card-content">
+                            <div class="card-value">13</div>
+                            <div class="card-suit">SP</div>
+                        </div>
+                    </div>
+
+                    <!-- Carta 21 -->
+                    <div class="poker-card" data-value="21" onclick="selectPokerCard(this)">
+                        <div class="card-content">
+                            <div class="card-value">21</div>
+                            <div class="card-suit">SP</div>
+                        </div>
+                    </div>
+
+                    <!-- Carta ? -->
+                    <div class="poker-card poker-card-special" data-value="?" onclick="selectPokerCard(this)">
+                        <div class="card-content">
+                            <div class="card-value">?</div>
+                            <div class="card-suit">??</div>
+                        </div>
+                    </div>
+
+                    <!-- Carta Café -->
+                    <div class="poker-card poker-card-break" data-value="☕" onclick="selectPokerCard(this)">
+                        <div class="card-content">
+                            <div class="card-value">☕</div>
+                            <div class="card-suit">BREAK</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Votes Display (Hidden by default) -->
+
+            </div>
+
+            <!-- Planning Poker Tips -->
+            <div style="margin-top: 2rem; background: rgba(245, 158, 11, 0.1); border-radius: 15px; padding: 2rem; border-left: 4px solid var(--warning);">
+                <h4 style="color: var(--warning); margin-bottom: 1rem;">💡 Tips para Planning Poker Efectivo</h4>
+                <div class="grid grid-2">
+                    <div>
+                        <h6 style="color: var(--accent); margin-bottom: 0.5rem;">✅ Mejores Prácticas:</h6>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.4rem;">• Cada miembro vota sin ver otros votos</li>
+                            <li style="margin-bottom: 0.4rem;">• Discutir solo si hay diferencias significativas</li>
+                            <li style="margin-bottom: 0.4rem;">• Máximo 2-3 rondas de votación</li>
+                            <li style="margin-bottom: 0.4rem;">• Usar "?" cuando falta información</li>
+                            <li>• Estimar User Stories, no Tasks</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h6 style="color: #EF4444; margin-bottom: 0.5rem;">❌ Errores Comunes:</h6>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.4rem;">• Convertir Story Points a horas</li>
+                            <li style="margin-bottom: 0.4rem;">• Influenciar votos de otros</li>
+                            <li style="margin-bottom: 0.4rem;">• Sobre-analizar historias pequeñas</li>
+                            <li style="margin-bottom: 0.4rem;">• Presionar por consensus rápido</li>
+                            <li>• Estimar sin criterios de aceptación</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>        
     </div>
 </section>
