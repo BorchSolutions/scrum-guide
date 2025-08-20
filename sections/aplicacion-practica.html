@@ -8,7 +8,20 @@
 
         <!-- Work Items Hierarchy -->
         <div class="reveal">
-            <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.8rem;">Jerarquía de Work Items</h3>
+            <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.8rem;">Jerarquía de Work Items en SCRUM</h3>
+            
+            <!-- 🔧 ACLARACIÓN CONCEPTUAL IMPORTANTE -->
+            <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px; margin-bottom: 3rem; border-left: 4px solid var(--primary);">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">📋 Marco Conceptual SCRUM</h4>
+                <p style="color: var(--gray); margin-bottom: 1rem;">
+                    En <strong>SCRUM puro</strong>, la jerarquía oficial es: <strong>Epic → Feature → Product Backlog Item (User Story)</strong>. 
+                    Los "Tasks" son descomposiciones técnicas internas del Development Team durante el Sprint, no work items del Product Backlog.
+                </p>
+                <p style="color: var(--light); font-size: 0.9rem; margin: 0;">
+                    <strong>Nota:</strong> En herramientas como Azure DevOps o Jira, las "Tasks" aparecen como work items para fines de tracking, 
+                    pero conceptualmente siguen siendo descomposiciones técnicas, no elementos priorizables por el Product Owner.
+                </p>
+            </div>
             <div class="hierarchy">
                 <div class="hierarchy-item">
                     <div class="hierarchy-icon">
@@ -18,17 +31,17 @@
                     <div class="hierarchy-content">
                         <h3 class="hierarchy-title">Epic</h3>
                         <p class="hierarchy-description">
-                            Gran iniciativa estratégica que puede durar varios meses. Representa un objetivo de negocio significativo que se descompone en features más pequeñas.
+                            <strong>Iniciativa estratégica de alto nivel</strong> que puede durar varios meses. Representa un objetivo de negocio significativo que se descompone en Features más pequeñas. El Product Owner prioriza Epics en el Portfolio Backlog.
                         </p>
                         <div class="hierarchy-example">
                             <strong>Ejemplo:</strong> "Plataforma de E-commerce Completa"<br>
-                            <strong>Duración:</strong> 3-6 meses<br>
+                            <strong>Duración:</strong> 3-6 meses (múltiples releases)<br>
                             <strong>Valor de Negocio:</strong> Muy Alto (100+ puntos)<br>
-                            <strong>Incluye:</strong> Catálogo, Carrito, Pagos, Envíos, Admin Panel
+                            <strong>Incluye:</strong> Features de Catálogo, Carrito, Pagos, Envíos, Admin Panel<br>
+                            <strong>Owner:</strong> Product Owner + Stakeholders
                         </div>
                     </div>
                 </div>
-
                 <div class="hierarchy-item">
                     <div class="hierarchy-icon">
                         ⭐
@@ -37,38 +50,73 @@
                     <div class="hierarchy-content">
                         <h3 class="hierarchy-title">Feature</h3>
                         <p class="hierarchy-description">
-                            Funcionalidad específica que aporta valor directo al usuario. Puede completarse en uno o varios sprints.
+                            <strong>Funcionalidad cohesiva</strong> que aporta valor directo al usuario final. Puede completarse en uno o varios sprints. Agrupa User Stories relacionadas y es la unidad de planificación para releases.
                         </p>
                         <div class="hierarchy-example">
                             <strong>Ejemplo:</strong> "Sistema de Carrito de Compras"<br>
                             <strong>Duración:</strong> 2-3 sprints<br>
-                            <strong>Story Points:</strong> 21-34 puntos<br>
-                            <strong>Componentes:</strong> Añadir items, actualizar cantidad, calcular total
+                            <strong>Story Points Total:</strong> 21-34 puntos<br>
+                            <strong>User Stories:</strong> Añadir items, actualizar cantidad, calcular total, persistir carrito<br>
+                            <strong>Criterio "Done":</strong> Usuario puede gestionar carrito end-to-end
                         </div>
                     </div>
                 </div>
-
                 <div class="hierarchy-item">
                     <div class="hierarchy-icon">
                         📝
                         <div class="hierarchy-line"></div>
                     </div>
                     <div class="hierarchy-content">
-                        <h3 class="hierarchy-title">User Story</h3>
+                        <h3 class="hierarchy-title">Product Backlog Item (User Story)</h3>
                         <p class="hierarchy-description">
-                            Descripción de funcionalidad desde la perspectiva del usuario, siguiendo el formato: "Como [usuario], quiero [acción] para [beneficio]"
+                            <strong>Unidad de valor independiente</strong> desde la perspectiva del usuario. Sigue el formato: "Como [usuario], quiero [funcionalidad] para [beneficio]". Es estimable, negociable y testeable. Se completa en un sprint.
                         </p>
                         <div class="hierarchy-example">
                             <strong>Ejemplo:</strong> "Como cliente, quiero añadir productos al carrito para comprarlos después"<br>
                             <strong>Story Points:</strong> 8 puntos<br>
-                            <strong>Criterios de Aceptación:</strong><br>
-                            • Botón "Añadir al carrito" visible<br>
-                            • Confirmación visual al añadir<br>
-                            • Contador actualizado en navbar
+                            <strong>Sprint:</strong> Completable en 1 sprint<br>
+                            <strong>Valor:</strong> Independiente y entregable<br>
+                            <strong>Owner:</strong> Product Owner (prioriza), Development Team (estima y desarrolla)
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <h5 style="color: var(--accent); margin-bottom: 1rem;">✅ Criterios de Aceptación</h5>
+                            <ul style="color: var(--light); list-style: none; padding: 0;">
+                                <li style="margin-bottom: 0.8rem;">✅ El filtro muestra rangos de precio predefinidos</li>
+                                <li style="margin-bottom: 0.8rem;">✅ Se puede establecer un rango personalizado</li>
+                                <li style="margin-bottom: 0.8rem;">✅ Los resultados se actualizan automáticamente</li>
+                                <li style="margin-bottom: 0.8rem;">✅ Se mantiene el filtro al navegar entre páginas</li>
+                                <li style="margin-bottom: 0.8rem;">✅ Se puede combinar con otros filtros</li>
+                                <li>✅ Funciona en móvil y desktop</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-
+                <div class="hierarchy-item" style="opacity: 0.8; border-left: 3px dashed var(--gray);">
+                    <div class="hierarchy-icon" style="background: rgba(100, 116, 139, 0.2);">
+                        ⚙️
+                    </div>
+                    <div class="hierarchy-content">
+                        <h3 class="hierarchy-title" style="color: var(--gray);">Task (Descomposición Técnica)</h3>
+                        <p class="hierarchy-description" style="color: var(--gray);">
+                            <strong>Actividad técnica específica</strong> que el Development Team define durante Sprint Planning para completar una User Story. No es un work item del Product Backlog, sino una descomposición interna del equipo.
+                        </p>
+                        <div class="hierarchy-example" style="background: rgba(100, 116, 139, 0.1);">
+                            <strong>Ejemplo:</strong> "Implementar API endpoint POST /cart/items"<br>
+                            <strong>Estimación:</strong> 4-6 horas (no Story Points)<br>
+                            <strong>Owner:</strong> Development Team member específico<br>
+                            <strong>Propósito:</strong> Descomponer User Story en trabajo realizable<br>
+                            <strong>Visibilidad:</strong> Taskboard del Sprint (interno del equipo)
+                        </div>
+                        
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px; border-left: 3px solid #EF4444;">
+                            <p style="color: #EF4444; font-weight: 600; margin: 0; font-size: 0.9rem;">
+                                ⚠️ <strong>Importante:</strong> Las Tasks NO se estiman en Story Points ni son priorizadas por el Product Owner. 
+                                Son herramientas de auto-organización del Development Team.
+                            </p>
+                        </div>
+                    </div>
+                </div>
                 <div class="hierarchy-item">
                     <div class="hierarchy-icon">✅</div>
                     <div class="hierarchy-content">
@@ -83,6 +131,113 @@
                             • "Escribir unit tests para CartService" (3 horas)<br>
                             • "Configurar Redis para cache de carrito" (2 horas)
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <div class="example-container reveal" style="margin-top: 4rem;">
+            <div class="example-header">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">🛠️ SCRUM vs Herramientas de Gestión</h3>
+                <p style="color: var(--gray);">Cómo las herramientas adaptan el marco conceptual de SCRUM</p>
+            </div>
+
+            <div class="example-tabs">
+                <button class="tab-button active" data-tab="scrum-puro">SCRUM Puro</button>
+                <button class="tab-button" data-tab="azure-devops">Azure DevOps</button>
+                <button class="tab-button" data-tab="jira">Jira Software</button>
+            </div>
+
+            <div class="tab-content active" id="scrum-puro">
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: var(--primary); margin-bottom: 1.5rem;">📋 Marco SCRUM Oficial</h4>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div>
+                            <h5 style="color: var(--accent); margin-bottom: 1rem;">Artifacts Oficiales</h5>
+                            <ul style="color: var(--gray); list-style: none; padding: 0;">
+                                <li style="margin-bottom: 0.8rem;">📋 <strong>Product Backlog</strong> - Lista priorizada de PBIs</li>
+                                <li style="margin-bottom: 0.8rem;">🎯 <strong>Sprint Backlog</strong> - PBIs del Sprint + plan</li>
+                                <li style="margin-bottom: 0.8rem;">🚀 <strong>Increment</strong> - Producto funcional</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h5 style="color: var(--accent); margin-bottom: 1rem;">Work Items Oficiales</h5>
+                            <ul style="color: var(--gray); list-style: none; padding: 0;">
+                                <li style="margin-bottom: 0.8rem;">🏔️ <strong>Epic</strong> - Iniciativa estratégica</li>
+                                <li style="margin-bottom: 0.8rem;">⭐ <strong>Feature</strong> - Agrupación de PBIs</li>
+                                <li style="margin-bottom: 0.8rem;">📝 <strong>PBI/User Story</strong> - Unidad de valor</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                        <p style="color: var(--light); margin: 0;">
+                            <strong>Principio clave:</strong> El Development Team se auto-organiza para completar PBIs. 
+                            La descomposición en tasks es opcional y siempre interna al equipo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="azure-devops">
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: #0078D4; margin-bottom: 1.5rem;">🔷 Azure DevOps - Proceso SCRUM</h4>
+                    
+                    <div style="background: rgba(0, 120, 212, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h5 style="color: #0078D4; margin-bottom: 1rem;">Jerarquía en Azure DevOps</h5>
+                        <p style="color: var(--gray); margin: 0;">
+                            Epic → Feature → Product Backlog Item → <strong>Task</strong><br>
+                            <small style="opacity: 0.8;">*Task agregado para tracking granular del progreso</small>
+                        </p>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div>
+                            <h6 style="color: var(--accent); margin-bottom: 1rem;">✅ Ventajas</h6>
+                            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                                <li style="margin-bottom: 0.6rem;">• Visibility del progreso granular</li>
+                                <li style="margin-bottom: 0.6rem;">• Tracking de tiempo por actividad</li>
+                                <li style="margin-bottom: 0.6rem;">• Burndown a nivel Task</li>
+                                <li style="margin-bottom: 0.6rem;">• Asignación individual clara</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h6 style="color: var(--warning); margin-bottom: 1rem;">⚠️ Consideraciones</h6>
+                            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                                <li style="margin-bottom: 0.6rem;">• Tasks no son priorizadas por PO</li>
+                                <li style="margin-bottom: 0.6rem;">• Estimación en horas, no SP</li>
+                                <li style="margin-bottom: 0.6rem;">• Overhead de gestión adicional</li>
+                                <li style="margin-bottom: 0.6rem;">• Riesgo de micro-management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="jira">
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: #0052CC; margin-bottom: 1.5rem;">🔵 Jira Software - Adaptación Flexible</h4>
+                    
+                    <div style="background: rgba(0, 82, 204, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h5 style="color: #0052CC; margin-bottom: 1rem;">Enfoque Configurable</h5>
+                        <p style="color: var(--gray); margin: 0;">
+                            Epic → Story → <strong>Sub-task</strong> (opcional)<br>
+                            <small style="opacity: 0.8;">*Sub-tasks solo visibles para el equipo, no en Product Backlog</small>
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 10px;">
+                        <h6 style="color: var(--accent); margin-bottom: 1rem;">🎯 Mejores Prácticas</h6>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.8rem;">✅ Usar Stories como PBIs principales</li>
+                            <li style="margin-bottom: 0.8rem;">✅ Sub-tasks solo para tracking interno</li>
+                            <li style="margin-bottom: 0.8rem;">✅ Product Owner prioriza Stories, no Sub-tasks</li>
+                            <li style="margin-bottom: 0.8rem;">✅ Story Points solo en Stories</li>
+                            <li>✅ Mantener autonomía del Development Team</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -232,85 +387,240 @@
                 </div>
             </div>
 
-            <div class="tab-content" id="code">
-                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Ejemplos de Código</h4>
-                
-                <h5 style="color: var(--primary); margin-bottom: 1rem;">.NET Core - Product Controller</h5>
-                <div class="code-block">
-                    <pre><code><span class="keyword">using</span> Microsoft.AspNetCore.Mvc;
-<span class="keyword">using</span> MediatR;
+<!-- Tab de código corregido para incluir en aplicacion-practica.html -->
+<div class="tab-content" id="code">
+    <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Ejemplos de Código con Conceptos SCRUM Correctos</h4>
+    
+    <!-- 🔧 ACLARACIÓN CONCEPTUAL -->
+    <div style="padding: 1.5rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid var(--primary);">
+        <h5 style="color: var(--primary); margin-bottom: 1rem;">📖 Conceptos en el Código</h5>
+        <p style="color: var(--gray); margin: 0;">
+            Los comentarios en el código distinguen entre <strong>User Stories</strong> (estimadas en Story Points) 
+            y <strong>Tasks técnicas</strong> (estimadas en horas). Tasks son descomposición interna del Development Team.
+        </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <div>
+            <h5 style="color: var(--primary); margin-bottom: 1rem;">.NET Core - Product Controller</h5>
+            <div class="code-block">
+                <pre><code><span class="comment">// 📝 USER STORY: "Como admin, quiero gestionar productos para mantener el catálogo actualizado"</span>
+<span class="comment">// 🎯 Story Points: 8 SP (complejidad media-alta)</span>
+<span class="comment">// 👥 Estimado por: Development Team en Planning Poker</span>
 
 [ApiController]
-[Route(<span class="string">"api/[controller]"</span>)]
-<span class="keyword">public class</span> <span class="function">ProductsController</span> : ControllerBase
+[Route("api/[controller]")]
+<span class="keyword">public class</span> <span class="function">ProductController</span> : ControllerBase
 {
-    <span class="keyword">private readonly</span> IMediator _mediator;
+    <span class="keyword">private readonly</span> IProductService _productService;
     
-    <span class="keyword">public</span> <span class="function">ProductsController</span>(IMediator mediator)
+    <span class="comment">// ⚙️ TASK: Implementar constructor con DI</span>
+    <span class="comment">// ⏱️ Estimación: 30 minutos</span>
+    <span class="comment">// 👤 Asignado a: Developer A</span>
+    <span class="function">public ProductController</span>(IProductService productService)
     {
-        _mediator = mediator;
+        _productService = productService;
     }
     
+    <span class="comment">// ⚙️ TASK: Endpoint GET para listar productos</span>
+    <span class="comment">// ⏱️ Estimación: 2 horas (incluye validación, logging, tests)</span>
+    <span class="comment">// 👤 Asignado a: Developer A</span>
+    [HttpGet]
+    <span class="keyword">public async</span> Task&lt;ActionResult&lt;IEnumerable&lt;ProductDto&gt;&gt;&gt; <span class="function">GetProducts</span>()
+    {
+        <span class="keyword">var</span> products = <span class="keyword">await</span> _productService.GetAllAsync();
+        <span class="keyword">return</span> Ok(products);
+    }
+    
+    <span class="comment">// ⚙️ TASK: Endpoint POST para crear producto</span>
+    <span class="comment">// ⏱️ Estimación: 4 horas (validación, business logic, tests)</span>
+    <span class="comment">// 👤 Asignado a: Developer B</span>
     [HttpPost]
-    <span class="keyword">public async</span> Task&lt;ActionResult&lt;ProductDto&gt;&gt; <span class="function">CreateProduct</span>(
-        CreateProductCommand command)
+    <span class="keyword">public async</span> Task&lt;ActionResult&lt;ProductDto&gt;&gt; <span class="function">CreateProduct</span>(CreateProductRequest request)
     {
-        <span class="comment">// Story Points: 5</span>
-        <span class="comment">// Business Value: Alto - Funcionalidad core</span>
-        <span class="keyword">var</span> result = <span class="keyword">await</span> _mediator.Send(command);
-        <span class="keyword">return</span> CreatedAtAction(nameof(GetProduct), 
-            <span class="keyword">new</span> { id = result.Id }, result);
+        <span class="keyword">var</span> result = <span class="keyword">await</span> _productService.CreateAsync(request);
+        <span class="keyword">return</span> result.IsSuccess ? Ok(result.Data) : BadRequest(result.Error);
     }
-    
-    [HttpGet(<span class="string">"{id}"</span>)]
-    <span class="keyword">public async</span> Task&lt;ActionResult&lt;ProductDto&gt;&gt; <span class="function">GetProduct</span>(<span class="keyword">int</span> id)
-    {
-        <span class="keyword">var</span> query = <span class="keyword">new</span> GetProductQuery { Id = id };
-        <span class="keyword">var</span> result = <span class="keyword">await</span> _mediator.Send(query);
-        <span class="keyword">return</span> result != <span class="keyword">null</span> ? Ok(result) : NotFound();
-    }
-}</code></pre>
-                </div>
+}
 
-                <h5 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Angular - Product Service</h5>
-                <div class="code-block">
-                    <pre><code><span class="keyword">import</span> { Injectable } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
-<span class="keyword">import</span> { HttpClient } <span class="keyword">from</span> <span class="string">'@angular/common/http'</span>;
-<span class="keyword">import</span> { Observable } <span class="keyword">from</span> <span class="string">'rxjs'</span>;
-
-@Injectable({
-  providedIn: <span class="string">'root'</span>
-})
-<span class="keyword">export class</span> <span class="function">ProductService</span> {
-  <span class="keyword">private</span> apiUrl = <span class="string">'https://api.example.com/api/products'</span>;
-  
-  <span class="function">constructor</span>(<span class="keyword">private</span> http: HttpClient) {}
-  
-  <span class="comment">// User Story: Listar productos - 3 SP</span>
-  <span class="function">getProducts</span>(): Observable&lt;Product[]&gt; {
-    <span class="keyword">return this</span>.http.get&lt;Product[]&gt;(<span class="keyword">this</span>.apiUrl);
-  }
-  
-  <span class="comment">// User Story: Crear producto - 5 SP</span>
-  <span class="function">createProduct</span>(product: Product): Observable&lt;Product&gt; {
-    <span class="keyword">return this</span>.http.post&lt;Product&gt;(<span class="keyword">this</span>.apiUrl, product);
-  }
-  
-  <span class="comment">// Task: Implementar cache con RxJS - 2 horas</span>
-  <span class="keyword">private</span> cache$ = <span class="keyword">new</span> BehaviorSubject&lt;Product[]&gt;([]);
-}</code></pre>
-                </div>
-
-                <h5 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Estimación por Líneas de Código</h5>
-                <div style="background: rgba(99, 102, 241, 0.1); padding: 1.5rem; border-radius: 10px;">
-                    <p style="color: var(--gray);">
-                        <strong>Controller básico (5 SP):</strong> ~50-80 líneas<br>
-                        <strong>Service con cache (8 SP):</strong> ~120-200 líneas<br>
-                        <strong>Componente complejo (13 SP):</strong> ~300-500 líneas<br><br>
-                        <em>Nota: LOC es indicativo, la complejidad real define los Story Points</em>
-                    </p>
-                </div>
+<span class="comment">// 📊 RESUMEN DE LA USER STORY:</span>
+<span class="comment">// • Story Points: 8 SP (tamaño relativo medio-alto)</span>
+<span class="comment">// • Tasks técnicas: 4 tasks, ~8.5 horas total</span>
+<span class="comment">// • Valor de negocio: Alto (gestión de catálogo crítica)</span>
+<span class="comment">// • Definition of Done: Tests unitarios + integración + documentación</span></code></pre>
             </div>
+        </div>
+
+        <div>
+            <h5 style="color: var(--primary); margin-bottom: 1rem;">Angular - Product Component</h5>
+            <div class="code-block">
+                <pre><code><span class="comment">// 📝 USER STORY: "Como cliente, quiero ver productos con filtros para encontrar lo que busco"</span>
+<span class="comment">// 🎯 Story Points: 5 SP (complejidad media)</span>
+<span class="comment">// 👥 Estimado por: Development Team en Planning Poker</span>
+
+<span class="keyword">import</span> { Component, OnInit } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
+<span class="keyword">import</span> { ProductService } <span class="keyword">from</span> <span class="string">'../services/product.service'</span>;
+
+@Component({
+  selector: <span class="string">'app-product-list'</span>,
+  templateUrl: <span class="string">'./product-list.component.html'</span>,
+  styleUrls: [<span class="string">'./product-list.component.scss'</span>]
+})
+<span class="keyword">export class</span> <span class="function">ProductListComponent</span> <span class="keyword">implements</span> OnInit {
+  
+  <span class="comment">// ⚙️ TASK: Setup component properties</span>
+  <span class="comment">// ⏱️ Estimación: 1 hora</span>
+  <span class="comment">// 👤 Asignado a: Frontend Developer</span>
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
+  searchTerm = <span class="string">''</span>;
+  loading = <span class="keyword">false</span>;
+
+  <span class="comment">// ⚙️ TASK: Implementar constructor e inicialización</span>
+  <span class="comment">// ⏱️ Estimación: 30 minutos</span>
+  <span class="function">constructor</span>(<span class="keyword">private</span> productService: ProductService) {}
+
+  <span class="comment">// ⚙️ TASK: Cargar productos en inicialización</span>
+  <span class="comment">// ⏱️ Estimación: 2 horas (incluye error handling)</span>
+  <span class="function">ngOnInit</span>(): <span class="keyword">void</span> {
+    <span class="keyword">this</span>.loadProducts();
+  }
+
+  <span class="comment">// ⚙️ TASK: Implementar carga de datos</span>
+  <span class="comment">// ⏱️ Estimación: 1.5 horas</span>
+  <span class="keyword">async</span> <span class="function">loadProducts</span>(): Promise&lt;<span class="keyword">void</span>&gt; {
+    <span class="keyword">this</span>.loading = <span class="keyword">true</span>;
+    <span class="keyword">try</span> {
+      <span class="keyword">this</span>.products = <span class="keyword">await</span> <span class="keyword">this</span>.productService.getProducts().toPromise();
+      <span class="keyword">this</span>.filteredProducts = [...<span class="keyword">this</span>.products];
+    } <span class="keyword">catch</span> (error) {
+      console.error(<span class="string">'Error loading products:'</span>, error);
+    } <span class="keyword">finally</span> {
+      <span class="keyword">this</span>.loading = <span class="keyword">false</span>;
+    }
+  }
+
+  <span class="comment">// ⚙️ TASK: Implementar filtrado de productos</span>
+  <span class="comment">// ⏱️ Estimación: 2 horas (lógica de filtro + performance)</span>
+  <span class="function">filterProducts</span>(): <span class="keyword">void</span> {
+    <span class="keyword">this</span>.filteredProducts = <span class="keyword">this</span>.products.filter(product =>
+      product.name.toLowerCase().includes(<span class="keyword">this</span>.searchTerm.toLowerCase()) ||
+      product.description.toLowerCase().includes(<span class="keyword">this</span>.searchTerm.toLowerCase())
+    );
+  }
+}
+
+<span class="comment">// 📊 RESUMEN DE LA USER STORY:</span>
+<span class="comment">// • Story Points: 5 SP (tamaño relativo medio)</span>
+<span class="comment">// • Tasks técnicas: 5 tasks, ~7 horas total</span>
+<span class="comment">// • Valor de negocio: Alto (experiencia de usuario crítica)</span>
+<span class="comment">// • Definition of Done: Tests unitarios + E2E + responsive</span></code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔧 NUEVA SECCIÓN: Diferencia entre Story Points y Horas -->
+    <div style="margin-top: 3rem; padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+        <h5 style="color: var(--accent); margin-bottom: 1.5rem;">🎯 Diferencia Clave: Story Points vs Horas</h5>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div style="padding: 1.5rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px;">
+                <h6 style="color: var(--primary); margin-bottom: 1rem;">📝 User Stories (Story Points)</h6>
+                <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                    <li style="margin-bottom: 0.8rem;">• <strong>Qué:</strong> Funcionalidad completa de valor</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Estimación:</strong> Story Points (tamaño relativo)</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Quién estima:</strong> Development Team completo</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Cuándo:</strong> Sprint Planning / Backlog Refinement</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Prioriza:</strong> Product Owner</li>
+                    <li>• <strong>Ejemplo:</strong> "Gestionar productos" = 8 SP</li>
+                </ul>
+            </div>
+            
+            <div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                <h6 style="color: var(--accent); margin-bottom: 1rem;">⚙️ Tasks (Horas)</h6>
+                <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                    <li style="margin-bottom: 0.8rem;">• <strong>Qué:</strong> Actividad técnica específica</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Estimación:</strong> Horas (tiempo estimado)</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Quién estima:</strong> Developer individual</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Cuándo:</strong> Durante Sprint Planning (Parte 2)</li>
+                    <li style="margin-bottom: 0.8rem;">• <strong>Prioriza:</strong> Development Team (auto-organización)</li>
+                    <li>• <strong>Ejemplo:</strong> "Implementar endpoint POST" = 4h</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(236, 72, 153, 0.1); border-radius: 10px; border-left: 4px solid var(--secondary);">
+            <h6 style="color: var(--secondary); margin-bottom: 1rem;">⚠️ Errores Comunes a Evitar</h6>
+            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                <li style="margin-bottom: 0.8rem;">❌ Estimar Tasks en Story Points</li>
+                <li style="margin-bottom: 0.8rem;">❌ Que el Product Owner priorice Tasks</li>
+                <li style="margin-bottom: 0.8rem;">❌ Convertir Story Points a horas directamente</li>
+                <li style="margin-bottom: 0.8rem;">❌ Trackear Tasks en el Product Backlog</li>
+                <li>❌ Usar Tasks para medir velocity</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Ejemplo de Service Layer -->
+    <div style="margin-top: 2rem;">
+        <h5 style="color: var(--primary); margin-bottom: 1rem;">Service Layer - Patrón Repository</h5>
+        <div class="code-block">
+            <pre><code><span class="comment">// 📝 PARTE DE USER STORY: "Gestionar productos"</span>
+<span class="comment">// ⚙️ TASK: Implementar ProductService con Repository Pattern</span>
+<span class="comment">// ⏱️ Estimación: 3 horas (incluye tests)</span>
+
+<span class="keyword">public interface</span> IProductService
+{
+    Task&lt;IEnumerable&lt;ProductDto&gt;&gt; GetAllAsync();
+    Task&lt;ProductDto&gt; GetByIdAsync(<span class="keyword">int</span> id);
+    Task&lt;ServiceResult&lt;ProductDto&gt;&gt; CreateAsync(CreateProductRequest request);
+    Task&lt;ServiceResult&gt; UpdateAsync(<span class="keyword">int</span> id, UpdateProductRequest request);
+    Task&lt;ServiceResult&gt; DeleteAsync(<span class="keyword">int</span> id);
+}
+
+<span class="keyword">public class</span> <span class="function">ProductService</span> : IProductService
+{
+    <span class="keyword">private readonly</span> IProductRepository _repository;
+    <span class="keyword">private readonly</span> IMapper _mapper;
+    <span class="keyword">private readonly</span> ILogger&lt;ProductService&gt; _logger;
+
+    <span class="function">public ProductService</span>(
+        IProductRepository repository,
+        IMapper mapper,
+        ILogger&lt;ProductService&gt; logger)
+    {
+        _repository = repository;
+        _mapper = mapper;
+        _logger = logger;
+    }
+
+    <span class="keyword">public async</span> Task&lt;ServiceResult&lt;ProductDto&gt;&gt; <span class="function">CreateAsync</span>(CreateProductRequest request)
+    {
+        <span class="keyword">try</span>
+        {
+            <span class="comment">// Business logic validation</span>
+            <span class="keyword">if</span> (<span class="keyword">await</span> _repository.ExistsByNameAsync(request.Name))
+            {
+                <span class="keyword">return</span> ServiceResult&lt;ProductDto&gt;.Failure(<span class="string">"Product name already exists"</span>);
+            }
+
+            <span class="keyword">var</span> product = _mapper.Map&lt;Product&gt;(request);
+            <span class="keyword">var</span> created = <span class="keyword">await</span> _repository.CreateAsync(product);
+            <span class="keyword">var</span> dto = _mapper.Map&lt;ProductDto&gt;(created);
+
+            _logger.LogInformation(<span class="string">"Product created with ID: {ProductId}"</span>, created.Id);
+            <span class="keyword">return</span> ServiceResult&lt;ProductDto&gt;.Success(dto);
+        }
+        <span class="keyword">catch</span> (Exception ex)
+        {
+            _logger.LogError(ex, <span class="string">"Error creating product"</span>);
+            <span class="keyword">return</span> ServiceResult&lt;ProductDto&gt;.Failure(<span class="string">"Internal server error"</span>);
+        }
+    }
+}</code></pre>
+        </div>
+    </div>
+</div>
 
             <div class="tab-content" id="metricas-proyecto">
                 <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Métricas del Proyecto</h4>
