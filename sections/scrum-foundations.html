@@ -145,8 +145,8 @@
         <!-- Roles del Equipo - Versión Expandida -->
         <div class="example-container reveal">
             <div class="example-header">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Roles en SCRUM</h3>
-                <p style="color: var(--gray);">Tres roles interdependientes que forman el Scrum Team</p>
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Accountabilities en Scrum</h3>
+                <p style="color: var(--gray);">Tres Accountabilities interdependientes que forman el Scrum Team</p>
             </div>
 
             <div class="example-tabs">
@@ -155,7 +155,19 @@
                 <button class="tab-button" data-tab="developers">Developers</button>
                 <button class="tab-button" data-tab="team-dynamics">Team Dynamics</button>
             </div>
-
+            <div style="padding: 1.5rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid var(--primary);">
+                <h5 style="color: var(--primary); margin-bottom: 1rem;">📖 De "Roles" a "Accountabilities"</h5>
+                <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.9rem;">
+                    <strong>Scrum Guide 2020</strong> cambió la terminología de "roles" a <strong>"accountabilities"</strong> 
+                    (responsabilidades/compromisos) para enfatizar que:
+                </p>
+                <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                    <li style="margin-bottom: 0.5rem;">✅ Son <em>responsabilidades</em>, no puestos de trabajo rígidos</li>
+                    <li style="margin-bottom: 0.5rem;">✅ Una persona puede cumplir múltiples accountabilities</li>
+                    <li style="margin-bottom: 0.5rem;">✅ Lo importante es <em>qué se hace</em>, no el título</li>
+                    <li>✅ Flexibilidad organizacional sin perder claridad de responsabilidades</li>
+                </ul>
+            </div>
             <div class="tab-content active" id="product-owner">
                 <div class="grid grid-2">
                     <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px;">
@@ -167,7 +179,7 @@
                             </div>
                         </div>
                         
-                        <h5 style="color: var(--primary); margin-bottom: 1rem;">🎯 Responsabilidades Clave</h5>
+                        <h5 style="color: var(--primary); margin-bottom: 1rem;">🎯 Accountabilities Clave</h5>
                         <ul style="color: var(--gray); list-style: none; padding: 0;">
                             <li style="margin-bottom: 0.8rem;">🎪 <strong>Visión del producto:</strong> Define y comunica la visión</li>
                             <li style="margin-bottom: 0.8rem;">📋 <strong>Product Backlog:</strong> Gestiona y prioriza items</li>
@@ -281,83 +293,61 @@
             </div>
 
             <div class="tab-content" id="developers">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">👥 Developers: Equipos Cross-funcionales y Self-managing</h4>
+                
                 <div class="grid grid-2">
                     <div style="padding: 2rem; background: rgba(16, 185, 129, 0.1); border-radius: 15px;">
-                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                            <div style="font-size: 3rem; margin-right: 1rem;">👥</div>
-                            <div>
-                                <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Developers</h4>
-                                <p style="color: var(--gray); margin: 0;">3-9 profesionales que crean el incremento</p>
-                            </div>
-                        </div>
-                        
-                        <h5 style="color: var(--accent); margin-bottom: 1rem;">🌟 Características del Team</h5>
+                        <h5 style="color: var(--accent); margin-bottom: 1rem;">🎯 Características del Equipo</h5>
                         <ul style="color: var(--gray); list-style: none; padding: 0;">
-                            <li style="margin-bottom: 0.8rem;">🔀 <strong>Cross-functional:</strong> Todas las skills necesarias</li>
-                            <li style="margin-bottom: 0.8rem;">🎯 <strong>Auto-organizados:</strong> Deciden cómo trabajar</li>
-                            <li style="margin-bottom: 0.8rem;">🤝 <strong>Colaborativos:</strong> Ownership compartido</li>
-                            <li style="margin-bottom: 0.8rem;">📚 <strong>T-shaped:</strong> Especialización + generalización</li>
-                            <li>🔄 <strong>Mejora continua:</strong> Aprenden y se adaptan</li>
+                            <li style="margin-bottom: 0.8rem;">👥 <strong>3-9 personas:</strong> Tamaño optimal para comunicación</li>
+                            <li style="margin-bottom: 0.8rem;">🔧 <strong>Cross-functional:</strong> Todas las skills necesarias</li>
+                            <li style="margin-bottom: 0.8rem;">🎪 <strong>Self-managing:</strong> Deciden cómo hacer el trabajo</li>
+                            <li style="margin-bottom: 0.8rem;">🎯 <strong>Accountable:</strong> Del Sprint Goal y calidad</li>
+                            <li>📱 <strong>Diversos:</strong> Backend, Frontend, QA, UX, DevOps</li>
                         </ul>
-                        
-                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(30, 41, 59, 0.3); border-radius: 10px;">
-                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">🎯 Sprint Goal Ownership</h6>
-                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">
-                                Los Developers son collectively accountable por crear un incremento utilizable que cumpla el Sprint Goal cada Sprint.
-                            </p>
-                        </div>
                     </div>
                     
                     <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
-                        <h5 style="color: var(--accent); margin-bottom: 1rem;">🛠️ Skills Matrix Típica</h5>
-                        
-                        <div style="margin-bottom: 1.5rem;">
-                            <h6 style="color: var(--secondary); margin-bottom: 1rem;">Para equipos .NET + Angular</h6>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                                <div style="padding: 0.8rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
-                                    <strong style="color: var(--primary);">Backend</strong>
-                                    <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0 0; font-size: 0.8rem; color: var(--gray);">
-                                        <li>• C# / .NET Core</li>
-                                        <li>• Entity Framework</li>
-                                        <li>• API REST</li>
-                                        <li>• SQL Server</li>
-                                    </ul>
-                                </div>
-                                <div style="padding: 0.8rem; background: rgba(236, 72, 153, 0.1); border-radius: 8px;">
-                                    <strong style="color: var(--secondary);">Frontend</strong>
-                                    <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0 0; font-size: 0.8rem; color: var(--gray);">
-                                        <li>• Angular / TypeScript</li>
-                                        <li>• RxJS</li>
-                                        <li>• HTML/CSS</li>
-                                        <li>• Testing (Jasmine/Karma)</li>
-                                    </ul>
-                                </div>
-                                <div style="padding: 0.8rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
-                                    <strong style="color: var(--accent);">DevOps</strong>
-                                    <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0 0; font-size: 0.8rem; color: var(--gray);">
-                                        <li>• Azure DevOps</li>
-                                        <li>• Docker</li>
-                                        <li>• CI/CD</li>
-                                        <li>• Monitoring</li>
-                                    </ul>
-                                </div>
-                                <div style="padding: 0.8rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
-                                    <strong style="color: var(--warning);">QA</strong>
-                                    <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0 0; font-size: 0.8rem; color: var(--gray);">
-                                        <li>• Unit Testing</li>
-                                        <li>• Integration Tests</li>
-                                        <li>• E2E Testing</li>
-                                        <li>• Performance Testing</li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <h5 style="color: var(--primary); margin-bottom: 1rem;">🛠️ Skills Cross-funcionales (.NET/Angular)</h5>
+                        <div style="background: rgba(99, 102, 241, 0.1); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                            <h6 style="color: var(--primary); margin-bottom: 0.5rem;">💻 Development</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">C#/.NET Core, Angular/TypeScript, SQL, NoSQL</p>
                         </div>
-                        
-                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
-                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">🔄 Pair Programming Benefits</h6>
-                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">
-                                Knowledge sharing instantáneo, menos bugs, mejor diseño, y team building natural.
-                            </p>
+                        <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">🧪 Testing</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Unit/Integration/E2E tests, Test automation</p>
+                        </div>
+                        <div style="background: rgba(236, 72, 153, 0.1); padding: 1rem; border-radius: 10px;">
+                            <h6 style="color: var(--secondary); margin-bottom: 0.5rem;">🚀 DevOps</h6>
+                            <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">CI/CD, Azure DevOps, Docker, Monitoring</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; padding: 2rem; background: rgba(245, 158, 11, 0.1); border-radius: 15px; border-left: 4px solid var(--warning);">
+                    <h5 style="color: var(--warning); margin-bottom: 1rem;">🔄 Self-managing vs Self-organizing</h5>
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <strong>Scrum Guide 2020 actualización:</strong> Los equipos son <em>"self-managing"</em> en lugar de 
+                        "self-organizing" para enfatizar que gestionan su propio trabajo, pero dentro del marco organizacional.
+                    </p>
+                    <div class="grid grid-2">
+                        <div>
+                            <h6 style="color: var(--accent); margin-bottom: 0.5rem;">✅ Self-managing incluye:</h6>
+                            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                                <li style="margin-bottom: 0.5rem;">• Decidir qué hacer (dentro del Sprint Goal)</li>
+                                <li style="margin-bottom: 0.5rem;">• Cómo distribuir el trabajo</li>
+                                <li style="margin-bottom: 0.5rem;">• Cuándo hacer cada task</li>
+                                <li>• Quién hace qué actividad</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h6 style="color: #EF4444; margin-bottom: 0.5rem;">❌ NO self-managing:</h6>
+                            <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                                <li style="margin-bottom: 0.5rem;">• Cambiar marcos organizacionales</li>
+                                <li style="margin-bottom: 0.5rem;">• Decidir salarios o contrataciones</li>
+                                <li style="margin-bottom: 0.5rem;">• Ignorar stakeholders</li>
+                                <li>• Modificar Definition of Done unilateralmente</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -524,6 +514,293 @@
                             <h6 style="color: var(--warning); margin-bottom: 0.5rem;">📈 Output</h6>
                             <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Plan de mejoras para próximo Sprint</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nueva Sección: Time-boxing -->
+        <div class="example-container reveal" style="margin-top: 4rem;">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">⏰ Time-boxing: Disciplina Temporal en Scrum</h3>
+                <p style="color: var(--gray);">Por qué los límites de tiempo son fundamentales para la efectividad de Scrum</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div style="padding: 2rem; background: rgba(245, 158, 11, 0.1); border-radius: 15px;">
+                    <h4 style="color: var(--warning); margin-bottom: 1.5rem;">🎯 ¿Por qué Time-boxing?</h4>
+                    <ul style="color: var(--gray); list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">⚡ <strong>Enfoque:</strong> Limita el tiempo para forzar decisiones</li>
+                        <li style="margin-bottom: 0.8rem;">🎪 <strong>Participación:</strong> Evita monopolización de conversaciones</li>
+                        <li style="margin-bottom: 0.8rem;">📊 <strong>Predictibilidad:</strong> Permite planificar calendarios</li>
+                        <li style="margin-bottom: 0.8rem;">🔄 <strong>Frecuencia:</strong> Asegura inspect & adapt regular</li>
+                        <li>💡 <strong>Creatividad:</strong> La restricción estimula soluciones innovadoras</li>
+                    </ul>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: var(--accent); margin-bottom: 1.5rem;">⏱️ Time-boxes Oficiales</h4>
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                        <h6 style="color: var(--accent); margin-bottom: 0.5rem;">Sprint (1-4 semanas)</h6>
+                        <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Contenedor para todos los demás eventos</p>
+                    </div>
+                    <div style="background: rgba(99, 102, 241, 0.1); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                        <h6 style="color: var(--primary); margin-bottom: 0.5rem;">Sprint Planning (máx 8h)</h6>
+                        <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Para Sprint de 4 semanas. Proporcional para Sprints más cortos</p>
+                    </div>
+                    <div style="background: rgba(236, 72, 153, 0.1); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                        <h6 style="color: var(--secondary); margin-bottom: 0.5rem;">Daily Scrum (15 min)</h6>
+                        <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Mismo horario y lugar cada día</p>
+                    </div>
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: 1rem; border-radius: 10px;">
+                        <h6 style="color: var(--warning); margin-bottom: 0.5rem;">Review (4h) + Retro (3h)</h6>
+                        <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">Para Sprint de 4 semanas</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 2rem; background: rgba(239, 68, 68, 0.1); border-radius: 15px; border-left: 4px solid #EF4444;">
+                <h4 style="color: #EF4444; margin-bottom: 1rem;">🚫 Errores Comunes con Time-boxing</h4>
+                <div class="grid grid-2">
+                    <div>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.5rem;">❌ Extender reuniones "solo 5 minutos más"</li>
+                            <li style="margin-bottom: 0.5rem;">❌ Daily Scrums de 30+ minutos</li>
+                            <li>❌ Sprint Planning sin agenda definida</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.5rem;">❌ Retrospectivas superficiales por falta de tiempo</li>
+                            <li style="margin-bottom: 0.5rem;">❌ No preparar eventos con anticipación</li>
+                            <li>❌ Usar time-boxes como metas en lugar de límites</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+        <!-- Nueva Sección: Sprint Goal -->
+        <div class="example-container reveal" style="margin-top: 4rem;">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">🎯 Sprint Goal: El Corazón del Sprint</h3>
+                <p style="color: var(--gray);">El objetivo único que da coherencia y enfoque a todo el trabajo del Sprint</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px;">
+                    <h4 style="color: var(--primary); margin-bottom: 1.5rem;">📝 ¿Qué es el Sprint Goal?</h4>
+                    <ul style="color: var(--gray); list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">🎯 <strong>Objetivo único:</strong> Una meta clara y concisa para el Sprint</li>
+                        <li style="margin-bottom: 0.8rem;">🧭 <strong>Brújula del equipo:</strong> Guía las decisiones durante el Sprint</li>
+                        <li style="margin-bottom: 0.8rem;">🤝 <strong>Compromiso:</strong> Los Developers se comprometen a cumplirlo</li>
+                        <li style="margin-bottom: 0.8rem;">💡 <strong>Flexibilidad:</strong> Permite negociar scope manteniendo el objetivo</li>
+                        <li>✨ <strong>Valor:</strong> Debe aportar valor claro al producto/usuario</li>
+                    </ul>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: var(--accent); margin-bottom: 1.5rem;">💡 Ejemplos de Sprint Goals</h4>
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                        <strong style="color: var(--accent);">✅ Bien formulado:</strong>
+                        <p style="color: var(--gray); margin: 0.5rem 0;">"Permitir a los usuarios gestionar productos en su carrito de compras"</p>
+                    </div>
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px;">
+                        <strong style="color: #EF4444;">❌ Mal formulado:</strong>
+                        <p style="color: var(--gray); margin: 0.5rem 0;">"Completar 15 User Stories del backlog"</p>
+                    </div>
+                    <div style="padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+                        <strong style="color: var(--warning);">🎯 Características clave:</strong>
+                        <p style="color: var(--gray); margin: 0.5rem 0;">Específico, alcanzable, orientado al valor, inspirador para el equipo</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 2rem; background: rgba(236, 72, 153, 0.1); border-radius: 15px; border-left: 4px solid var(--secondary);">
+                <h4 style="color: var(--secondary); margin-bottom: 1rem;">🚀 Sprint Goal en la Práctica</h4>
+                <p style="color: var(--gray); margin-bottom: 1rem;">
+                    Durante el Sprint Planning, el Product Owner propone un objetivo basado en los items de mayor prioridad. 
+                    Los Developers analizan la factibilidad y colaboran para refinar el Sprint Goal hasta que todo el Scrum Team esté alineado.
+                </p>
+                <p style="color: var(--gray); margin: 0;">
+                    <strong>Importante:</strong> Si durante el Sprint surgen impedimentos que amenazan el Sprint Goal, 
+                    el equipo puede renegociar el scope con el Product Owner, pero el objetivo debe mantenerse o el Sprint puede cancelarse.
+                </p>
+            </div>
+        </div>
+
+        <!-- Nueva Sección: Definition of Done -->
+        <div class="example-container reveal" style="margin-top: 4rem;">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">✅ Definition of Done: Pilar de Transparencia</h3>
+                <p style="color: var(--gray);">El estándar de calidad compartido que define cuándo el trabajo está realmente terminado</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div style="padding: 2rem; background: rgba(16, 185, 129, 0.1); border-radius: 15px;">
+                    <h4 style="color: var(--accent); margin-bottom: 1.5rem;">📋 ¿Qué es la Definition of Done?</h4>
+                    <ul style="color: var(--gray); list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">🎯 <strong>Estándar compartido:</strong> Entendimiento común de "completado"</li>
+                        <li style="margin-bottom: 0.8rem;">🔍 <strong>Transparencia:</strong> Hace visible la calidad del trabajo</li>
+                        <li style="margin-bottom: 0.8rem;">📊 <strong>Consistencia:</strong> Asegura calidad uniforme en todos los incrementos</li>
+                        <li style="margin-bottom: 0.8rem;">🚀 <strong>Potentially shippable:</strong> El incremento puede liberarse</li>
+                        <li>⚡ <strong>Mejora continua:</strong> Evoluciona con la madurez del equipo</li>
+                    </ul>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: var(--primary); margin-bottom: 1.5rem;">🛠️ Ejemplo DoD para .NET/Angular</h4>
+                    <div style="background: rgba(99, 102, 241, 0.1); padding: 1rem; border-radius: 10px; font-size: 0.9rem;">
+                        <ul style="color: var(--gray); list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">✅ Código revisado por al menos 1 peer</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Unit tests escritos y passing (>80% coverage)</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Integration tests funcionando</li>
+                            <li style="margin-bottom: 0.5rem;">✅ UI funciona en Chrome, Firefox, Safari</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Responsive design verificado</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Accessibility guidelines cumplidas</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Documentación actualizada</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Build pipeline passing</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Deployed to staging environment</li>
+                            <li>✅ Product Owner acceptance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 2rem; background: rgba(245, 158, 11, 0.1); border-radius: 15px; border-left: 4px solid var(--warning);">
+                <h4 style="color: var(--warning); margin-bottom: 1rem;">🎯 Impacto en Velocity y Estimación</h4>
+                <p style="color: var(--gray); margin-bottom: 1rem;">
+                    Una Definition of Done bien establecida hace que las estimaciones sean más precisas, ya que todo el equipo 
+                    entiende exactamente qué trabajo incluye cada User Story.
+                </p>
+                <p style="color: var(--gray); margin: 0;">
+                    <strong>Importante:</strong> Solo se cuentan Story Points de User Stories que cumplen la DoD completa. 
+                    Trabajo "casi terminado" = 0 puntos para velocity.
+                </p>
+            </div>
+        </div>
+
+        <!-- Nueva Sección: Definition of Ready -->
+        <div class="example-container reveal" style="margin-top: 4rem;">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">🎫 Definition of Ready: Calidad del Product Backlog</h3>
+                <p style="color: var(--gray);">Criterios que debe cumplir una User Story antes de entrar al Sprint</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px;">
+                    <h4 style="color: var(--primary); margin-bottom: 1.5rem;">📋 ¿Qué es la Definition of Ready?</h4>
+                    <ul style="color: var(--gray); list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">🎯 <strong>Filtro de calidad:</strong> User Stories listas para Sprint Planning</li>
+                        <li style="margin-bottom: 0.8rem;">🔍 <strong>Claridad:</strong> Reduce malentendidos durante el Sprint</li>
+                        <li style="margin-bottom: 0.8rem;">⚡ <strong>Eficiencia:</strong> Planning más fluido y rápido</li>
+                        <li style="margin-bottom: 0.8rem;">📊 <strong>Estimación:</strong> Permite estimaciones más precisas</li>
+                        <li>🤝 <strong>Compromiso:</strong> Facilita el compromiso del equipo</li>
+                    </ul>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(30, 41, 59, 0.5); border-radius: 15px;">
+                    <h4 style="color: var(--accent); margin-bottom: 1.5rem;">✅ Criterios de Ready</h4>
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 10px; font-size: 0.9rem;">
+                        <ul style="color: var(--gray); list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">✅ Formato "Como... quiero... para..." completo</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Criterios de aceptación definidos</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Business value asignado</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Dependencies identificadas y resueltas</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Mockups/wireframes si necesario</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Estimación inicial (puede refinarse)</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Testeable (criterios verificables)</li>
+                            <li style="margin-bottom: 0.5rem;">✅ Técnicamente feasible</li>
+                            <li>✅ Cabe en un Sprint</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 2rem; background: rgba(236, 72, 153, 0.1); border-radius: 15px; border-left: 4px solid var(--secondary);">
+                <h4 style="color: var(--secondary); margin-bottom: 1rem;">🔄 DoR vs DoD: Complementarios</h4>
+                <div class="grid grid-2">
+                    <div>
+                        <h6 style="color: var(--secondary); margin-bottom: 0.5rem;">Definition of Ready</h6>
+                        <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">
+                            <strong>Input quality:</strong> Asegura que User Stories están preparadas para desarrollo
+                        </p>
+                    </div>
+                    <div>
+                        <h6 style="color: var(--accent); margin-bottom: 0.5rem;">Definition of Done</h6>
+                        <p style="color: var(--gray); margin: 0; font-size: 0.9rem;">
+                            <strong>Output quality:</strong> Asegura que el trabajo completado cumple estándares
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nueva Sección: Empiricism como base -->
+        <div class="example-container reveal" style="margin-top: 2rem;">
+            <div class="example-header">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">🧪 Empirismo: La Base Científica de Scrum</h3>
+                <p style="color: var(--gray);">Scrum se fundamenta en el empirismo: conocimiento basado en experiencia y toma de decisiones basada en observación</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div style="padding: 2rem; background: rgba(99, 102, 241, 0.1); border-radius: 15px;">
+                    <div style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">🔍</div>
+                    <h4 style="color: var(--primary); margin-bottom: 1rem; text-align: center;">Transparencia</h4>
+                    <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                        <li style="margin-bottom: 0.5rem;">• Trabajo visible para todos</li>
+                        <li style="margin-bottom: 0.5rem;">• Definition of Done compartida</li>
+                        <li style="margin-bottom: 0.5rem;">• Sprint Backlog público</li>
+                        <li style="margin-bottom: 0.5rem;">• Progress tracking abierto</li>
+                        <li>• Impedimentos visibles</li>
+                    </ul>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(16, 185, 129, 0.1); border-radius: 15px;">
+                    <div style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">👁️</div>
+                    <h4 style="color: var(--accent); margin-bottom: 1rem; text-align: center;">Inspección</h4>
+                    <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                        <li style="margin-bottom: 0.5rem;">• Daily Scrum para progreso</li>
+                        <li style="margin-bottom: 0.5rem;">• Sprint Review para producto</li>
+                        <li style="margin-bottom: 0.5rem;">• Sprint Retrospective para proceso</li>
+                        <li style="margin-bottom: 0.5rem;">• Burndown charts</li>
+                        <li>• Feedback continuo</li>
+                    </ul>
+                </div>
+                
+                <div style="padding: 2rem; background: rgba(236, 72, 153, 0.1); border-radius: 15px;">
+                    <div style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">🔄</div>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem; text-align: center;">Adaptación</h4>
+                    <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                        <li style="margin-bottom: 0.5rem;">• Ajustar Sprint scope</li>
+                        <li style="margin-bottom: 0.5rem;">• Repriorizar Product Backlog</li>
+                        <li style="margin-bottom: 0.5rem;">• Mejorar proceso en Retros</li>
+                        <li style="margin-bottom: 0.5rem;">• Evolucionar Definition of Done</li>
+                        <li>• Pivot en funcionalidades</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 2rem; background: rgba(245, 158, 11, 0.1); border-radius: 15px; border-left: 4px solid var(--warning);">
+                <h4 style="color: var(--warning); margin-bottom: 1rem;">🧠 Empirismo vs Predictivismo</h4>
+                <div class="grid grid-2">
+                    <div>
+                        <h6 style="color: #EF4444; margin-bottom: 0.5rem;">❌ Enfoque Predictivo (Waterfall)</h6>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.5rem;">• Planificación exhaustiva inicial</li>
+                            <li style="margin-bottom: 0.5rem;">• Seguir el plan rigidamente</li>
+                            <li style="margin-bottom: 0.5rem;">• Cambios son desviaciones</li>
+                            <li>• Control a través de documentación</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h6 style="color: var(--accent); margin-bottom: 0.5rem;">✅ Enfoque Empírico (Scrum)</h6>
+                        <ul style="color: var(--gray); list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 0.5rem;">• Experimentación y aprendizaje</li>
+                            <li style="margin-bottom: 0.5rem;">• Adaptación basada en evidencia</li>
+                            <li style="margin-bottom: 0.5rem;">• Cambios son oportunidades</li>
+                            <li>• Control a través de visibilidad</li>
+                        </ul>
                     </div>
                 </div>
             </div>

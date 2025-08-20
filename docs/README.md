@@ -36,7 +36,7 @@ Una guía completa e interactiva de SCRUM con enfoque especial en estimación Fi
 - Dashboard del Sprint con KPIs en tiempo real
 
 ### 4. **Aplicación Práctica**
-- Jerarquía de Work Items (Epic → Feature → User Story → Task)
+- Jerarquía de Work Items (Epic → Feature → Product Backlog Item (User Story))
 - Proyecto ejemplo: E-commerce con .NET Core 8 + Angular 17
 - Casos de uso reales con código
 
